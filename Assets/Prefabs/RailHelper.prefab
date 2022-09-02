@@ -351,6 +351,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: RailFour
       objectReference: {fileID: 0}
+    - target: {fileID: 8414870938995940506, guid: 9f3c5612b83634346888a5ffb1da3ff3, type: 3}
+      propertyPath: m_SortingOrder
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9f3c5612b83634346888a5ffb1da3ff3, type: 3}
 --- !u!1 &1418635985292779505 stripped
@@ -417,6 +421,10 @@ PrefabInstance:
     - target: {fileID: 6879076624371249322, guid: 9f3c5612b83634346888a5ffb1da3ff3, type: 3}
       propertyPath: m_Name
       value: RailTwo
+      objectReference: {fileID: 0}
+    - target: {fileID: 8414870938995940506, guid: 9f3c5612b83634346888a5ffb1da3ff3, type: 3}
+      propertyPath: m_SortingOrder
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9f3c5612b83634346888a5ffb1da3ff3, type: 3}
@@ -485,6 +493,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: RailThree
       objectReference: {fileID: 0}
+    - target: {fileID: 8414870938995940506, guid: 9f3c5612b83634346888a5ffb1da3ff3, type: 3}
+      propertyPath: m_SortingOrder
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9f3c5612b83634346888a5ffb1da3ff3, type: 3}
 --- !u!1 &1418635986546821803 stripped
@@ -551,6 +563,10 @@ PrefabInstance:
     - target: {fileID: 6879076624371249322, guid: 9f3c5612b83634346888a5ffb1da3ff3, type: 3}
       propertyPath: m_Name
       value: RailOne
+      objectReference: {fileID: 0}
+    - target: {fileID: 8414870938995940506, guid: 9f3c5612b83634346888a5ffb1da3ff3, type: 3}
+      propertyPath: m_SortingOrder
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9f3c5612b83634346888a5ffb1da3ff3, type: 3}
