@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-    float characterRailOffset = 0.25f; // How far 'above' the rail position the character should be
+    float characterRailOffset = 0.75f; // How far 'above' the rail position the character should be
 
     int currentRailIndex = 0;
     int targetRailIndex = 0;
@@ -20,6 +20,14 @@ public class PlayerController : MonoBehaviour
     float jumpDuration = 0.5f;
 
     float earlyInputAllowance = 0.25f;
+
+
+    private void Start()
+    {
+        // Snap to starting rail
+        UpdateYPos(RailHelper.instance.rails[targetRailIndex].transform.position.y + characterRailOffset);
+        currentRailIndex = targetRailIndex;
+    }
 
     private void Update()
     {
