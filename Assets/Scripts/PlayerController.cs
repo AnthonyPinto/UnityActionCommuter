@@ -4,7 +4,10 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
+    public AudioClip jumpAudioClip;
+
     Animator animator;
+    AudioSource audioSource;
 
     float characterRailOffset = 0.75f; // How far 'above' the rail position the character should be
 
@@ -27,6 +30,8 @@ public class PlayerController : MonoBehaviour
     private void Start()
     {
         animator = GetComponent<Animator>();
+        audioSource = GetComponent<AudioSource>();
+
         // Snap to starting rail
         UpdateYPos(LayerHelper.instance.layerObjects[targetRailIndex].transform.position.y + characterRailOffset);
         currentRailIndex = targetRailIndex;
@@ -39,13 +44,11 @@ public class PlayerController : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.UpArrow) || Input.GetKeyDown(KeyCode.W))
         {
             queuedAction = ActionType.Up;
-            animator.SetTrigger("Jump");
             actionQueuedTime = Time.time;
         }
         else if (Input.GetKeyDown(KeyCode.DownArrow) || Input.GetKeyDown(KeyCode.S))
         {
             queuedAction = ActionType.Down;
-            animator.SetTrigger("Jump");
             actionQueuedTime = Time.time;
         }
         else if (Input.GetKeyDown(KeyCode.Space))
@@ -91,6 +94,11 @@ public class PlayerController : MonoBehaviour
 
     private void StartJump(bool isUp)
     {
+        animator.SetTrigger("Jump");
+        audioSource.Pause();
+        audioSource.PlayOneShot(jumpAudioClip);
+        audioSource.PlayDelayed(jumpDuration);
+
         // Check for the target rail and return if it doesn't exist
         // Skip over 'channel' layers between rails
         int newTargetRailIdx = isUp ? currentRailIndex + 2 : currentRailIndex - 2;
