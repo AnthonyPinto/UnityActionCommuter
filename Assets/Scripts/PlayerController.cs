@@ -4,6 +4,13 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
+    public AudioClip jumpAudioClip;
+
+    Animator animator;
+    AudioSource audioSource;
+
+    float defaultAudioVolume;
+
     float characterRailOffset = 0.75f; // How far 'above' the rail position the character should be
 
     int currentRailIndex = 0;
@@ -24,6 +31,11 @@ public class PlayerController : MonoBehaviour
 
     private void Start()
     {
+        animator = GetComponent<Animator>();
+        audioSource = GetComponent<AudioSource>();
+
+        defaultAudioVolume = audioSource.volume;
+
         // Snap to starting rail
         UpdateYPos(LayerHelper.instance.layerObjects[targetRailIndex].transform.position.y + characterRailOffset);
         currentRailIndex = targetRailIndex;
@@ -86,6 +98,17 @@ public class PlayerController : MonoBehaviour
 
     private void StartJump(bool isUp)
     {
+        animator.SetTrigger("Jump");
+
+        // play jump SFX
+        audioSource.Pause();
+        audioSource.volume = 0.8f;
+        audioSource.PlayOneShot(jumpAudioClip);
+
+        // reset audio source
+        audioSource.volume = defaultAudioVolume;
+        audioSource.PlayDelayed(jumpDuration);
+
         // Check for the target rail and return if it doesn't exist
         // Skip over 'channel' layers between rails
         int newTargetRailIdx = isUp ? currentRailIndex + 2 : currentRailIndex - 2;
