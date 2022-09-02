@@ -25,7 +25,7 @@ public class PlayerController : MonoBehaviour
     private void Start()
     {
         // Snap to starting rail
-        UpdateYPos(RailHelper.instance.rails[targetRailIndex].transform.position.y + characterRailOffset);
+        UpdateYPos(LayerHelper.instance.layerObjects[targetRailIndex].transform.position.y + characterRailOffset);
         currentRailIndex = targetRailIndex;
     }
 
@@ -87,8 +87,9 @@ public class PlayerController : MonoBehaviour
     private void StartJump(bool isUp)
     {
         // Check for the target rail and return if it doesn't exist
-        int newTargetRailIdx = isUp ? currentRailIndex + 1 : currentRailIndex - 1;
-        if (newTargetRailIdx < 0 || newTargetRailIdx >= RailHelper.instance.rails.Count)
+        // Skip over 'channel' layers between rails
+        int newTargetRailIdx = isUp ? currentRailIndex + 2 : currentRailIndex - 2;
+        if (newTargetRailIdx < 0 || newTargetRailIdx >= LayerHelper.instance.layerObjects.Count)
         {
             return;
         }
@@ -115,8 +116,8 @@ public class PlayerController : MonoBehaviour
 
         float remainingDuration = actionStartTime + currentActionDuration - Time.time;
 
-        GameObject prevRail = RailHelper.instance.rails[currentRailIndex];
-        GameObject nextRail = RailHelper.instance.rails[targetRailIndex];
+        GameObject prevRail = LayerHelper.instance.layerObjects[currentRailIndex];
+        GameObject nextRail = LayerHelper.instance.layerObjects[targetRailIndex];
 
         // If the jump is over, finish move and clear current action and update rail index
         if (remainingDuration <= 0)
