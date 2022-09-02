@@ -672,6 +672,22 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 303478958958413303, guid: 94b6d1b4cab84fd49a8cf316739259c0, type: 3}
+      propertyPath: m_SortingOrder
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4035439529501304475, guid: 94b6d1b4cab84fd49a8cf316739259c0, type: 3}
+      propertyPath: m_SortingOrder
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4035439530590079796, guid: 94b6d1b4cab84fd49a8cf316739259c0, type: 3}
+      propertyPath: m_SortingOrder
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4035439530755322817, guid: 94b6d1b4cab84fd49a8cf316739259c0, type: 3}
+      propertyPath: m_SortingOrder
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5532498796270449064, guid: 94b6d1b4cab84fd49a8cf316739259c0, type: 3}
       propertyPath: m_Name
       value: RailHelper
