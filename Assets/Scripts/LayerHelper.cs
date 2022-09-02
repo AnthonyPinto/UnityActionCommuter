@@ -2,12 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class RailHelper : MonoBehaviour
+public class LayerHelper : MonoBehaviour
 {
-    public static RailHelper instance;
+    public static LayerHelper instance;
 
 
-    public List<GameObject> rails;
+    public List<GameObject> layerObjects;
 
     private void Awake()
     {
