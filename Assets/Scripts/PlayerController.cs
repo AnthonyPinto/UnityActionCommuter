@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
+    Animator animator;
+
     float characterRailOffset = 0.75f; // How far 'above' the rail position the character should be
 
     int currentRailIndex = 0;
@@ -24,6 +26,7 @@ public class PlayerController : MonoBehaviour
 
     private void Start()
     {
+        animator = GetComponent<Animator>();
         // Snap to starting rail
         UpdateYPos(LayerHelper.instance.layerObjects[targetRailIndex].transform.position.y + characterRailOffset);
         currentRailIndex = targetRailIndex;
@@ -36,11 +39,13 @@ public class PlayerController : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.UpArrow) || Input.GetKeyDown(KeyCode.W))
         {
             queuedAction = ActionType.Up;
+            animator.SetTrigger("Jump");
             actionQueuedTime = Time.time;
         }
         else if (Input.GetKeyDown(KeyCode.DownArrow) || Input.GetKeyDown(KeyCode.S))
         {
             queuedAction = ActionType.Down;
+            animator.SetTrigger("Jump");
             actionQueuedTime = Time.time;
         }
         else if (Input.GetKeyDown(KeyCode.Space))
