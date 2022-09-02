@@ -27,4 +27,19 @@ public static class Constants
         Layer.ChannelThree,
         Layer.RailFour,
     };
+
+    public static List<Layer> RailList = new List<Layer>()
+    {
+        Layer.RailOne,
+        Layer.RailTwo,
+        Layer.RailThree,
+        Layer.RailFour,
+    };
+
+    public static List<Layer> ChannelList = new List<Layer>()
+    {
+        Layer.ChannelOne,
+        Layer.ChannelTwo,
+        Layer.ChannelThree,
+    };
 }
