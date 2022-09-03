@@ -12,7 +12,7 @@ public class ObjectSpawner : MonoBehaviour
     float timeToNextRat;
     public Poolable ratPrefab;
     ObjectPool<GameObject> ratObjectPool;
-    float ratYOffset = 0.25f;
+    float ratYOffset = 0.5f;
     float maxRatWait = 6;
     float minRatWait = 1;
 
