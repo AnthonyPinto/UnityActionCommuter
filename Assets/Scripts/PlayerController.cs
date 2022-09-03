@@ -37,8 +37,8 @@ public class PlayerController : MonoBehaviour
         defaultAudioVolume = audioSource.volume;
 
         // Snap to starting rail
-        UpdateYPos(LayerHelper.instance.layerObjects[targetRailIndex].transform.position.y + characterRailOffset);
-        currentRailIndex = targetRailIndex;
+        UpdateYPos(LayerHelper.instance.layerObjects[currentRailIndex].transform.position.y + characterRailOffset);
+        SetLayerFromIndex(currentRailIndex);
     }
 
     private void Update()
@@ -149,6 +149,7 @@ public class PlayerController : MonoBehaviour
             currentAction = null;
             UpdateYPos(nextRail.transform.position.y + characterRailOffset);
             currentRailIndex = targetRailIndex;
+            SetLayerFromIndex(currentRailIndex);
         }
         else
         {
@@ -156,7 +157,30 @@ public class PlayerController : MonoBehaviour
             float startY = prevRail.transform.position.y + characterRailOffset;
             float endY = nextRail.transform.position.y + characterRailOffset;
 
-            UpdateYPos(Mathf.Lerp(startY, endY, (currentActionDuration - remainingDuration) / currentActionDuration));
+            float percentComplete = (currentActionDuration - remainingDuration) / currentActionDuration;
+
+            // Set the current collision layer based on how far into the jump we are
+            if (percentComplete < 0.25f)
+            {
+                SetLayerFromIndex(currentRailIndex);
+            }
+            else if (percentComplete < 0.75f)
+            {
+                if (currentAction == ActionType.Up)
+                {
+                    SetLayerFromIndex(currentRailIndex + 1);
+                }
+                else
+                {
+                    SetLayerFromIndex(currentRailIndex - 1);
+                }
+            }
+            else
+            {
+                SetLayerFromIndex(targetRailIndex);
+            }
+
+            UpdateYPos(Mathf.Lerp(startY, endY, percentComplete));
         }
     }
 
@@ -181,6 +205,11 @@ public class PlayerController : MonoBehaviour
     void UpdateYPos(float newY)
     {
         transform.position = new Vector3(transform.position.x, newY, transform.position.y);
+    }
+
+    void SetLayerFromIndex(int layerIndex)
+    {
+        gameObject.layer = LayerMask.NameToLayer(Constants.LayerString[Constants.LayerList[layerIndex]]);
     }
 
 

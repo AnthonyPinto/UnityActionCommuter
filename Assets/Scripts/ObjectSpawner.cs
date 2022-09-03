@@ -52,6 +52,7 @@ public class ObjectSpawner : MonoBehaviour
             GameObject rat = ratObjectPool.Get();
             rat.GetComponent<Poolable>().pool = ratObjectPool;
             rat.transform.position = new Vector3(spawnXPos, channelObject.transform.position.y + ratYOffset, 0);
+            Debug.Log(LayerMask.NameToLayer(Constants.LayerString[channel]));
             rat.gameObject.layer = LayerMask.NameToLayer(Constants.LayerString[channel]);
 
             timeToNextRat = Random.Range(minRatWait, maxRatWait);
