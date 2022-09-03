@@ -84,6 +84,7 @@ public class PlayerController : MonoBehaviour
         }
 
         UpdateForCurrentJump();
+        UpdateForCurrentAttack();
     }
 
     private void StartJumpUp()
