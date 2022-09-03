@@ -98,17 +98,6 @@ public class PlayerController : MonoBehaviour
 
     private void StartJump(bool isUp)
     {
-        animator.SetTrigger("Jump");
-
-        // play jump SFX
-        audioSource.Pause();
-        audioSource.volume = 0.8f;
-        audioSource.PlayOneShot(jumpAudioClip);
-
-        // reset audio source
-        audioSource.volume = defaultAudioVolume;
-        audioSource.PlayDelayed(jumpDuration);
-
         // Check for the target rail and return if it doesn't exist
         // Skip over 'channel' layers between rails
         int newTargetRailIdx = isUp ? currentRailIndex + 2 : currentRailIndex - 2;
@@ -121,6 +110,17 @@ public class PlayerController : MonoBehaviour
         currentAction = isUp ? ActionType.Up : ActionType.Down;
         actionStartTime = Time.time;
         currentActionDuration = jumpDuration;
+
+        animator.SetTrigger("Jump");
+
+        // play jump SFX
+        audioSource.Pause();
+        audioSource.volume = 0.8f;
+        audioSource.PlayOneShot(jumpAudioClip);
+
+        // reset audio source
+        audioSource.volume = defaultAudioVolume;
+        audioSource.PlayDelayed(jumpDuration);
     }
 
     private void StartAttack()
