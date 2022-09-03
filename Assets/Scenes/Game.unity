@@ -433,10 +433,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
-    - target: {fileID: 4289609563148473162, guid: 80680761297283943a58c741764d08bc, type: 3}
-      propertyPath: jumpAudioClip
-      value: 
-      objectReference: {fileID: 8300000, guid: 11a5b0ec4d3c2457bbd9daa75056cf95, type: 3}
     - target: {fileID: 4289609563148473163, guid: 80680761297283943a58c741764d08bc, type: 3}
       propertyPath: m_RootOrder
       value: 4
@@ -648,10 +644,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 8314340867665787322, guid: 7e01f30968a54764c9091596f316b618, type: 3}
-      propertyPath: ratPrefab
-      value: 
-      objectReference: {fileID: 8041328654447054947, guid: bb60891240f9bf94891c9629638816e0, type: 3}
     - target: {fileID: 8314340867665787323, guid: 7e01f30968a54764c9091596f316b618, type: 3}
       propertyPath: m_Name
       value: ObjectSpawner

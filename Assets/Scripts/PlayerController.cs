@@ -6,7 +6,8 @@ public class PlayerController : MonoBehaviour
 {
     public AudioClip jumpAudioClip;
 
-    Animator animator;
+    public Animator animator;
+
     AudioSource audioSource;
 
     float defaultAudioVolume;
@@ -31,7 +32,6 @@ public class PlayerController : MonoBehaviour
 
     private void Start()
     {
-        animator = GetComponent<Animator>();
         audioSource = GetComponent<AudioSource>();
 
         defaultAudioVolume = audioSource.volume;
