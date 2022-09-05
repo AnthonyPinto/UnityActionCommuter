@@ -46,3 +46,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ratPrefab: {fileID: 8041328654447054947, guid: bb60891240f9bf94891c9629638816e0, type: 3}
   sodaPrefab: {fileID: 1415263052553856670, guid: 61c4baeb5d968274888ec9eda22c207c, type: 3}
+  pillarPrefab: {fileID: 5351399786233930218, guid: 881e71d68de3fe34d9cf6e7f4274c6c0, type: 3}
