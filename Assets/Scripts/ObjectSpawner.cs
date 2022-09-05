@@ -28,7 +28,7 @@ public class ObjectSpawner : MonoBehaviour
     float timeToNextPillar;
     public Poolable pillarPrefab;
     ObjectPool<GameObject> pillarObjectPool;
-    float pillarYOffset = 6.2f;
+    float pillarYOffset = 4f;
     float pillarWait = 2;
 
     private void Awake()

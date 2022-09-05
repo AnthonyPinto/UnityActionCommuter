@@ -14,6 +14,7 @@ public class Enemy : MonoBehaviour
     public AudioClip attackAudioClip;
     public OnTriggerReporter attackPrepTrigger;
 
+    bool isReadyToAttack = false;
     bool wasHit = false;
     bool isHitRoutineRunning = false;
     bool hitPlayer = false;
@@ -29,6 +30,7 @@ public class Enemy : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Player"))
         {
+            isReadyToAttack = true;
             audioSource.PlayOneShot(attackAudioClip);
             animator.SetTrigger("Attack");
         }
@@ -61,16 +63,18 @@ public class Enemy : MonoBehaviour
         {
             wasHit = false;
             hitPlayer = false;
+            isReadyToAttack = false;
             isHitRoutineRunning = true;
             StartCoroutine(WasHitRoutine());
 
         }
-        else if (hitPlayer)
+        else if (hitPlayer && isReadyToAttack)
         {
             wasHit = false;
             hitPlayer = false;
             isHitRoutineRunning = false;
             GameManager.instance.GameOver();
+            isReadyToAttack = false;
             Destroy(playerObject);
         }
     }
