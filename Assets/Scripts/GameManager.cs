@@ -7,6 +7,7 @@ public class GameManager : MonoBehaviour
     public static GameManager instance;
 
     public UIController uiController;
+    public AudioSource audioSource;
 
     int score = 0;
     int distance = 0;
@@ -21,6 +22,8 @@ public class GameManager : MonoBehaviour
         {
             instance = this;
         }
+
+        audioSource = GetComponent<AudioSource>();
     }
 
     private void Start()
@@ -50,6 +53,11 @@ public class GameManager : MonoBehaviour
             AddDistance(3);
             yield return new WaitForSeconds(0.1f);
         }
+    }
+
+    public void PlaySFX(AudioClip audioClip)
+    {
+        audioSource.PlayOneShot(audioClip);
     }
 
 

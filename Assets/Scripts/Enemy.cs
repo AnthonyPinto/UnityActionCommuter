@@ -5,9 +5,13 @@ using UnityEngine;
 [RequireComponent(typeof(Poolable))]
 public class Enemy : MonoBehaviour
 {
+    AudioSource audioSource;
+
     public int pointsOnDestroy = 50;
     public float WasHitAnimationDuration = 0.75f;
     public Animator animator;
+    public AudioClip deathAudioClip;
+    public AudioClip attackAudioClip;
     public OnTriggerReporter attackPrepTrigger;
 
     bool wasHit = false;
@@ -17,6 +21,7 @@ public class Enemy : MonoBehaviour
 
     private void Start()
     {
+        audioSource = GetComponent<AudioSource>();
         attackPrepTrigger.SetOnTriggerEnter2DHandler(OnAttackPrepTriggerEnter2D);
     }
 
@@ -24,6 +29,7 @@ public class Enemy : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Player"))
         {
+            audioSource.PlayOneShot(attackAudioClip);
             animator.SetTrigger("Attack");
         }
     }
@@ -74,6 +80,7 @@ public class Enemy : MonoBehaviour
 
         GameManager.instance.AddPoints(pointsOnDestroy);
         animator.SetTrigger("Hit");
+        audioSource.PlayOneShot(deathAudioClip);
         yield return new WaitForSeconds(WasHitAnimationDuration);
 
 
