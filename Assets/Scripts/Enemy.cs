@@ -11,6 +11,7 @@ public class Enemy : MonoBehaviour
     public float WasHitAnimationDuration = 0.75f;
     public Animator animator;
     public AudioClip deathAudioClip;
+    public AudioClip attackAudioClip;
     public OnTriggerReporter attackPrepTrigger;
 
     bool wasHit = false;
@@ -28,6 +29,7 @@ public class Enemy : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Player"))
         {
+            audioSource.PlayOneShot(attackAudioClip);
             animator.SetTrigger("Attack");
         }
     }

@@ -269,6 +269,7 @@ MonoBehaviour:
   WasHitAnimationDuration: 0.75
   animator: {fileID: 2430815958593866524}
   deathAudioClip: {fileID: 8300000, guid: d70d71a6c35be48f482c2c9bc27fe53b, type: 3}
+  attackAudioClip: {fileID: 8300000, guid: 1ff2d116ae81143f9ba031e11e4e96aa, type: 3}
   attackPrepTrigger: {fileID: 451596740430693480}
 --- !u!114 &8041328654447054947
 MonoBehaviour:
