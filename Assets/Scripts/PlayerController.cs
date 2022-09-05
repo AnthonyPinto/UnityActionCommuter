@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
+    public AudioSource sfxAudioSource;
     public AudioClip jumpAudioClip;
     public AudioClip attackAudioClip;
 
@@ -12,8 +13,6 @@ public class PlayerController : MonoBehaviour
     public SpriteRenderer attackHitboxRenderer;
 
     AudioSource audioSource;
-
-    float defaultAudioVolume;
 
     float characterRailOffset = 0.75f; // How far 'above' the rail position the character should be
 
@@ -38,8 +37,6 @@ public class PlayerController : MonoBehaviour
     private void Start()
     {
         audioSource = GetComponent<AudioSource>();
-
-        defaultAudioVolume = audioSource.volume;
 
         // Snap to starting rail
         UpdateYPos(LayerHelper.instance.layerObjects[currentRailIndex].transform.position.y + characterRailOffset);
@@ -123,22 +120,21 @@ public class PlayerController : MonoBehaviour
 
         animator.SetTrigger("Jump");
 
-        // play jump SFX
+        // pause grind SFX
         audioSource.Pause();
-        audioSource.volume = 0.8f;
-        audioSource.PlayOneShot(jumpAudioClip);
 
-        // reset audio source
-        audioSource.volume = defaultAudioVolume;
+        // play Jump SFX
+        sfxAudioSource.PlayOneShot(jumpAudioClip);
+
+        // restart grind SFX
         audioSource.PlayDelayed(jumpDuration);
     }
 
     private void StartAttack()
     {
         animator.SetTrigger("Attack");
-        audioSource.volume = 1;
-        audioSource.PlayOneShot(attackAudioClip);
-        audioSource.volume = defaultAudioVolume;
+        
+        sfxAudioSource.PlayOneShot(attackAudioClip);
 
         currentAction = ActionType.Attack;
         actionStartTime = Time.time;
