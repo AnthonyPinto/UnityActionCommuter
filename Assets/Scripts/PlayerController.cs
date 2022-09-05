@@ -26,7 +26,7 @@ public class PlayerController : MonoBehaviour
     float actionStartTime;
     float currentActionDuration;
 
-    float attackDuration = 0.1f;
+    float attackDuration = 0.3f;
     float jumpDuration = 0.5f;
 
     float attackCooldown = 0.2f;
@@ -133,7 +133,7 @@ public class PlayerController : MonoBehaviour
     private void StartAttack()
     {
         animator.SetTrigger("Attack");
-        
+
         sfxAudioSource.PlayOneShot(attackAudioClip);
 
         currentAction = ActionType.Attack;
@@ -244,8 +244,7 @@ public class PlayerController : MonoBehaviour
     void SetPlayerLayerFromIndex(int layerIndex)
     {
         int newLayer = LayerMask.NameToLayer(Constants.LayerString[Constants.LayerList[layerIndex]]);
-        gameObject.layer = newLayer;
-        attackHitboxRenderer.gameObject.layer = newLayer;
+        gameObject.SetLayerRecursively(newLayer);
     }
 
 
