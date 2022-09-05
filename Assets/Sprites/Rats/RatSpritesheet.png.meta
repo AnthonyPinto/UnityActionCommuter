@@ -47,7 +47,7 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 20
+  spritePixelsToUnits: 100
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -120,6 +120,69 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 0
+        y: 64
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0f3bc3f80577c4b238ff87c6764415af
+      internalID: -1327568672
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: RatSpritesheet_1
+      rect:
+        serializedVersion: 2
+        x: 32
+        y: 64
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b10b63a7edfe643f49701d00801e3402
+      internalID: -448602163
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: RatSpritesheet_2
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 64
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7a9366e47979c4c7381805303c42a881
+      internalID: -529019472
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: RatSpritesheet_3
+      rect:
+        serializedVersion: 2
+        x: 0
         y: 32
         width: 32
         height: 32
@@ -130,14 +193,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 7516601e636c14df0bb30f58b64400ea
-      internalID: -1659380322
+      spriteID: 3a6b7aa459a77421eb32e2461fa9d5d6
+      internalID: 1528122229
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: RatSpritesheet_1
+      name: RatSpritesheet_4
       rect:
         serializedVersion: 2
         x: 32
@@ -151,14 +214,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 63c4db7c34d4b4df29975a2b8621b101
-      internalID: -292197465
+      spriteID: dcc3c8fbde2f0458cb59411e6697709d
+      internalID: 619142030
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: RatSpritesheet_2
+      name: RatSpritesheet_5
       rect:
         serializedVersion: 2
         x: 64
@@ -172,14 +235,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 5493db860a2bd4bf5a7586ab1dc256bb
-      internalID: -1321251655
+      spriteID: 57d1f955fb5ae4b59b1971986c4ba7b6
+      internalID: 181706949
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: RatSpritesheet_3
+      name: RatSpritesheet_6
       rect:
         serializedVersion: 2
         x: 0
@@ -193,14 +256,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 2b3301c7272c149e28d8529ca11fa16d
-      internalID: 2081323464
+      spriteID: 172a8fcf5e2d048c68f50696a70ed150
+      internalID: 1671941404
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: RatSpritesheet_4
+      name: RatSpritesheet_7
       rect:
         serializedVersion: 2
         x: 32
@@ -214,8 +277,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 14416bff8adc74a40a9de85c7f4b1e2d
-      internalID: 835445114
+      spriteID: 0aad0fc88231f45f1bac6beb3833e13b
+      internalID: -707716090
       vertices: []
       indices: 
       edges: []
@@ -231,11 +294,14 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      RatSpritesheet_2: -1321251655
-      RatSpritesheet_3: 2081323464
-      RatSpritesheet_4: 835445114
-      RatSpritesheet_1: -292197465
-      RatSpritesheet_0: -1659380322
+      RatSpritesheet_2: -529019472
+      RatSpritesheet_7: -707716090
+      RatSpritesheet_3: 1528122229
+      RatSpritesheet_4: 619142030
+      RatSpritesheet_6: 1671941404
+      RatSpritesheet_5: 181706949
+      RatSpritesheet_1: -448602163
+      RatSpritesheet_0: -1327568672
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0
