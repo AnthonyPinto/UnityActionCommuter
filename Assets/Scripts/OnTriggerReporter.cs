@@ -16,7 +16,6 @@ public class OnTriggerReporter : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        Debug.Log("FOO");
         OnTriggerEnter2DHandler(collision);
     }
 }

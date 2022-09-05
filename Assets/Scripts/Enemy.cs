@@ -28,7 +28,6 @@ public class Enemy : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Player"))
         {
-            Debug.Log("FOO");
             animator.SetTrigger("Attack");
         }
     }
