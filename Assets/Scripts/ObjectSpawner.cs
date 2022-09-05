@@ -62,7 +62,7 @@ public class ObjectSpawner : MonoBehaviour
             GameObject rat = ratObjectPool.Get();
             rat.GetComponent<Poolable>().pool = ratObjectPool;
             rat.transform.position = new Vector3(spawnXPos, channelObject.transform.position.y + ratYOffset, 0);
-            rat.gameObject.layer = LayerMask.NameToLayer(Constants.LayerString[channel]);
+            rat.gameObject.SetLayerRecursively(LayerMask.NameToLayer(Constants.LayerString[channel]));
 
             timeToNextRat = Random.Range(minRatWait, maxRatWait);
         }
@@ -76,7 +76,7 @@ public class ObjectSpawner : MonoBehaviour
             GameObject soda = sodaObjectPool.Get();
             soda.GetComponent<Poolable>().pool = sodaObjectPool;
             soda.transform.position = new Vector3(spawnXPos, railObject.transform.position.y + sodaYOffset, 0);
-            soda.gameObject.layer = LayerMask.NameToLayer(Constants.LayerString[rail]);
+            soda.gameObject.SetLayerRecursively(LayerMask.NameToLayer(Constants.LayerString[rail]));
 
             timeToNextSoda = Random.Range(minSodaWait, maxSodaWait);
         }

@@ -8,15 +8,30 @@ public class Enemy : MonoBehaviour
     public int pointsOnDestroy = 50;
     public float WasHitAnimationDuration = 0.75f;
     public Animator animator;
+    public OnTriggerReporter attackPrepTrigger;
 
     bool wasHit = false;
-    bool isRoutineRunning = false;
+    bool isHitRoutineRunning = false;
     bool hitPlayer = false;
     GameObject playerObject;
 
+    private void Start()
+    {
+        attackPrepTrigger.SetOnTriggerEnter2DHandler(OnAttackPrepTriggerEnter2D);
+    }
+
+    private void OnAttackPrepTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.CompareTag("Player"))
+        {
+            Debug.Log("FOO");
+            animator.SetTrigger("Attack");
+        }
+    }
+
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (isRoutineRunning)
+        if (isHitRoutineRunning)
         {
             return;
         }
@@ -41,7 +56,7 @@ public class Enemy : MonoBehaviour
         {
             wasHit = false;
             hitPlayer = false;
-            isRoutineRunning = true;
+            isHitRoutineRunning = true;
             StartCoroutine(WasHitRoutine());
 
         }
@@ -49,8 +64,7 @@ public class Enemy : MonoBehaviour
         {
             wasHit = false;
             hitPlayer = false;
-            isRoutineRunning = false;
-            animator.SetTrigger("Attack");
+            isHitRoutineRunning = false;
             Destroy(playerObject);
 
         }
@@ -65,6 +79,6 @@ public class Enemy : MonoBehaviour
 
 
         GetComponent<Poolable>().pool.Release(gameObject);
-        isRoutineRunning = false;
+        isHitRoutineRunning = false;
     }
 }

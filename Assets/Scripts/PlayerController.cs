@@ -242,8 +242,7 @@ public class PlayerController : MonoBehaviour
     void SetPlayerLayerFromIndex(int layerIndex)
     {
         int newLayer = LayerMask.NameToLayer(Constants.LayerString[Constants.LayerList[layerIndex]]);
-        gameObject.layer = newLayer;
-        attackHitboxRenderer.gameObject.layer = newLayer;
+        gameObject.SetLayerRecursively(newLayer);
     }
 
 
