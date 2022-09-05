@@ -26,7 +26,7 @@ public class PlayerController : MonoBehaviour
     float actionStartTime;
     float currentActionDuration;
 
-    float attackDuration = 0.1f;
+    float attackDuration = 0.3f;
     float jumpDuration = 0.5f;
 
     float attackCooldown = 0.2f;
@@ -133,7 +133,7 @@ public class PlayerController : MonoBehaviour
     private void StartAttack()
     {
         animator.SetTrigger("Attack");
-        
+
         sfxAudioSource.PlayOneShot(attackAudioClip);
 
         currentAction = ActionType.Attack;
