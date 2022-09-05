@@ -9,6 +9,7 @@ public class Obstacle : MonoBehaviour
         // Obstacles only effect the layer they are on
         if (collision.gameObject.CompareTag("Player") && collision.gameObject.layer == gameObject.layer)
         {
+            GameManager.instance.GameOver();
             Destroy(collision.gameObject);
         }
     }
