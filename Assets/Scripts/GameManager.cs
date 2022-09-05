@@ -67,7 +67,9 @@ public class GameManager : MonoBehaviour
     {
         backgroundMusic.Stop();
         audioSource.PlayOneShot(playerDeathAudioClip);
-        audioSource.PlayOneShot(gameOverAudioClip);
+        backgroundMusic.clip = gameOverAudioClip;
+        backgroundMusic.loop = false;
+        backgroundMusic.PlayDelayed(0.5f);
     }
 
 
