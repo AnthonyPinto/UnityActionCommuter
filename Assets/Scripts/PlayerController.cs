@@ -29,6 +29,8 @@ public class PlayerController : MonoBehaviour
     float attackDuration = 0.3f;
     float jumpDuration = 0.5f;
 
+    float onHitAnimationDuration = 0.6f;
+
     float attackCooldown = 0.2f;
 
     float earlyInputAllowance = 0.25f;
@@ -245,6 +247,19 @@ public class PlayerController : MonoBehaviour
     {
         int newLayer = LayerMask.NameToLayer(Constants.LayerString[Constants.LayerList[layerIndex]]);
         gameObject.SetLayerRecursively(newLayer);
+    }
+
+    public void OnHit()
+    {
+        // Should probably disable all colliders here
+        StartCoroutine(OnHitRoutine());
+    }
+
+    IEnumerator OnHitRoutine()
+    {
+        animator.SetTrigger("Hit");
+        yield return new WaitForSeconds(onHitAnimationDuration);
+        Destroy(gameObject);
     }
 
 

@@ -75,7 +75,7 @@ public class Enemy : MonoBehaviour
             isHitRoutineRunning = false;
             GameManager.instance.GameOver();
             isReadyToAttack = false;
-            Destroy(playerObject);
+            playerObject.GetComponent<PlayerController>().OnHit();
         }
     }
 

@@ -10,7 +10,7 @@ public class Obstacle : MonoBehaviour
         if (collision.gameObject.CompareTag("Player") && collision.gameObject.layer == gameObject.layer)
         {
             GameManager.instance.GameOver();
-            Destroy(collision.gameObject);
+            collision.gameObject.GetComponent<PlayerController>().OnHit();
         }
     }
 }
