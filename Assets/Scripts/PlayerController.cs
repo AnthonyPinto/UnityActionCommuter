@@ -134,6 +134,7 @@ public class PlayerController : MonoBehaviour
 
     private void StartAttack()
     {
+        animator.SetTrigger("Attack");
         currentAction = ActionType.Attack;
         actionStartTime = Time.time;
         currentActionDuration = attackDuration;
