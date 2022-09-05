@@ -70,8 +70,8 @@ public class Enemy : MonoBehaviour
             wasHit = false;
             hitPlayer = false;
             isHitRoutineRunning = false;
+            GameManager.instance.GameOver();
             Destroy(playerObject);
-
         }
     }
 

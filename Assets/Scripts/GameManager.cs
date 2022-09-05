@@ -5,9 +5,12 @@ using UnityEngine;
 public class GameManager : MonoBehaviour
 {
     public static GameManager instance;
+    public AudioClip gameOverAudioClip;
+    public AudioClip playerDeathAudioClip;
+    public AudioSource backgroundMusic;
 
     public UIController uiController;
-    public AudioSource audioSource;
+    AudioSource audioSource;
 
     int score = 0;
     int distance = 0;
@@ -58,6 +61,13 @@ public class GameManager : MonoBehaviour
     public void PlaySFX(AudioClip audioClip)
     {
         audioSource.PlayOneShot(audioClip);
+    }
+
+    public void GameOver()
+    {
+        backgroundMusic.Stop();
+        audioSource.PlayOneShot(playerDeathAudioClip);
+        audioSource.PlayOneShot(gameOverAudioClip);
     }
 
 

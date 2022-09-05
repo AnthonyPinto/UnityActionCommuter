@@ -274,8 +274,8 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
-  m_PlayOnAwake: 1
-  m_Volume: 1
+  m_PlayOnAwake: 0
+  m_Volume: 0.3
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -1333,6 +1333,18 @@ PrefabInstance:
       propertyPath: uiController
       value: 
       objectReference: {fileID: 738668507}
+    - target: {fileID: 3406241353266256615, guid: 9df3ffcde96ee294ba56ef139d18858c, type: 3}
+      propertyPath: backgroundMusic
+      value: 
+      objectReference: {fileID: 1297716921}
+    - target: {fileID: 3406241353266256615, guid: 9df3ffcde96ee294ba56ef139d18858c, type: 3}
+      propertyPath: gameOverAudioClip
+      value: 
+      objectReference: {fileID: 8300000, guid: 83a3d26e14ee53540a782bb6b7ca1ca5, type: 3}
+    - target: {fileID: 3406241353266256615, guid: 9df3ffcde96ee294ba56ef139d18858c, type: 3}
+      propertyPath: playerDeathAudioClip
+      value: 
+      objectReference: {fileID: 8300000, guid: 089910556ac0746aa8027d59b953a6ef, type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9df3ffcde96ee294ba56ef139d18858c, type: 3}
 --- !u!1001 &4289609563761760267
