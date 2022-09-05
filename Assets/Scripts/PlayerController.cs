@@ -5,6 +5,7 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
     public AudioClip jumpAudioClip;
+    public AudioClip attackAudioClip;
 
     public Animator animator;
 
@@ -135,6 +136,10 @@ public class PlayerController : MonoBehaviour
     private void StartAttack()
     {
         animator.SetTrigger("Attack");
+        audioSource.volume = 1;
+        audioSource.PlayOneShot(attackAudioClip);
+        audioSource.volume = defaultAudioVolume;
+
         currentAction = ActionType.Attack;
         actionStartTime = Time.time;
         currentActionDuration = attackDuration;
