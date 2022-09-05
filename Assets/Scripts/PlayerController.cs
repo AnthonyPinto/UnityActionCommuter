@@ -8,6 +8,8 @@ public class PlayerController : MonoBehaviour
 
     public Animator animator;
 
+    public SpriteRenderer attackHitboxRenderer;
+
     AudioSource audioSource;
 
     float defaultAudioVolume;
@@ -27,6 +29,8 @@ public class PlayerController : MonoBehaviour
     float attackDuration = 0.1f;
     float jumpDuration = 0.5f;
 
+    float attackCooldown = 0.2f;
+
     float earlyInputAllowance = 0.25f;
 
 
@@ -38,7 +42,10 @@ public class PlayerController : MonoBehaviour
 
         // Snap to starting rail
         UpdateYPos(LayerHelper.instance.layerObjects[currentRailIndex].transform.position.y + characterRailOffset);
-        SetLayerFromIndex(currentRailIndex);
+        SetPlayerLayerFromIndex(currentRailIndex);
+
+        // Hide attack hitbox until we attack
+        attackHitboxRenderer.gameObject.SetActive(false);
     }
 
     private void Update()
@@ -85,6 +92,7 @@ public class PlayerController : MonoBehaviour
 
         UpdateForCurrentJump();
         UpdateForCurrentAttack();
+        UpdateForCurrentCooldown();
     }
 
     private void StartJumpUp()
@@ -149,7 +157,7 @@ public class PlayerController : MonoBehaviour
             currentAction = null;
             UpdateYPos(nextRail.transform.position.y + characterRailOffset);
             currentRailIndex = targetRailIndex;
-            SetLayerFromIndex(currentRailIndex);
+            SetPlayerLayerFromIndex(currentRailIndex);
         }
         else
         {
@@ -162,22 +170,22 @@ public class PlayerController : MonoBehaviour
             // Set the current collision layer based on how far into the jump we are
             if (percentComplete < 0.25f)
             {
-                SetLayerFromIndex(currentRailIndex);
+                SetPlayerLayerFromIndex(currentRailIndex);
             }
             else if (percentComplete < 0.75f)
             {
                 if (currentAction == ActionType.Up)
                 {
-                    SetLayerFromIndex(currentRailIndex + 1);
+                    SetPlayerLayerFromIndex(currentRailIndex + 1);
                 }
                 else
                 {
-                    SetLayerFromIndex(currentRailIndex - 1);
+                    SetPlayerLayerFromIndex(currentRailIndex - 1);
                 }
             }
             else
             {
-                SetLayerFromIndex(targetRailIndex);
+                SetPlayerLayerFromIndex(targetRailIndex);
             }
 
             UpdateYPos(Mathf.Lerp(startY, endY, percentComplete));
@@ -193,12 +201,36 @@ public class PlayerController : MonoBehaviour
 
         // If the attack is over clear the action
         float remainingDuration = actionStartTime + currentActionDuration - Time.time;
+        float percentComplete = (currentActionDuration - remainingDuration) / currentActionDuration;
+        if (remainingDuration <= 0)
+        {
+            attackHitboxRenderer.gameObject.SetActive(false);
+            currentAction = ActionType.Cooldown;
+            actionStartTime = Time.time;
+            currentActionDuration = attackCooldown;
+        }
+        else
+        {
+            attackHitboxRenderer.gameObject.SetActive(true);
+            Color prevColor = attackHitboxRenderer.color;
+            attackHitboxRenderer.color = new Color(prevColor.r, prevColor.g, prevColor.b, 1 - percentComplete);
+        }
+
+        // DO ATTACK HERE
+    }
+
+    private void UpdateForCurrentCooldown()
+    {
+        if (currentAction != ActionType.Cooldown)
+        {
+            return;
+        }
+
+        float remainingDuration = actionStartTime + currentActionDuration - Time.time;
         if (remainingDuration <= 0)
         {
             currentAction = null;
         }
-
-        // DO ATTACK HERE
     }
 
 
@@ -207,11 +239,13 @@ public class PlayerController : MonoBehaviour
         transform.position = new Vector3(transform.position.x, newY, transform.position.y);
     }
 
-    void SetLayerFromIndex(int layerIndex)
+    void SetPlayerLayerFromIndex(int layerIndex)
     {
-        gameObject.layer = LayerMask.NameToLayer(Constants.LayerString[Constants.LayerList[layerIndex]]);
+        int newLayer = LayerMask.NameToLayer(Constants.LayerString[Constants.LayerList[layerIndex]]);
+        gameObject.layer = newLayer;
+        attackHitboxRenderer.gameObject.layer = newLayer;
     }
 
 
-    enum ActionType { Up, Down, Attack }
+    enum ActionType { Up, Down, Attack, Cooldown }
 }
