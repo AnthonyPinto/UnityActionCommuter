@@ -17,19 +17,22 @@ public class ObjectSpawner : MonoBehaviour
     float ratYOffset = 0.5f;
     float maxRatWait = 6;
     float minRatWait = 1;
+    List<TrackManager.TrackSectionKey> ratTrackSections = new List<TrackManager.TrackSectionKey>() { TrackManager.TrackSectionKey.ChannelOne, TrackManager.TrackSectionKey.ChannelThree };
 
     float timeToNextItem;
     public Poolable itemPrefab;
     ObjectPool<GameObject> itemObjectPool;
     float itemYOffset = 0.25f;
-    float maxSodaWait = 8;
-    float minSodaWait = 3;
+    float maxItemWait = 8;
+    float minItemWait = 3;
+    List<TrackManager.TrackSectionKey> itemTrackSections = new List<TrackManager.TrackSectionKey>() { TrackManager.TrackSectionKey.RailOne, TrackManager.TrackSectionKey.RailTwo, TrackManager.TrackSectionKey.RailThree, TrackManager.TrackSectionKey.RailFour };
 
     float timeToNextPillar;
     public Poolable pillarPrefab;
     ObjectPool<GameObject> pillarObjectPool;
     float pillarYOffset = 4f;
     float pillarWait = 2;
+    List<TrackManager.TrackSectionKey> pillarTrackSections = new List<TrackManager.TrackSectionKey>() { TrackManager.TrackSectionKey.ChannelTwo };
 
     private void Awake()
     {
@@ -66,17 +69,17 @@ public class ObjectSpawner : MonoBehaviour
         // Spawn rat
         if (timeToNextRat <= 0)
         {
-            // channel = space between 2 rails
-            Constants.Layer channel = Random.value > 0.5 ? Constants.Layer.ChannelOne : Constants.Layer.ChannelThree;
-            GameObject channelObject = TrackManager.instance.GetObjectForLayer(channel);
-
             GameObject rat = ratObjectPool.Get();
             rat.GetComponent<Poolable>().pool = ratObjectPool;
+
+            TrackManager.TrackSectionKey trackSectionKey = ratTrackSections[Random.Range(0, ratTrackSections.Count)];
+            TrackManager.TrackSection trackSection = TrackManager.instance.GetTrackSectionByKey(trackSectionKey);
+
             rat.transform.position = new Vector3(
                 spawnXPosition,
-                channelObject.transform.position.y + ratYOffset,
+                trackSection.yPosition + ratYOffset,
                 0);
-            rat.gameObject.SetLayerRecursively(LayerMask.NameToLayer(Constants.LayerString[channel]));
+            TrackManager.instance.SetObjectLayerToMatchTrackSection(rat, trackSection);
 
             timeToNextRat = Random.Range(minRatWait, maxRatWait);
         }
@@ -84,33 +87,35 @@ public class ObjectSpawner : MonoBehaviour
         // Spawn item
         if (timeToNextItem <= 0)
         {
-            Constants.Layer rail = Constants.RailList[Random.Range(0, Constants.RailList.Count)];
-            GameObject railObject = TrackManager.instance.GetObjectForLayer(rail);
-
             GameObject item = itemObjectPool.Get();
             item.GetComponent<Poolable>().pool = itemObjectPool;
+
+            TrackManager.TrackSectionKey trackSectionKey = itemTrackSections[Random.Range(0, itemTrackSections.Count)];
+            TrackManager.TrackSection trackSection = TrackManager.instance.GetTrackSectionByKey(trackSectionKey);
+
             item.transform.position = new Vector3(
                 spawnXPosition,
-                railObject.transform.position.y + itemYOffset,
+                trackSection.yPosition + itemYOffset,
                 0);
-            item.gameObject.SetLayerRecursively(LayerMask.NameToLayer(Constants.LayerString[rail]));
+            TrackManager.instance.SetObjectLayerToMatchTrackSection(item, trackSection);
 
-            timeToNextItem = Random.Range(minSodaWait, maxSodaWait);
+            timeToNextItem = Random.Range(minItemWait, maxItemWait);
         }
 
         // Spawn pillar
         if (timeToNextPillar <= 0)
         {
-            Constants.Layer layer = Constants.ChannelList[1]; // Always the middle channel
-            GameObject channelObject = TrackManager.instance.GetObjectForLayer(layer);
-
             GameObject pillar = pillarObjectPool.Get();
             pillar.GetComponent<Poolable>().pool = pillarObjectPool;
+
+            TrackManager.TrackSectionKey trackSectionKey = pillarTrackSections[Random.Range(0, pillarTrackSections.Count)];
+            TrackManager.TrackSection trackSection = TrackManager.instance.GetTrackSectionByKey(trackSectionKey);
+
             pillar.transform.position = new Vector3(
                 spawnXPosition,
-                channelObject.transform.position.y + pillarYOffset,
+                trackSection.yPosition + pillarYOffset,
                 0);
-            pillar.gameObject.SetLayerRecursively(LayerMask.NameToLayer(Constants.LayerString[layer]));
+            TrackManager.instance.SetObjectLayerToMatchTrackSection(pillar, trackSection);
 
             timeToNextPillar = pillarWait;
         }

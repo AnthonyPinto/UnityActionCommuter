@@ -39,13 +39,13 @@ public class PlayerController : MonoBehaviour
     {
         audioSource = GetComponent<AudioSource>();
 
-        GameObject currentRail = TrackManager.instance.layerObjects[currentRailIndex];
-        float currentRailYPosition = currentRail.transform.position.y;
+        TrackManager.TrackSection currentRail = TrackManager.instance.GetTrackSectionByIndex(currentRailIndex);
+        float currentRailYPosition = currentRail.yPosition;
 
         // Snap to starting rail
         UpdateYPosition(currentRailYPosition + characterRailOffset);
 
-        SetPlayerLayerFromIndex(currentRailIndex);
+        SetPlayerLayerFromTrackSectionIndex(currentRailIndex);
 
         // Hide attack hitbox until we attack
         attackHitBox.SetActive(false);
@@ -121,7 +121,7 @@ public class PlayerController : MonoBehaviour
         // Check for the target rail and return if it doesn't exist
         // Skip over 'channel' layers between rails
         int newTargetRailIdx = isUp ? currentRailIndex + 2 : currentRailIndex - 2;
-        if (newTargetRailIdx < 0 || newTargetRailIdx >= TrackManager.instance.layerObjects.Count)
+        if (!TrackManager.instance.isIndexAValidTrackSection(newTargetRailIdx))
         {
             return;
         }
@@ -163,44 +163,44 @@ public class PlayerController : MonoBehaviour
 
         float remainingDuration = actionStartTime + currentActionDuration - Time.time;
 
-        GameObject prevRail = TrackManager.instance.layerObjects[currentRailIndex];
-        GameObject nextRail = TrackManager.instance.layerObjects[targetRailIndex];
+        TrackManager.TrackSection prevRail = TrackManager.instance.GetTrackSectionByIndex(currentRailIndex);
+        TrackManager.TrackSection nextRail = TrackManager.instance.GetTrackSectionByIndex(targetRailIndex);
 
         // If the jump is over, finish move and clear current action and update rail index
         if (remainingDuration <= 0)
         {
             currentAction = null;
-            UpdateYPosition(nextRail.transform.position.y + characterRailOffset);
+            UpdateYPosition(nextRail.yPosition + characterRailOffset);
             currentRailIndex = targetRailIndex;
-            SetPlayerLayerFromIndex(currentRailIndex);
+            SetPlayerLayerFromTrackSectionIndex(currentRailIndex);
         }
         else
         {
             // reposition based on progress of jump
-            float startY = prevRail.transform.position.y + characterRailOffset;
-            float endY = nextRail.transform.position.y + characterRailOffset;
+            float startY = prevRail.yPosition + characterRailOffset;
+            float endY = nextRail.yPosition + characterRailOffset;
 
             float percentComplete = (currentActionDuration - remainingDuration) / currentActionDuration;
 
             // Set the current collision layer based on how far into the jump we are
             if (percentComplete < 0.25f)
             {
-                SetPlayerLayerFromIndex(currentRailIndex);
+                SetPlayerLayerFromTrackSectionIndex(currentRailIndex);
             }
             else if (percentComplete < 0.75f)
             {
                 if (currentAction == ActionType.Up)
                 {
-                    SetPlayerLayerFromIndex(currentRailIndex + 1);
+                    SetPlayerLayerFromTrackSectionIndex(currentRailIndex + 1);
                 }
                 else
                 {
-                    SetPlayerLayerFromIndex(currentRailIndex - 1);
+                    SetPlayerLayerFromTrackSectionIndex(currentRailIndex - 1);
                 }
             }
             else
             {
-                SetPlayerLayerFromIndex(targetRailIndex);
+                SetPlayerLayerFromTrackSectionIndex(targetRailIndex);
             }
 
             UpdateYPosition(Mathf.Lerp(startY, endY, percentComplete));
@@ -251,10 +251,10 @@ public class PlayerController : MonoBehaviour
         transform.position = new Vector3(transform.position.x, newY, transform.position.y);
     }
 
-    void SetPlayerLayerFromIndex(int layerIndex)
+    void SetPlayerLayerFromTrackSectionIndex(int trackSectionIndex)
     {
-        int newLayer = LayerMask.NameToLayer(Constants.LayerString[Constants.LayerList[layerIndex]]);
-        gameObject.SetLayerRecursively(newLayer);
+        TrackManager.TrackSection trackSection = TrackManager.instance.GetTrackSectionByIndex(trackSectionIndex);
+        TrackManager.instance.SetObjectLayerToMatchTrackSection(gameObject, trackSection);
     }
 
     public void OnHit()

@@ -123,6 +123,11 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1 &59551303 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2062835965253761517, guid: 94b6d1b4cab84fd49a8cf316739259c0, type: 3}
+  m_PrefabInstance: {fileID: 5532498795758368170}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &102573067
 GameObject:
   m_ObjectHideFlags: 0
@@ -359,6 +364,11 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!1 &490258242 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1418635985455884036, guid: 94b6d1b4cab84fd49a8cf316739259c0, type: 3}
+  m_PrefabInstance: {fileID: 5532498795758368170}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &543251496
 GameObject:
   m_ObjectHideFlags: 0
@@ -876,6 +886,11 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 921261306}
   m_CullTransparentMesh: 1
+--- !u!1 &951370703 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1418635985292779505, guid: 94b6d1b4cab84fd49a8cf316739259c0, type: 3}
+  m_PrefabInstance: {fileID: 5532498795758368170}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1067997218
 GameObject:
   m_ObjectHideFlags: 0
@@ -956,6 +971,11 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1067997218}
   m_CullTransparentMesh: 1
+--- !u!1 &1204092670 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4937769498909641468, guid: 94b6d1b4cab84fd49a8cf316739259c0, type: 3}
+  m_PrefabInstance: {fileID: 5532498795758368170}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1297716920
 GameObject:
   m_ObjectHideFlags: 0
@@ -1152,6 +1172,21 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1895703491 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3424688138441632199, guid: 94b6d1b4cab84fd49a8cf316739259c0, type: 3}
+  m_PrefabInstance: {fileID: 5532498795758368170}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &1992662143 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4614452660371922354, guid: 94b6d1b4cab84fd49a8cf316739259c0, type: 3}
+  m_PrefabInstance: {fileID: 5532498795758368170}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &2122915981 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1418635986546821803, guid: 94b6d1b4cab84fd49a8cf316739259c0, type: 3}
+  m_PrefabInstance: {fileID: 5532498795758368170}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1863217249758648013
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1492,6 +1527,38 @@ PrefabInstance:
       propertyPath: m_Name
       value: TrackManager
       objectReference: {fileID: 0}
+    - target: {fileID: 5532498796270449065, guid: 94b6d1b4cab84fd49a8cf316739259c0, type: 3}
+      propertyPath: trackSectionGameObjects.Array.size
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 5532498796270449065, guid: 94b6d1b4cab84fd49a8cf316739259c0, type: 3}
+      propertyPath: trackSectionGameObjects.Array.data[0]
+      value: 
+      objectReference: {fileID: 1895703491}
+    - target: {fileID: 5532498796270449065, guid: 94b6d1b4cab84fd49a8cf316739259c0, type: 3}
+      propertyPath: trackSectionGameObjects.Array.data[1]
+      value: 
+      objectReference: {fileID: 1204092670}
+    - target: {fileID: 5532498796270449065, guid: 94b6d1b4cab84fd49a8cf316739259c0, type: 3}
+      propertyPath: trackSectionGameObjects.Array.data[2]
+      value: 
+      objectReference: {fileID: 490258242}
+    - target: {fileID: 5532498796270449065, guid: 94b6d1b4cab84fd49a8cf316739259c0, type: 3}
+      propertyPath: trackSectionGameObjects.Array.data[3]
+      value: 
+      objectReference: {fileID: 59551303}
+    - target: {fileID: 5532498796270449065, guid: 94b6d1b4cab84fd49a8cf316739259c0, type: 3}
+      propertyPath: trackSectionGameObjects.Array.data[4]
+      value: 
+      objectReference: {fileID: 2122915981}
+    - target: {fileID: 5532498796270449065, guid: 94b6d1b4cab84fd49a8cf316739259c0, type: 3}
+      propertyPath: trackSectionGameObjects.Array.data[5]
+      value: 
+      objectReference: {fileID: 1992662143}
+    - target: {fileID: 5532498796270449065, guid: 94b6d1b4cab84fd49a8cf316739259c0, type: 3}
+      propertyPath: trackSectionGameObjects.Array.data[6]
+      value: 
+      objectReference: {fileID: 951370703}
     - target: {fileID: 5532498796270449070, guid: 94b6d1b4cab84fd49a8cf316739259c0, type: 3}
       propertyPath: m_RootOrder
       value: 6
