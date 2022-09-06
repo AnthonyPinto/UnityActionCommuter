@@ -6,9 +6,9 @@ using UnityEngine.Pool;
 public class ObjectSpawner : MonoBehaviour
 {
 
+    float spawnXPosition = 20;
 
-    float spawnXPos = 20;
-
+    // how often it checks whether to spawn one or more new objects
     float spawnTick = 0.5f;
 
     float timeToNextRat;
@@ -18,10 +18,10 @@ public class ObjectSpawner : MonoBehaviour
     float maxRatWait = 6;
     float minRatWait = 1;
 
-    float timeToNextSoda;
-    public Poolable sodaPrefab;
-    ObjectPool<GameObject> sodaObjectPool;
-    float sodaYOffset = 0.25f;
+    float timeToNextItem;
+    public Poolable itemPrefab;
+    ObjectPool<GameObject> itemObjectPool;
+    float itemYOffset = 0.25f;
     float maxSodaWait = 8;
     float minSodaWait = 3;
 
@@ -34,7 +34,7 @@ public class ObjectSpawner : MonoBehaviour
     private void Awake()
     {
         ratObjectPool = ObjectPoolFactory.CreatePooler(ratPrefab.gameObject);
-        sodaObjectPool = ObjectPoolFactory.CreatePooler(sodaPrefab.gameObject);
+        itemObjectPool = ObjectPoolFactory.CreatePooler(itemPrefab.gameObject);
         pillarObjectPool = ObjectPoolFactory.CreatePooler(pillarPrefab.gameObject);
     }
 
@@ -47,7 +47,7 @@ public class ObjectSpawner : MonoBehaviour
     private void Update()
     {
         timeToNextRat -= Time.deltaTime;
-        timeToNextSoda -= Time.deltaTime;
+        timeToNextItem -= Time.deltaTime;
         timeToNextPillar -= Time.deltaTime;
     }
 
@@ -66,29 +66,36 @@ public class ObjectSpawner : MonoBehaviour
         // Spawn rat
         if (timeToNextRat <= 0)
         {
+            // channel = space between 2 rails
             Constants.Layer channel = Random.value > 0.5 ? Constants.Layer.ChannelOne : Constants.Layer.ChannelThree;
             GameObject channelObject = LayerHelper.instance.GetObjectForLayer(channel);
 
             GameObject rat = ratObjectPool.Get();
             rat.GetComponent<Poolable>().pool = ratObjectPool;
-            rat.transform.position = new Vector3(spawnXPos, channelObject.transform.position.y + ratYOffset, 0);
+            rat.transform.position = new Vector3(
+                spawnXPosition,
+                channelObject.transform.position.y + ratYOffset,
+                0);
             rat.gameObject.SetLayerRecursively(LayerMask.NameToLayer(Constants.LayerString[channel]));
 
             timeToNextRat = Random.Range(minRatWait, maxRatWait);
         }
 
-        // Spawn soda
-        if (timeToNextSoda <= 0)
+        // Spawn item
+        if (timeToNextItem <= 0)
         {
             Constants.Layer rail = Constants.RailList[Random.Range(0, Constants.RailList.Count)];
             GameObject railObject = LayerHelper.instance.GetObjectForLayer(rail);
 
-            GameObject soda = sodaObjectPool.Get();
-            soda.GetComponent<Poolable>().pool = sodaObjectPool;
-            soda.transform.position = new Vector3(spawnXPos, railObject.transform.position.y + sodaYOffset, 0);
-            soda.gameObject.SetLayerRecursively(LayerMask.NameToLayer(Constants.LayerString[rail]));
+            GameObject item = itemObjectPool.Get();
+            item.GetComponent<Poolable>().pool = itemObjectPool;
+            item.transform.position = new Vector3(
+                spawnXPosition,
+                railObject.transform.position.y + itemYOffset,
+                0);
+            item.gameObject.SetLayerRecursively(LayerMask.NameToLayer(Constants.LayerString[rail]));
 
-            timeToNextSoda = Random.Range(minSodaWait, maxSodaWait);
+            timeToNextItem = Random.Range(minSodaWait, maxSodaWait);
         }
 
         // Spawn pillar
@@ -99,7 +106,10 @@ public class ObjectSpawner : MonoBehaviour
 
             GameObject pillar = pillarObjectPool.Get();
             pillar.GetComponent<Poolable>().pool = pillarObjectPool;
-            pillar.transform.position = new Vector3(spawnXPos, channelObject.transform.position.y + pillarYOffset, 0);
+            pillar.transform.position = new Vector3(
+                spawnXPosition,
+                channelObject.transform.position.y + pillarYOffset,
+                0);
             pillar.gameObject.SetLayerRecursively(LayerMask.NameToLayer(Constants.LayerString[layer]));
 
             timeToNextPillar = pillarWait;
