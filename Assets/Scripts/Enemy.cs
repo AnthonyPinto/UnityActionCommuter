@@ -12,30 +12,34 @@ public class Enemy : MonoBehaviour
     public Animator animator;
     public AudioClip deathAudioClip;
     public AudioClip attackAudioClip;
-    public OnTriggerEmitter attackPrepTrigger;
+    public OnTriggerEmitter attackTrigger;
 
-    bool isReadyToAttack = false;
-    bool wasHit = false;
-    bool isHitRoutineRunning = false;
-    bool hitPlayer = false;
+    // it gets this from collision
     GameObject playerObject;
+
+    bool isAttacking = false;
+    bool wasHitByPlayer = false;
+    bool isHitRoutineRunning = false;
+    bool hasHitPlayer = false;
 
     private void Start()
     {
         audioSource = GetComponent<AudioSource>();
-        attackPrepTrigger.SetOnTriggerEnter2DHandler(OnAttackPrepTriggerEnter2D);
+        attackTrigger.SetOnTriggerEnter2DHandler(OnAttackTriggerEnter2D);
     }
 
-    private void OnAttackPrepTriggerEnter2D(Collider2D collision)
+    // triggered when player is close enough to be attacked by rat
+    private void OnAttackTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject.CompareTag("Player"))
         {
-            isReadyToAttack = true;
+            isAttacking = true;
             audioSource.PlayOneShot(attackAudioClip);
             animator.SetTrigger("Attack");
         }
     }
 
+    // triggered on collision with rat
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (isHitRoutineRunning)
@@ -48,34 +52,37 @@ public class Enemy : MonoBehaviour
         // resulting in both the player and the rat being hit
         if (collision.gameObject.CompareTag("PlayerAttack"))
         {
-            wasHit = true;
+            wasHitByPlayer = true;
         }
         else if (collision.gameObject.CompareTag("Player"))
         {
-            hitPlayer = true;
+            hasHitPlayer = true;
             playerObject = collision.gameObject;
         }
     }
 
     private void LateUpdate()
     {
-        if (wasHit)
+        if (wasHitByPlayer)
         {
-            wasHit = false;
-            hitPlayer = false;
-            isReadyToAttack = false;
-            isHitRoutineRunning = true;
             StartCoroutine(WasHitRoutine());
+            isHitRoutineRunning = true;
 
+            // reset
+            wasHitByPlayer = false;
+            hasHitPlayer = false;
+            isAttacking = false;
         }
-        else if (hitPlayer && isReadyToAttack)
+        else if (hasHitPlayer && isAttacking)
         {
-            wasHit = false;
-            hitPlayer = false;
-            isHitRoutineRunning = false;
             GameManager.instance.GameOver();
-            isReadyToAttack = false;
             playerObject.GetComponent<PlayerController>().OnHit();
+
+            // reset
+            isAttacking = false;
+            isHitRoutineRunning = false;
+            wasHitByPlayer = false;
+            hasHitPlayer = false;
         }
     }
 
@@ -85,8 +92,8 @@ public class Enemy : MonoBehaviour
         GameManager.instance.AddPoints(pointsOnDestroy);
         animator.SetTrigger("Hit");
         audioSource.PlayOneShot(deathAudioClip);
+        
         yield return new WaitForSeconds(WasHitAnimationDuration);
-
 
         GetComponent<Poolable>().pool.Release(gameObject);
         isHitRoutineRunning = false;
