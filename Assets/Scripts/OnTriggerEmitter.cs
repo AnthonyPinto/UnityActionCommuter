@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class OnTriggerReporter : MonoBehaviour
+public class OnTriggerEmitter : MonoBehaviour
 {
     public delegate void OnTrigger2DHandler(Collider2D collision);
 

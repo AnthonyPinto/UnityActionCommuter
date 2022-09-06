@@ -9,7 +9,7 @@ public class GameManager : MonoBehaviour
     public AudioClip playerDeathAudioClip;
     public AudioSource backgroundMusic;
 
-    public UIController uiController;
+    public UIManager uiManager;
     AudioSource audioSource;
 
     int score = 0;
@@ -39,13 +39,13 @@ public class GameManager : MonoBehaviour
     public void AddPoints(int points)
     {
         score += points;
-        uiController.UpdateScore(score);
+        uiManager.UpdateScore(score);
     }
 
     public void AddDistance(int amountToAdd)
     {
         distance += amountToAdd;
-        uiController.UpdateDistance(distance);
+        uiManager.UpdateDistance(distance);
     }
 
     IEnumerator IncreaseScoreAndDistanceOverTimeRoutine()

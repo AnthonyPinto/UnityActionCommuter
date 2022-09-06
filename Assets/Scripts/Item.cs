@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [RequireComponent(typeof(Poolable))]
-public class Collectable : MonoBehaviour
+public class Item : MonoBehaviour
 {
     public int pointValue = 100;
     public AudioClip audioClip;

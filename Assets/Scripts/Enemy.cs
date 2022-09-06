@@ -12,7 +12,7 @@ public class Enemy : MonoBehaviour
     public Animator animator;
     public AudioClip deathAudioClip;
     public AudioClip attackAudioClip;
-    public OnTriggerReporter attackPrepTrigger;
+    public OnTriggerEmitter attackPrepTrigger;
 
     bool isReadyToAttack = false;
     bool wasHit = false;

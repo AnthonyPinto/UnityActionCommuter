@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BackgroundScroller : MonoBehaviour
+public class Background : MonoBehaviour
 {
     public SpriteRenderer tier1Sprite;
     public float tier1Speed = 15;
