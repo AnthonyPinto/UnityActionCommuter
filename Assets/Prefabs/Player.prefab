@@ -85,7 +85,7 @@ MonoBehaviour:
   jumpAudioClip: {fileID: 8300000, guid: 11a5b0ec4d3c2457bbd9daa75056cf95, type: 3}
   attackAudioClip: {fileID: 8300000, guid: 8f706007a53f34e2e9e1b4f874b85cab, type: 3}
   animator: {fileID: 3689474334354708738}
-  attackHitboxRenderer: {fileID: 4968444000980727575}
+  attackHitBox: {fileID: 4483870324255562014}
 --- !u!61 &4289609563761760277
 BoxCollider2D:
   m_ObjectHideFlags: 0

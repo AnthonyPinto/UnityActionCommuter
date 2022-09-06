@@ -7,7 +7,9 @@ public class Obstacle : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D collision)
     {
         // Obstacles only effect the layer they are on
-        if (collision.gameObject.CompareTag("Player") && collision.gameObject.layer == gameObject.layer)
+        if (
+            collision.gameObject.CompareTag("Player") &&
+            collision.gameObject.layer == gameObject.layer)
         {
             GameManager.instance.GameOver();
             collision.gameObject.GetComponent<PlayerController>().OnHit();

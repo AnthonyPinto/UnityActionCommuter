@@ -10,7 +10,7 @@ public class PlayerController : MonoBehaviour
 
     public Animator animator;
 
-    public SpriteRenderer attackHitboxRenderer;
+    public GameObject attackHitBox;
 
     AudioSource audioSource;
 
@@ -33,31 +33,38 @@ public class PlayerController : MonoBehaviour
 
     float attackCooldown = 0.2f;
 
-    float earlyInputAllowance = 0.25f;
-
+    float earlyInputAllowance = 0.25f; 
 
     private void Start()
     {
         audioSource = GetComponent<AudioSource>();
 
+        GameObject currentRail = LayerHelper.instance.layerObjects[currentRailIndex];
+        float currentRailYPosition = currentRail.transform.position.y;
+
         // Snap to starting rail
-        UpdateYPos(LayerHelper.instance.layerObjects[currentRailIndex].transform.position.y + characterRailOffset);
+        UpdateYPosition(currentRailYPosition + characterRailOffset);
+
         SetPlayerLayerFromIndex(currentRailIndex);
 
         // Hide attack hitbox until we attack
-        attackHitboxRenderer.gameObject.SetActive(false);
+        attackHitBox.SetActive(false);
     }
 
     private void Update()
     {
         // Get user input and queue it up to either start this frame - or possibly start on a later
         // frame if it becomes possible during the earlyInputAllowance window
-        if (Input.GetKeyDown(KeyCode.UpArrow) || Input.GetKeyDown(KeyCode.W))
+        if (
+            Input.GetKeyDown(KeyCode.UpArrow) ||
+            Input.GetKeyDown(KeyCode.W))
         {
             queuedAction = ActionType.Up;
             actionQueuedTime = Time.time;
         }
-        else if (Input.GetKeyDown(KeyCode.DownArrow) || Input.GetKeyDown(KeyCode.S))
+        else if (
+            Input.GetKeyDown(KeyCode.DownArrow) ||
+            Input.GetKeyDown(KeyCode.S))
         {
             queuedAction = ActionType.Down;
             actionQueuedTime = Time.time;
@@ -70,7 +77,11 @@ public class PlayerController : MonoBehaviour
 
         // If we aren't in the middle of an action, and an action is queued and the input for that action was
         // within the input allowance, start the new action
-        if (!currentAction.HasValue && queuedAction.HasValue && Time.time - actionQueuedTime <= earlyInputAllowance)
+        if (
+            !currentAction.HasValue &&
+            queuedAction.HasValue &&
+            Time.time - actionQueuedTime <= earlyInputAllowance
+        )
         {
             switch (queuedAction)
             {
@@ -90,9 +101,9 @@ public class PlayerController : MonoBehaviour
             queuedAction = null;
         }
 
-        UpdateForCurrentJump();
-        UpdateForCurrentAttack();
-        UpdateForCurrentCooldown();
+        UpdateForJumpInProgress();
+        UpdateForAttackInProgress();
+        UpdateForCooldownInProgress();
     }
 
     private void StartJumpUp()
@@ -143,7 +154,7 @@ public class PlayerController : MonoBehaviour
         currentActionDuration = attackDuration;
     }
 
-    private void UpdateForCurrentJump()
+    private void UpdateForJumpInProgress()
     {
         if (currentAction != ActionType.Up && currentAction != ActionType.Down)
         {
@@ -159,7 +170,7 @@ public class PlayerController : MonoBehaviour
         if (remainingDuration <= 0)
         {
             currentAction = null;
-            UpdateYPos(nextRail.transform.position.y + characterRailOffset);
+            UpdateYPosition(nextRail.transform.position.y + characterRailOffset);
             currentRailIndex = targetRailIndex;
             SetPlayerLayerFromIndex(currentRailIndex);
         }
@@ -192,11 +203,11 @@ public class PlayerController : MonoBehaviour
                 SetPlayerLayerFromIndex(targetRailIndex);
             }
 
-            UpdateYPos(Mathf.Lerp(startY, endY, percentComplete));
+            UpdateYPosition(Mathf.Lerp(startY, endY, percentComplete));
         }
     }
 
-    private void UpdateForCurrentAttack()
+    private void UpdateForAttackInProgress()
     {
         if (currentAction != ActionType.Attack)
         {
@@ -208,22 +219,19 @@ public class PlayerController : MonoBehaviour
         float percentComplete = (currentActionDuration - remainingDuration) / currentActionDuration;
         if (remainingDuration <= 0)
         {
-            attackHitboxRenderer.gameObject.SetActive(false);
+            attackHitBox.SetActive(false);
             currentAction = ActionType.Cooldown;
             actionStartTime = Time.time;
             currentActionDuration = attackCooldown;
         }
         else
         {
-            attackHitboxRenderer.gameObject.SetActive(true);
-            Color prevColor = attackHitboxRenderer.color;
-            attackHitboxRenderer.color = new Color(prevColor.r, prevColor.g, prevColor.b, 1 - percentComplete);
+            attackHitBox.SetActive(true);
         }
 
-        // DO ATTACK HERE
     }
 
-    private void UpdateForCurrentCooldown()
+    private void UpdateForCooldownInProgress()
     {
         if (currentAction != ActionType.Cooldown)
         {
@@ -238,7 +246,7 @@ public class PlayerController : MonoBehaviour
     }
 
 
-    void UpdateYPos(float newY)
+    void UpdateYPosition(float newY)
     {
         transform.position = new Vector3(transform.position.x, newY, transform.position.y);
     }
@@ -261,7 +269,6 @@ public class PlayerController : MonoBehaviour
         yield return new WaitForSeconds(onHitAnimationDuration);
         Destroy(gameObject);
     }
-
 
     enum ActionType { Up, Down, Attack, Cooldown }
 }
