@@ -52,9 +52,9 @@ public class TrackManager : MonoBehaviour
         }
     }
 
-    public void SetObjectLayerToMatchTrackSection(GameObject gameObject, TrackSection trackSection)
+    public void SetObjectLayerToMatchTrackSection(GameObject objectToSet, TrackSection trackSection)
     {
-        gameObject.SetLayerRecursively(LayerMask.NameToLayer(TrackManager.TrackSectionLayerName[trackSection.key]));
+        objectToSet.SetLayerRecursively(LayerMask.NameToLayer(TrackManager.TrackSectionLayerName[trackSection.key]));
     }
 
     public bool isIndexAValidTrackSection(int index)
