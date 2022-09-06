@@ -915,7 +915,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -0.6695862, y: 1.800003}
+  m_AnchoredPosition: {x: -0.66955566, y: 1.7999878}
   m_SizeDelta: {x: 11.1949, y: 45.8689}
   m_Pivot: {x: 0.5, y: 0.99999994}
 --- !u!114 &1067997220
@@ -1490,7 +1490,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5532498796270449064, guid: 94b6d1b4cab84fd49a8cf316739259c0, type: 3}
       propertyPath: m_Name
-      value: RailHelper
+      value: TrackManager
       objectReference: {fileID: 0}
     - target: {fileID: 5532498796270449070, guid: 94b6d1b4cab84fd49a8cf316739259c0, type: 3}
       propertyPath: m_RootOrder

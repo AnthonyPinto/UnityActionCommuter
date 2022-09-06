@@ -2,9 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class LayerHelper : MonoBehaviour
+public class TrackManager : MonoBehaviour
 {
-    public static LayerHelper instance;
+    public static TrackManager instance;
 
 
     public List<GameObject> layerObjects;

@@ -33,13 +33,13 @@ public class PlayerController : MonoBehaviour
 
     float attackCooldown = 0.2f;
 
-    float earlyInputAllowance = 0.25f; 
+    float earlyInputAllowance = 0.25f;
 
     private void Start()
     {
         audioSource = GetComponent<AudioSource>();
 
-        GameObject currentRail = LayerHelper.instance.layerObjects[currentRailIndex];
+        GameObject currentRail = TrackManager.instance.layerObjects[currentRailIndex];
         float currentRailYPosition = currentRail.transform.position.y;
 
         // Snap to starting rail
@@ -121,7 +121,7 @@ public class PlayerController : MonoBehaviour
         // Check for the target rail and return if it doesn't exist
         // Skip over 'channel' layers between rails
         int newTargetRailIdx = isUp ? currentRailIndex + 2 : currentRailIndex - 2;
-        if (newTargetRailIdx < 0 || newTargetRailIdx >= LayerHelper.instance.layerObjects.Count)
+        if (newTargetRailIdx < 0 || newTargetRailIdx >= TrackManager.instance.layerObjects.Count)
         {
             return;
         }
@@ -163,8 +163,8 @@ public class PlayerController : MonoBehaviour
 
         float remainingDuration = actionStartTime + currentActionDuration - Time.time;
 
-        GameObject prevRail = LayerHelper.instance.layerObjects[currentRailIndex];
-        GameObject nextRail = LayerHelper.instance.layerObjects[targetRailIndex];
+        GameObject prevRail = TrackManager.instance.layerObjects[currentRailIndex];
+        GameObject nextRail = TrackManager.instance.layerObjects[targetRailIndex];
 
         // If the jump is over, finish move and clear current action and update rail index
         if (remainingDuration <= 0)

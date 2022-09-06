@@ -68,7 +68,7 @@ public class ObjectSpawner : MonoBehaviour
         {
             // channel = space between 2 rails
             Constants.Layer channel = Random.value > 0.5 ? Constants.Layer.ChannelOne : Constants.Layer.ChannelThree;
-            GameObject channelObject = LayerHelper.instance.GetObjectForLayer(channel);
+            GameObject channelObject = TrackManager.instance.GetObjectForLayer(channel);
 
             GameObject rat = ratObjectPool.Get();
             rat.GetComponent<Poolable>().pool = ratObjectPool;
@@ -85,7 +85,7 @@ public class ObjectSpawner : MonoBehaviour
         if (timeToNextItem <= 0)
         {
             Constants.Layer rail = Constants.RailList[Random.Range(0, Constants.RailList.Count)];
-            GameObject railObject = LayerHelper.instance.GetObjectForLayer(rail);
+            GameObject railObject = TrackManager.instance.GetObjectForLayer(rail);
 
             GameObject item = itemObjectPool.Get();
             item.GetComponent<Poolable>().pool = itemObjectPool;
@@ -102,7 +102,7 @@ public class ObjectSpawner : MonoBehaviour
         if (timeToNextPillar <= 0)
         {
             Constants.Layer layer = Constants.ChannelList[1]; // Always the middle channel
-            GameObject channelObject = LayerHelper.instance.GetObjectForLayer(layer);
+            GameObject channelObject = TrackManager.instance.GetObjectForLayer(layer);
 
             GameObject pillar = pillarObjectPool.Get();
             pillar.GetComponent<Poolable>().pool = pillarObjectPool;
