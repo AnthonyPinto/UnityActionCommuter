@@ -5,11 +5,14 @@ using UnityEngine;
 public class GameManager : MonoBehaviour
 {
     public static GameManager instance;
-    public AudioClip gameOverAudioClip;
-    public AudioClip playerDeathAudioClip;
-    public AudioSource backgroundMusic;
 
+
+    // TODO: move player sfx to player
+    public AudioClip playerDeathAudioClip;
+    public AudioClip gameOverAudioClip;
+    public AudioSource backgroundMusic;
     public UIManager uiManager;
+
     AudioSource audioSource;
 
     int score = 0;
@@ -17,6 +20,7 @@ public class GameManager : MonoBehaviour
 
     private void Awake()
     {
+        // Singleton pattern
         if (instance != null && instance != this)
         {
             Destroy(this.gameObject);
@@ -34,17 +38,15 @@ public class GameManager : MonoBehaviour
         StartCoroutine(IncreaseScoreAndDistanceOverTimeRoutine());
     }
 
-
-
-    public void AddPoints(int points)
+    public void AddPoints(int pointsToAdd)
     {
-        score += points;
+        score += pointsToAdd;
         uiManager.UpdateScore(score);
     }
 
-    public void AddDistance(int amountToAdd)
+    public void AddDistance(int distanceToAdd)
     {
-        distance += amountToAdd;
+        distance += distanceToAdd;
         uiManager.UpdateDistance(distance);
     }
 
