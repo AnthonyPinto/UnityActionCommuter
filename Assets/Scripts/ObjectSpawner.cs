@@ -33,9 +33,9 @@ public class ObjectSpawner : MonoBehaviour
 
     private void Awake()
     {
-        ratObjectPool = PoolerFactory.CreatePooler(ratPrefab.gameObject);
-        sodaObjectPool = PoolerFactory.CreatePooler(sodaPrefab.gameObject);
-        pillarObjectPool = PoolerFactory.CreatePooler(pillarPrefab.gameObject);
+        ratObjectPool = ObjectPoolFactory.CreatePooler(ratPrefab.gameObject);
+        sodaObjectPool = ObjectPoolFactory.CreatePooler(sodaPrefab.gameObject);
+        pillarObjectPool = ObjectPoolFactory.CreatePooler(pillarPrefab.gameObject);
     }
 
 

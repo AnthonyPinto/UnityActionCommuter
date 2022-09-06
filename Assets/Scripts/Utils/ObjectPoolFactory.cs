@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Pool;
 
-public static class PoolerFactory
+public static class ObjectPoolFactory
 {
     public static ObjectPool<GameObject> CreatePooler(GameObject prefab)
     {
