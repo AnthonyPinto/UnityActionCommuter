@@ -29,10 +29,11 @@ public class Background : MonoBehaviour
 
     class BackgroundTier
     {
+        // we use two copies of the sprite to make sure it always fills the screen
         SpriteRenderer baseSprite;
-        SpriteRenderer cloneSprite;
+        SpriteRenderer clonedSprite;
         float speed;
-        Vector3 originalPos;
+        Vector3 originalPosition;
         float spriteWidth;
 
         public BackgroundTier(SpriteRenderer tierSprite, float tierSpeed)
@@ -40,25 +41,33 @@ public class Background : MonoBehaviour
             baseSprite = tierSprite;
             speed = tierSpeed;
             spriteWidth = baseSprite.bounds.size.x;
-            originalPos = baseSprite.transform.position;
-            // Create a second copy of the sprite and offset it to the right by the width of the sprite we will maintain this offset
-            cloneSprite = Instantiate(baseSprite, originalPos + Vector3.right * spriteWidth, baseSprite.transform.rotation);
+            originalPosition = baseSprite.transform.position;
+            // Create a second copy of the sprite and offset it to the right by
+            // the width of the sprite. We will maintain this offset
+            clonedSprite = Instantiate(
+                baseSprite,
+                originalPosition + Vector3.right * spriteWidth,
+                baseSprite.transform.rotation
+            );
         }
 
         public void UpdateTier(float deltaTime)
         {
-            Vector3 delta = Vector3.left * speed * Time.deltaTime;
-            Vector3 newPos = baseSprite.transform.position + delta;
+            Vector3 distanceToMove = Vector3.left * speed * Time.deltaTime;
+            Vector3 newPosition = baseSprite.transform.position + distanceToMove;
 
-            // If the sprite is about to move past it's full width to the left 'wrap' the sprite back to it's start position
-            if (newPos.x < -spriteWidth)
+            // If the sprite is about to move past it's full width to the left
+            // 'wrap' the sprite back to it's start position
+            if (newPosition.x < -spriteWidth)
             {
-                newPos.x = newPos.x + spriteWidth;
+                newPosition.x = newPosition.x + spriteWidth;
             }
 
-            // Move the bg sprite to it's new pos move the clone to the updated pos plus offset
-            baseSprite.transform.position = newPos;
-            cloneSprite.transform.position = newPos + Vector3.right * spriteWidth;
+            // Move the bg sprite to it's new position
+            baseSprite.transform.position = newPosition;
+
+            // Move the clone to the updated position plus offset
+            clonedSprite.transform.position = newPosition + Vector3.right * spriteWidth;
         }
     }
 }
