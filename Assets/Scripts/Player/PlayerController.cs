@@ -4,51 +4,51 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-    public AudioSource sfxAudioSource;
-    public AudioClip jumpAudioClip;
-    public AudioClip attackAudioClip;
-
     public Animator animator;
 
-    public GameObject attackHitBox;
-
-    AudioSource audioSource;
-
-    float characterRailOffset = 0.75f; // How far 'above' the rail position the character should be
-
-    int currentRailIndex = 0;
-    int targetRailIndex = 0;
+    public PlayerMoveHandler moveHandler;
+    public PlayerAttackHandler attackHandler;
+    public PlayerCooldownHandler cooldownHandler;
 
     ActionType? queuedAction;
     float actionQueuedTime;
 
-    ActionType? currentAction;
-    float actionStartTime;
-    float currentActionDuration;
-
-    float attackDuration = 0.3f;
-    float jumpDuration = 0.5f;
-
     float onHitAnimationDuration = 0.6f;
-
-    float attackCooldown = 0.2f;
-
     float earlyInputAllowance = 0.25f;
+    int startingRailIndex = 0;
+
+    PlayerState playerState;
+
+    public class PlayerState
+    {
+        public ActionType? currentAction;
+        public float actionStartTime;
+        public float currentActionDuration;
+
+        public int currentRailIndex = 0;
+        public int targetRailIndex = 0;
+
+        public PlayerState(int initialRailIndex)
+        {
+            currentRailIndex = initialRailIndex;
+            targetRailIndex = initialRailIndex;
+        }
+
+        public PlayerState(PlayerState stateToClone)
+        {
+            currentAction = stateToClone.currentAction;
+            actionStartTime = stateToClone.actionStartTime;
+            currentActionDuration = stateToClone.currentActionDuration;
+            currentRailIndex = stateToClone.currentRailIndex;
+            targetRailIndex = stateToClone.targetRailIndex;
+        }
+    }
 
     private void Start()
     {
-        audioSource = GetComponent<AudioSource>();
-
-        TrackManager.TrackSection currentRail = TrackManager.instance.GetTrackSectionByIndex(currentRailIndex);
-        float currentRailYPosition = currentRail.yPosition;
-
-        // Snap to starting rail
-        UpdateYPosition(currentRailYPosition + characterRailOffset);
-
-        SetPlayerLayerFromTrackSectionIndex(currentRailIndex);
-
-        // Hide attack hitbox until we attack
-        attackHitBox.SetActive(false);
+        playerState = new PlayerState(startingRailIndex);
+        playerState = moveHandler.HandleStart(playerState);
+        playerState = attackHandler.HandleStart(playerState);
     }
 
     private void Update()
@@ -78,7 +78,7 @@ public class PlayerController : MonoBehaviour
         // If we aren't in the middle of an action, and an action is queued and the input for that action was
         // within the input allowance, start the new action
         if (
-            !currentAction.HasValue &&
+            !playerState.currentAction.HasValue &&
             queuedAction.HasValue &&
             Time.time - actionQueuedTime <= earlyInputAllowance
         )
@@ -86,13 +86,13 @@ public class PlayerController : MonoBehaviour
             switch (queuedAction)
             {
                 case ActionType.Up:
-                    StartJumpUp();
+                    playerState = moveHandler.HandleTryJumpUp(playerState);
                     break;
                 case ActionType.Down:
-                    StartJumpDown();
+                    playerState = moveHandler.HandleTryJumpDown(playerState);
                     break;
                 case ActionType.Attack:
-                    StartAttack();
+                    playerState = attackHandler.HandleDoAttack(playerState);
                     break;
                 default:
                     throw new System.Exception("unrecognized action type: " + queuedAction);
@@ -101,160 +101,9 @@ public class PlayerController : MonoBehaviour
             queuedAction = null;
         }
 
-        UpdateForJumpInProgress();
-        UpdateForAttackInProgress();
-        UpdateForCooldownInProgress();
-    }
-
-    private void StartJumpUp()
-    {
-        StartJump(true);
-    }
-
-    private void StartJumpDown()
-    {
-        StartJump(false);
-    }
-
-    private void StartJump(bool isUp)
-    {
-        // Check for the target rail and return if it doesn't exist
-        // Skip over 'channel' layers between rails
-        int newTargetRailIdx = isUp ? currentRailIndex + 2 : currentRailIndex - 2;
-        if (!TrackManager.instance.isIndexAValidTrackSection(newTargetRailIdx))
-        {
-            return;
-        }
-
-        targetRailIndex = newTargetRailIdx;
-        currentAction = isUp ? ActionType.Up : ActionType.Down;
-        actionStartTime = Time.time;
-        currentActionDuration = jumpDuration;
-
-        animator.SetTrigger("Jump");
-
-        // pause grind SFX
-        audioSource.Pause();
-
-        // play Jump SFX
-        sfxAudioSource.PlayOneShot(jumpAudioClip);
-
-        // restart grind SFX
-        audioSource.PlayDelayed(jumpDuration);
-    }
-
-    private void StartAttack()
-    {
-        animator.SetTrigger("Attack");
-
-        sfxAudioSource.PlayOneShot(attackAudioClip);
-
-        currentAction = ActionType.Attack;
-        actionStartTime = Time.time;
-        currentActionDuration = attackDuration;
-    }
-
-    private void UpdateForJumpInProgress()
-    {
-        if (currentAction != ActionType.Up && currentAction != ActionType.Down)
-        {
-            return;
-        }
-
-        float remainingDuration = actionStartTime + currentActionDuration - Time.time;
-
-        TrackManager.TrackSection prevRail = TrackManager.instance.GetTrackSectionByIndex(currentRailIndex);
-        TrackManager.TrackSection nextRail = TrackManager.instance.GetTrackSectionByIndex(targetRailIndex);
-
-        // If the jump is over, finish move and clear current action and update rail index
-        if (remainingDuration <= 0)
-        {
-            currentAction = null;
-            UpdateYPosition(nextRail.yPosition + characterRailOffset);
-            currentRailIndex = targetRailIndex;
-            SetPlayerLayerFromTrackSectionIndex(currentRailIndex);
-        }
-        else
-        {
-            // reposition based on progress of jump
-            float startY = prevRail.yPosition + characterRailOffset;
-            float endY = nextRail.yPosition + characterRailOffset;
-
-            float percentComplete = (currentActionDuration - remainingDuration) / currentActionDuration;
-
-            // Set the current collision layer based on how far into the jump we are
-            if (percentComplete < 0.25f)
-            {
-                SetPlayerLayerFromTrackSectionIndex(currentRailIndex);
-            }
-            else if (percentComplete < 0.75f)
-            {
-                if (currentAction == ActionType.Up)
-                {
-                    SetPlayerLayerFromTrackSectionIndex(currentRailIndex + 1);
-                }
-                else
-                {
-                    SetPlayerLayerFromTrackSectionIndex(currentRailIndex - 1);
-                }
-            }
-            else
-            {
-                SetPlayerLayerFromTrackSectionIndex(targetRailIndex);
-            }
-
-            UpdateYPosition(Mathf.Lerp(startY, endY, percentComplete));
-        }
-    }
-
-    private void UpdateForAttackInProgress()
-    {
-        if (currentAction != ActionType.Attack)
-        {
-            return;
-        }
-
-        // If the attack is over clear the action
-        float remainingDuration = actionStartTime + currentActionDuration - Time.time;
-        float percentComplete = (currentActionDuration - remainingDuration) / currentActionDuration;
-        if (remainingDuration <= 0)
-        {
-            attackHitBox.SetActive(false);
-            currentAction = ActionType.Cooldown;
-            actionStartTime = Time.time;
-            currentActionDuration = attackCooldown;
-        }
-        else
-        {
-            attackHitBox.SetActive(true);
-        }
-
-    }
-
-    private void UpdateForCooldownInProgress()
-    {
-        if (currentAction != ActionType.Cooldown)
-        {
-            return;
-        }
-
-        float remainingDuration = actionStartTime + currentActionDuration - Time.time;
-        if (remainingDuration <= 0)
-        {
-            currentAction = null;
-        }
-    }
-
-
-    void UpdateYPosition(float newY)
-    {
-        transform.position = new Vector3(transform.position.x, newY, transform.position.y);
-    }
-
-    void SetPlayerLayerFromTrackSectionIndex(int trackSectionIndex)
-    {
-        TrackManager.TrackSection trackSection = TrackManager.instance.GetTrackSectionByIndex(trackSectionIndex);
-        TrackManager.instance.SetObjectLayerToMatchTrackSection(gameObject, trackSection);
+        playerState = moveHandler.HandleUpdate(playerState);
+        playerState = attackHandler.HandleUpdate(playerState);
+        playerState = cooldownHandler.HandleUpdate(playerState);
     }
 
     public void OnHit()
@@ -270,5 +119,5 @@ public class PlayerController : MonoBehaviour
         Destroy(gameObject);
     }
 
-    enum ActionType { Up, Down, Attack, Cooldown }
+    public enum ActionType { Up, Down, Attack, Cooldown }
 }
