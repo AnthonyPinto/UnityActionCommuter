@@ -75,7 +75,6 @@ public class Enemy : MonoBehaviour
         }
         else if (hasHitPlayer && isAttacking)
         {
-            GameManager.instance.GameOver();
             playerObject.GetComponent<Player.PlayerController>().OnHit();
 
             // reset

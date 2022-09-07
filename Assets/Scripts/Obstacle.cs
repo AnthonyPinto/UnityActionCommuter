@@ -13,7 +13,6 @@ public class Obstacle : MonoBehaviour
             (!ignoreNeighboringTrackSections || collision.gameObject.layer == gameObject.layer)
            )
         {
-            GameManager.instance.GameOver();
             collision.gameObject.GetComponent<Player.PlayerController>().OnHit();
         }
     }

@@ -12,6 +12,7 @@ public class GameManager : MonoBehaviour
 
     int score = 0;
     int distance = 0;
+    bool isGameOver = false;
 
     private void Awake()
     {
@@ -45,7 +46,7 @@ public class GameManager : MonoBehaviour
 
     IEnumerator IncreaseScoreAndDistanceOverTimeRoutine()
     {
-        while (true)
+        while (!isGameOver)
         {
             AddPoints(1);
             AddDistance(3);
@@ -55,10 +56,12 @@ public class GameManager : MonoBehaviour
 
     public void GameOver()
     {
+        isGameOver = true;
         backgroundMusic.Stop();
         backgroundMusic.clip = gameOverAudioClip;
         backgroundMusic.loop = false;
         backgroundMusic.PlayDelayed(0.5f);
+        uiManager.SetGameOver(true);
     }
 
 

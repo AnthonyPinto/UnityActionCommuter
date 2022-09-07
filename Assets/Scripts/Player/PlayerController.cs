@@ -120,6 +120,7 @@ namespace Player
             playerState = attackHandler.HandleOnHit(playerState);
             boxCollider.enabled = false;
             StartCoroutine(OnHitRoutine());
+            GameManager.instance.GameOver();
         }
 
         IEnumerator OnHitRoutine()
