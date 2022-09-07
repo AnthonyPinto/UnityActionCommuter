@@ -14,7 +14,7 @@ public class Obstacle : MonoBehaviour
            )
         {
             GameManager.instance.GameOver();
-            collision.gameObject.GetComponent<PlayerController>().OnHit();
+            collision.gameObject.GetComponent<Player.PlayerController>().OnHit();
         }
     }
 }

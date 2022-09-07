@@ -76,7 +76,7 @@ public class Enemy : MonoBehaviour
         else if (hasHitPlayer && isAttacking)
         {
             GameManager.instance.GameOver();
-            playerObject.GetComponent<PlayerController>().OnHit();
+            playerObject.GetComponent<Player.PlayerController>().OnHit();
 
             // reset
             isAttacking = false;
@@ -92,7 +92,7 @@ public class Enemy : MonoBehaviour
         GameManager.instance.AddPoints(pointsOnDestroy);
         animator.SetTrigger("Hit");
         audioSource.PlayOneShot(deathAudioClip);
-        
+
         yield return new WaitForSeconds(WasHitAnimationDuration);
 
         GetComponent<Poolable>().pool.Release(gameObject);

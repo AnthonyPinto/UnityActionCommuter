@@ -2,126 +2,129 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerController : MonoBehaviour
+namespace Player
 {
-    public Animator animator;
-    AudioSource audioSource;
-    public AudioClip playerDeathAudioClip;
-
-    public PlayerMoveHandler moveHandler;
-    public PlayerAttackHandler attackHandler;
-    public PlayerCooldownHandler cooldownHandler;
-
-    ActionType? queuedAction;
-    float actionQueuedTime;
-
-    float onHitAnimationDuration = 0.6f;
-    float earlyInputAllowance = 0.25f;
-    int startingRailIndex = 0;
-
-    PlayerState playerState;
-
-    public class PlayerState
+    public class PlayerController : MonoBehaviour
     {
-        public ActionType? currentAction;
-        public float actionStartTime;
-        public float currentActionDuration;
+        public Animator animator;
+        AudioSource audioSource;
+        public AudioClip playerDeathAudioClip;
 
-        public int currentRailIndex = 0;
-        public int targetRailIndex = 0;
+        public PlayerMoveHandler moveHandler;
+        public PlayerAttackHandler attackHandler;
+        public PlayerCooldownHandler cooldownHandler;
 
-        public PlayerState(int initialRailIndex)
-        {
-            currentRailIndex = initialRailIndex;
-            targetRailIndex = initialRailIndex;
-        }
+        ActionType? queuedAction;
+        float actionQueuedTime;
 
-        public PlayerState(PlayerState stateToClone)
-        {
-            currentAction = stateToClone.currentAction;
-            actionStartTime = stateToClone.actionStartTime;
-            currentActionDuration = stateToClone.currentActionDuration;
-            currentRailIndex = stateToClone.currentRailIndex;
-            targetRailIndex = stateToClone.targetRailIndex;
-        }
-    }
+        float onHitAnimationDuration = 0.6f;
+        float earlyInputAllowance = 0.25f;
+        int startingRailIndex = 0;
 
-    private void Start()
-    {
-        audioSource = GetComponent<AudioSource>();
-        playerState = new PlayerState(startingRailIndex);
-        playerState = moveHandler.HandleStart(playerState);
-        playerState = attackHandler.HandleStart(playerState);
-    }
+        PlayerState playerState;
 
-    private void Update()
-    {
-        // Get user input and queue it up to either start this frame - or possibly start on a later
-        // frame if it becomes possible during the earlyInputAllowance window
-        if (
-            Input.GetKeyDown(KeyCode.UpArrow) ||
-            Input.GetKeyDown(KeyCode.W))
+        public class PlayerState
         {
-            queuedAction = ActionType.Up;
-            actionQueuedTime = Time.time;
-        }
-        else if (
-            Input.GetKeyDown(KeyCode.DownArrow) ||
-            Input.GetKeyDown(KeyCode.S))
-        {
-            queuedAction = ActionType.Down;
-            actionQueuedTime = Time.time;
-        }
-        else if (Input.GetKeyDown(KeyCode.Space))
-        {
-            queuedAction = ActionType.Attack;
-            actionQueuedTime = Time.time;
-        }
+            public ActionType? currentAction;
+            public float actionStartTime;
+            public float currentActionDuration;
 
-        // If we aren't in the middle of an action, and an action is queued and the input for that action was
-        // within the input allowance, start the new action
-        if (
-            !playerState.currentAction.HasValue &&
-            queuedAction.HasValue &&
-            Time.time - actionQueuedTime <= earlyInputAllowance
-        )
-        {
-            switch (queuedAction)
+            public int currentRailIndex = 0;
+            public int targetRailIndex = 0;
+
+            public PlayerState(int initialRailIndex)
             {
-                case ActionType.Up:
-                    playerState = moveHandler.HandleTryJumpUp(playerState);
-                    break;
-                case ActionType.Down:
-                    playerState = moveHandler.HandleTryJumpDown(playerState);
-                    break;
-                case ActionType.Attack:
-                    playerState = attackHandler.HandleDoAttack(playerState);
-                    break;
-                default:
-                    throw new System.Exception("unrecognized action type: " + queuedAction);
-            };
+                currentRailIndex = initialRailIndex;
+                targetRailIndex = initialRailIndex;
+            }
 
-            queuedAction = null;
+            public PlayerState(PlayerState stateToClone)
+            {
+                currentAction = stateToClone.currentAction;
+                actionStartTime = stateToClone.actionStartTime;
+                currentActionDuration = stateToClone.currentActionDuration;
+                currentRailIndex = stateToClone.currentRailIndex;
+                targetRailIndex = stateToClone.targetRailIndex;
+            }
         }
 
-        playerState = moveHandler.HandleUpdate(playerState);
-        playerState = attackHandler.HandleUpdate(playerState);
-        playerState = cooldownHandler.HandleUpdate(playerState);
-    }
+        private void Start()
+        {
+            audioSource = GetComponent<AudioSource>();
+            playerState = new PlayerState(startingRailIndex);
+            playerState = moveHandler.HandleStart(playerState);
+            playerState = attackHandler.HandleStart(playerState);
+        }
 
-    public void OnHit()
-    {
-        // Should probably disable all colliders here
-        StartCoroutine(OnHitRoutine());
-    }
+        private void Update()
+        {
+            // Get user input and queue it up to either start this frame - or possibly start on a later
+            // frame if it becomes possible during the earlyInputAllowance window
+            if (
+                Input.GetKeyDown(KeyCode.UpArrow) ||
+                Input.GetKeyDown(KeyCode.W))
+            {
+                queuedAction = ActionType.Up;
+                actionQueuedTime = Time.time;
+            }
+            else if (
+                Input.GetKeyDown(KeyCode.DownArrow) ||
+                Input.GetKeyDown(KeyCode.S))
+            {
+                queuedAction = ActionType.Down;
+                actionQueuedTime = Time.time;
+            }
+            else if (Input.GetKeyDown(KeyCode.Space))
+            {
+                queuedAction = ActionType.Attack;
+                actionQueuedTime = Time.time;
+            }
 
-    IEnumerator OnHitRoutine()
-    {
-        animator.SetTrigger("Hit");
-        audioSource.PlayOneShot(playerDeathAudioClip);
-        yield return new WaitForSeconds(onHitAnimationDuration);
-        Destroy(gameObject);
-    }
+            // If we aren't in the middle of an action, and an action is queued and the input for that action was
+            // within the input allowance, start the new action
+            if (
+                !playerState.currentAction.HasValue &&
+                queuedAction.HasValue &&
+                Time.time - actionQueuedTime <= earlyInputAllowance
+            )
+            {
+                switch (queuedAction)
+                {
+                    case ActionType.Up:
+                        playerState = moveHandler.HandleTryJumpUp(playerState);
+                        break;
+                    case ActionType.Down:
+                        playerState = moveHandler.HandleTryJumpDown(playerState);
+                        break;
+                    case ActionType.Attack:
+                        playerState = attackHandler.HandleDoAttack(playerState);
+                        break;
+                    default:
+                        throw new System.Exception("unrecognized action type: " + queuedAction);
+                };
 
-    public enum ActionType { Up, Down, Attack, Cooldown }
+                queuedAction = null;
+            }
+
+            playerState = moveHandler.HandleUpdate(playerState);
+            playerState = attackHandler.HandleUpdate(playerState);
+            playerState = cooldownHandler.HandleUpdate(playerState);
+        }
+
+        public void OnHit()
+        {
+            // Should probably disable all colliders here
+            StartCoroutine(OnHitRoutine());
+        }
+
+        IEnumerator OnHitRoutine()
+        {
+            animator.SetTrigger("Hit");
+            audioSource.PlayOneShot(playerDeathAudioClip);
+            yield return new WaitForSeconds(onHitAnimationDuration);
+            Destroy(gameObject);
+        }
+
+        public enum ActionType { Up, Down, Attack, Cooldown }
+    }
 }
