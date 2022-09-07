@@ -1077,7 +1077,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8314340867665787322, guid: 7e01f30968a54764c9091596f316b618, type: 3}
       propertyPath: yOffsetAboveRail
-      value: 4
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8314340867665787322, guid: 7e01f30968a54764c9091596f316b618, type: 3}
       propertyPath: enabledTrackSections.Array.size
@@ -2223,6 +2223,10 @@ PrefabInstance:
       propertyPath: prefab
       value: 
       objectReference: {fileID: 8041328654447054947, guid: bb60891240f9bf94891c9629638816e0, type: 3}
+    - target: {fileID: 8314340867665787322, guid: 7e01f30968a54764c9091596f316b618, type: 3}
+      propertyPath: yOffsetAboveRail
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8314340867665787322, guid: 7e01f30968a54764c9091596f316b618, type: 3}
       propertyPath: enabledTrackSections.Array.size
       value: 2

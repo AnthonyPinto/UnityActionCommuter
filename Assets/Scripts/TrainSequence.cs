@@ -14,7 +14,7 @@ public class TrainSequence : MonoBehaviour
     float trainDuration = 2f;
 
     float lightYOffset = 0;
-    float trainYOffset = 0.8f;
+    float trainYOffset = -0.1f;
 
     private void Start()
     {
