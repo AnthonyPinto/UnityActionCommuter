@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 8840465456845335895}
   - component: {fileID: 8840465456845335892}
   - component: {fileID: 8840465456845335891}
+  - component: {fileID: 6407569285501955143}
   m_Layer: 0
   m_Name: TrainCar
   m_TagString: Untagged
@@ -75,7 +76,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 3
+  m_SortingOrder: 0
   m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
   m_Color: {r: 0.5377358, g: 0.5377358, b: 0.5377358, a: 1}
   m_FlipX: 0
@@ -99,6 +100,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5557b2f2fb03ac347abe4b090f1b197a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ignoreNeighboringTrackSections: 0
 --- !u!61 &8840465456845335891
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -125,6 +127,17 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
+--- !u!210 &6407569285501955143
+SortingGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8840465456845335889}
+  m_Enabled: 1
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
 --- !u!1 &8840465457764552109
 GameObject:
   m_ObjectHideFlags: 0
@@ -197,7 +210,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 4
+  m_SortingOrder: 0
   m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
   m_Color: {r: 0.26321647, g: 0.2642341, b: 0.3301887, a: 1}
   m_FlipX: 0
