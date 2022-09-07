@@ -35,8 +35,6 @@ namespace Player
             public int currentRailIndex = 0;
             public int targetRailIndex = 0;
 
-            public bool isDead = false;
-
             public PlayerState(int initialRailIndex)
             {
                 currentRailIndex = initialRailIndex;
@@ -50,7 +48,6 @@ namespace Player
                 currentActionDuration = stateToClone.currentActionDuration;
                 currentRailIndex = stateToClone.currentRailIndex;
                 targetRailIndex = stateToClone.targetRailIndex;
-                isDead = stateToClone.isDead;
             }
         }
 
@@ -120,13 +117,9 @@ namespace Player
 
         public void OnHit()
         {
-            if (!playerState.isDead)
-            {
-                playerState.isDead = true;
-                playerState = attackHandler.HandleOnHit(playerState);
-                boxCollider.enabled = false;
-                StartCoroutine(OnHitRoutine());
-            }
+            playerState = attackHandler.HandleOnHit(playerState);
+            boxCollider.enabled = false;
+            StartCoroutine(OnHitRoutine());
         }
 
         IEnumerator OnHitRoutine()
