@@ -20,7 +20,7 @@ namespace Player
         ActionType? queuedAction;
         float actionQueuedTime;
 
-        float onHitAnimationDuration = 0.6f;
+        float onHitAnimationDuration = 0.5f;
         float earlyInputAllowance = 0.25f;
         int startingRailIndex = 0;
 

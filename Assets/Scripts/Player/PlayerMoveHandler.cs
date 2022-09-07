@@ -13,7 +13,7 @@ namespace Player
 
         AudioSource audioSource;
 
-        float jumpDuration = 0.5f;
+        float jumpDuration = 0.4f;
         float characterRailOffset = 0.75f; // How far 'above' the rail position the character should be
 
         public PlayerController.PlayerState HandleStart(PlayerController.PlayerState state)
@@ -127,7 +127,7 @@ namespace Player
                     SetPlayerLayerFromTrackSectionIndex(state.targetRailIndex);
                 }
 
-                UpdateYPosition(Mathf.Lerp(startY, endY, percentComplete));
+                UpdateYPosition(Mathf.SmoothStep(startY, endY, percentComplete));
             }
 
             return resultState;
