@@ -6,8 +6,11 @@ namespace Player
 {
     public class PlayerController : MonoBehaviour
     {
-        public Animator animator;
+
         AudioSource audioSource;
+        BoxCollider2D boxCollider;
+
+        public Animator animator;
         public AudioClip playerDeathAudioClip;
 
         public PlayerMoveHandler moveHandler;
@@ -32,6 +35,8 @@ namespace Player
             public int currentRailIndex = 0;
             public int targetRailIndex = 0;
 
+            public bool isDead = false;
+
             public PlayerState(int initialRailIndex)
             {
                 currentRailIndex = initialRailIndex;
@@ -45,12 +50,14 @@ namespace Player
                 currentActionDuration = stateToClone.currentActionDuration;
                 currentRailIndex = stateToClone.currentRailIndex;
                 targetRailIndex = stateToClone.targetRailIndex;
+                isDead = stateToClone.isDead;
             }
         }
 
         private void Start()
         {
             audioSource = GetComponent<AudioSource>();
+            boxCollider = GetComponent<BoxCollider2D>();
             playerState = new PlayerState(startingRailIndex);
             playerState = moveHandler.HandleStart(playerState);
             playerState = attackHandler.HandleStart(playerState);
@@ -113,8 +120,13 @@ namespace Player
 
         public void OnHit()
         {
-            // Should probably disable all colliders here
-            StartCoroutine(OnHitRoutine());
+            if (!playerState.isDead)
+            {
+                playerState.isDead = true;
+                playerState = attackHandler.HandleOnHit(playerState);
+                boxCollider.enabled = false;
+                StartCoroutine(OnHitRoutine());
+            }
         }
 
         IEnumerator OnHitRoutine()

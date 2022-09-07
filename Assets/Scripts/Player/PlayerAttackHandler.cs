@@ -66,5 +66,11 @@ namespace Player
 
             return resultState;
         }
+
+        public PlayerController.PlayerState HandleOnHit(PlayerController.PlayerState state)
+        {
+            attackHitBox.SetActive(false);
+            return state;
+        }
     }
 }
