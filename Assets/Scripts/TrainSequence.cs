@@ -7,6 +7,8 @@ public class TrainSequence : MonoBehaviour
 {
     public GameObject trainLightPrefab;
     public GameObject trainPrefab;
+    
+    AudioSource audioSource;
     GameObject trainLight;
     GameObject train;
 
@@ -16,9 +18,9 @@ public class TrainSequence : MonoBehaviour
     float lightYOffset = 0;
     float trainYOffset = -0.1f;
 
-    private void Start()
+    private void Awake()
     {
-
+        audioSource = GetComponent<AudioSource>();
     }
 
 
@@ -40,6 +42,7 @@ public class TrainSequence : MonoBehaviour
 
     IEnumerator OnEnableSequence()
     {
+        audioSource.PlayDelayed(0.5f);
         // wait for the OnEnable call to resolve so that we use thisgameObjects position AFTER it is repositioned by the object spawner
         yield return new WaitForSeconds(0);
         trainLight.SetActive(true);
