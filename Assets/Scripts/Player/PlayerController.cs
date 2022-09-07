@@ -5,6 +5,8 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
     public Animator animator;
+    AudioSource audioSource;
+    public AudioClip playerDeathAudioClip;
 
     public PlayerMoveHandler moveHandler;
     public PlayerAttackHandler attackHandler;
@@ -46,6 +48,7 @@ public class PlayerController : MonoBehaviour
 
     private void Start()
     {
+        audioSource = GetComponent<AudioSource>();
         playerState = new PlayerState(startingRailIndex);
         playerState = moveHandler.HandleStart(playerState);
         playerState = attackHandler.HandleStart(playerState);
@@ -115,6 +118,7 @@ public class PlayerController : MonoBehaviour
     IEnumerator OnHitRoutine()
     {
         animator.SetTrigger("Hit");
+        audioSource.PlayOneShot(playerDeathAudioClip);
         yield return new WaitForSeconds(onHitAnimationDuration);
         Destroy(gameObject);
     }

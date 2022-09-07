@@ -6,14 +6,9 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager instance;
 
-
-    // TODO: move player sfx to player
-    public AudioClip playerDeathAudioClip;
     public AudioClip gameOverAudioClip;
     public AudioSource backgroundMusic;
     public UIManager uiManager;
-
-    AudioSource audioSource;
 
     int score = 0;
     int distance = 0;
@@ -29,8 +24,6 @@ public class GameManager : MonoBehaviour
         {
             instance = this;
         }
-
-        audioSource = GetComponent<AudioSource>();
     }
 
     private void Start()
@@ -60,15 +53,9 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    public void PlaySFX(AudioClip audioClip)
-    {
-        audioSource.PlayOneShot(audioClip);
-    }
-
     public void GameOver()
     {
         backgroundMusic.Stop();
-        audioSource.PlayOneShot(playerDeathAudioClip);
         backgroundMusic.clip = gameOverAudioClip;
         backgroundMusic.loop = false;
         backgroundMusic.PlayDelayed(0.5f);
