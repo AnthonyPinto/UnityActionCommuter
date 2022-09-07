@@ -118,6 +118,9 @@ namespace Player
         public void OnHit()
         {
             playerState = attackHandler.HandleOnHit(playerState);
+            playerState.currentAction = ActionType.Death;
+            playerState.currentActionDuration = float.PositiveInfinity;
+            playerState.actionStartTime = Time.time;
             boxCollider.enabled = false;
             StartCoroutine(OnHitRoutine());
             GameManager.instance.GameOver();
@@ -131,6 +134,6 @@ namespace Player
             Destroy(gameObject);
         }
 
-        public enum ActionType { Up, Down, Attack, Cooldown }
+        public enum ActionType { Up, Down, Attack, Cooldown, Death }
     }
 }
