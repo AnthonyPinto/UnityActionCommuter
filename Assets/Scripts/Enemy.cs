@@ -88,7 +88,7 @@ public class Enemy : MonoBehaviour
     IEnumerator WasHitRoutine()
     {
 
-        GameManager.instance.AddPoints(pointsOnDestroy);
+        GameManager.instance.ScorePointsEvent(pointsOnDestroy, transform.position);
         animator.SetTrigger("Hit");
         audioSource.PlayOneShot(deathAudioClip);
 

@@ -10,6 +10,7 @@ public class GameManager : MonoBehaviour
     public AudioClip gameOverAudioClip;
     public AudioSource backgroundMusic;
     public UIManager uiManager;
+    public PointsPopupsManager pointsPopupsManager;
 
     int score = 0;
     int distance = 0;
@@ -41,7 +42,13 @@ public class GameManager : MonoBehaviour
         StartCoroutine(IncreaseScoreAndDistanceOverTimeRoutine());
     }
 
-    public void AddPoints(int pointsToAdd)
+    public void ScorePointsEvent(int pointsToAdd, Vector3 positionOfEvent)
+    {
+        AddPoints(pointsToAdd);
+        pointsPopupsManager.RunPointsPopupAtPosition(pointsToAdd, positionOfEvent);
+    }
+
+    void AddPoints(int pointsToAdd)
     {
         score += pointsToAdd;
         uiManager.UpdateScore(score);
