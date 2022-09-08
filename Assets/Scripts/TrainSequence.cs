@@ -7,7 +7,7 @@ public class TrainSequence : MonoBehaviour
 {
     public GameObject trainLightPrefab;
     public GameObject trainPrefab;
-    
+
     AudioSource audioSource;
     GameObject trainLight;
     GameObject train;
@@ -16,7 +16,7 @@ public class TrainSequence : MonoBehaviour
     float trainDuration = 2f;
 
     float lightYOffset = 0;
-    float trainYOffset = -0.1f;
+    float trainYOffset = -0.4f;
 
     private void Awake()
     {
