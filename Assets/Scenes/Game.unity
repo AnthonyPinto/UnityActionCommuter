@@ -2120,6 +2120,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
+    - target: {fileID: 4289609563148473162, guid: 80680761297283943a58c741764d08bc, type: 3}
+      propertyPath: trainCollisionAudioClip
+      value: 
+      objectReference: {fileID: 8300000, guid: 63f8cf8e05d624b49b84799b00789954, type: 3}
     - target: {fileID: 4289609563148473163, guid: 80680761297283943a58c741764d08bc, type: 3}
       propertyPath: m_RootOrder
       value: 5
