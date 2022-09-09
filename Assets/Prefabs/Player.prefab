@@ -227,7 +227,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b7c36582cf5590341af4345aa126e09f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  animator: {fileID: 3689474334354708738}
+  playerAnimator: {fileID: 3689474334354708738}
   playerDeathAudioClip: {fileID: 8300000, guid: 089910556ac0746aa8027d59b953a6ef, type: 3}
   moveHandler: {fileID: 3276636540969657204}
   attackHandler: {fileID: 1194553231965208015}

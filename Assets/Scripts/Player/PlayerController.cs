@@ -10,7 +10,7 @@ namespace Player
         AudioSource audioSource;
         BoxCollider2D boxCollider;
 
-        public Animator animator;
+        public Animator playerAnimator;
         public AudioClip playerDeathAudioClip;
 
         public PlayerMoveHandler moveHandler;
@@ -32,8 +32,14 @@ namespace Player
             public float actionStartTime;
             public float currentActionDuration;
 
+            public bool isInvincible = false;
+            public float invincibilityStartTime;
+            public float currentInvincibilityDuration;
+
             public int currentRailIndex = 0;
             public int targetRailIndex = 0;
+
+            public bool hasSunglasses = false;
 
             public PlayerState(int initialRailIndex)
             {
@@ -48,6 +54,10 @@ namespace Player
                 currentActionDuration = stateToClone.currentActionDuration;
                 currentRailIndex = stateToClone.currentRailIndex;
                 targetRailIndex = stateToClone.targetRailIndex;
+                hasSunglasses = stateToClone.hasSunglasses;
+                isInvincible = stateToClone.isInvincible;
+                invincibilityStartTime = stateToClone.invincibilityStartTime;
+                currentInvincibilityDuration = stateToClone.currentInvincibilityDuration;
             }
         }
 
@@ -117,18 +127,38 @@ namespace Player
 
         public void OnHit()
         {
-            playerState = attackHandler.HandleOnHit(playerState);
-            playerState.currentAction = ActionType.Death;
-            playerState.currentActionDuration = float.PositiveInfinity;
-            playerState.actionStartTime = Time.time;
-            boxCollider.enabled = false;
-            StartCoroutine(OnHitRoutine());
-            GameManager.instance.GameOver();
+            if (playerState.isInvincible)
+            {
+                return;
+            }
+            else if (playerState.hasSunglasses)
+            {
+                playerState = attackHandler.HandleOnHit(playerState);
+                playerState.isInvincible = true;
+                playerState.hasSunglasses = false;
+                playerAnimator.SetFloat("HasSunglasses", 0);
+                playerAnimator.SetFloat("IsInvincible", 1);
+            }
+            else
+            {
+                playerState.currentAction = ActionType.Death;
+                playerState.currentActionDuration = float.PositiveInfinity;
+                playerState.actionStartTime = Time.time;
+                boxCollider.enabled = false;
+                StartCoroutine(OnDeathRoutine());
+                GameManager.instance.GameOver();
+            }
         }
 
-        IEnumerator OnHitRoutine()
+        public void OnSunglasses()
         {
-            animator.SetTrigger("Hit");
+            playerState.hasSunglasses = true;
+            playerAnimator.SetFloat("HasSunglasses", 1);
+        }
+
+        IEnumerator OnDeathRoutine()
+        {
+            playerAnimator.SetTrigger("Hit");
             audioSource.PlayOneShot(playerDeathAudioClip);
             yield return new WaitForSeconds(onHitAnimationDuration);
             Destroy(gameObject);
