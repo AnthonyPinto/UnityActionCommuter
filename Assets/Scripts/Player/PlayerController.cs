@@ -10,6 +10,7 @@ namespace Player
         AudioSource audioSource;
         BoxCollider2D boxCollider;
 
+        public SpriteRenderer spriteRenderer;
         public Animator playerAnimator;
         public AudioClip playerDeathAudioClip;
 
@@ -23,6 +24,8 @@ namespace Player
         float onHitAnimationDuration = 0.5f;
         float earlyInputAllowance = 0.25f;
         int startingRailIndex = 0;
+
+        float invincibilityDuration = 1;
 
         PlayerState playerState;
 
@@ -123,21 +126,54 @@ namespace Player
             playerState = moveHandler.HandleUpdate(playerState);
             playerState = attackHandler.HandleUpdate(playerState);
             playerState = cooldownHandler.HandleUpdate(playerState);
+            playerState = HandleInvincibility(playerState);
+        }
+
+        public PlayerState HandleInvincibility(PlayerState state)
+        {
+            if (!state.isInvincible)
+            {
+                spriteRenderer.color = Color.white;
+                return state;
+            }
+
+            float remainingDuration = state.invincibilityStartTime + state.currentInvincibilityDuration - Time.time;
+
+            if (remainingDuration <= 0)
+            {
+                state.isInvincible = false;
+            }
+            else
+            {
+                int tenthsOfSeconds = Mathf.RoundToInt(remainingDuration * 10);
+                if (tenthsOfSeconds % 3 == 0)
+                {
+                    spriteRenderer.color = Color.clear;
+                }
+                else
+                {
+                    spriteRenderer.color = Color.white;
+                }
+            }
+
+            return state;
         }
 
         public void OnHit()
         {
             if (playerState.isInvincible)
             {
-                return;
+
             }
             else if (playerState.hasSunglasses)
             {
                 playerState = attackHandler.HandleOnHit(playerState);
                 playerState.isInvincible = true;
+                playerState.invincibilityStartTime = Time.time;
+                playerState.currentInvincibilityDuration = invincibilityDuration;
+
                 playerState.hasSunglasses = false;
                 playerAnimator.SetFloat("HasSunglasses", 0);
-                playerAnimator.SetFloat("IsInvincible", 1);
             }
             else
             {
