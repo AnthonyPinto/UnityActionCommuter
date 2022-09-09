@@ -15,6 +15,7 @@ public class GameManager : MonoBehaviour
     int score = 0;
     int distance = 0;
     bool isGameOver = false;
+    public bool playerHasSunglasses = false;
 
     private void Awake()
     {
@@ -58,6 +59,11 @@ public class GameManager : MonoBehaviour
     {
         distance += distanceToAdd;
         uiManager.UpdateDistance(distance);
+    }
+
+    public void SetPlayerHasSunglasses(bool hasSunglasses)
+    {
+        playerHasSunglasses = hasSunglasses;
     }
 
     IEnumerator IncreaseScoreAndDistanceOverTimeRoutine()

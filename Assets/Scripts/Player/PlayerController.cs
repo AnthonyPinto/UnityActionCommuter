@@ -172,8 +172,7 @@ namespace Player
                 playerState.invincibilityStartTime = Time.time;
                 playerState.currentInvincibilityDuration = invincibilityDuration;
 
-                playerState.hasSunglasses = false;
-                playerAnimator.SetFloat("HasSunglasses", 0);
+                RemoveSunglasses();
             }
             else
             {
@@ -188,8 +187,21 @@ namespace Player
 
         public void OnSunglasses()
         {
+            AddSunglasses();
+        }
+
+        void AddSunglasses()
+        {
             playerState.hasSunglasses = true;
             playerAnimator.SetFloat("HasSunglasses", 1);
+            GameManager.instance.SetPlayerHasSunglasses(true);
+        }
+
+        void RemoveSunglasses()
+        {
+            playerState.hasSunglasses = false;
+            playerAnimator.SetFloat("HasSunglasses", 0);
+            GameManager.instance.SetPlayerHasSunglasses(false);
         }
 
         IEnumerator OnDeathRoutine()

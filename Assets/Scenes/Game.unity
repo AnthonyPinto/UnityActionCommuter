@@ -364,6 +364,17 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &482297233 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8314340867665787322, guid: 7e01f30968a54764c9091596f316b618, type: 3}
+  m_PrefabInstance: {fileID: 604309456}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3be47cf85ed841b4291577628fc4da82, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &489360805
 GameObject:
   m_ObjectHideFlags: 0
@@ -832,6 +843,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: SunglassesSpawner
       objectReference: {fileID: 0}
+    - target: {fileID: 8314340867665787323, guid: 7e01f30968a54764c9091596f316b618, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7e01f30968a54764c9091596f316b618, type: 3}
 --- !u!1 &610115095
@@ -1230,6 +1245,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f52c15f9bbc1022498b7b95e9ac6416c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &867102354 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8314340867665787322, guid: 7e01f30968a54764c9091596f316b618, type: 3}
+  m_PrefabInstance: {fileID: 1371225429}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3be47cf85ed841b4291577628fc4da82, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &921261306
 GameObject:
   m_ObjectHideFlags: 0
@@ -1618,11 +1644,33 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &1166912079 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8314340867665787322, guid: 7e01f30968a54764c9091596f316b618, type: 3}
+  m_PrefabInstance: {fileID: 668343590}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3be47cf85ed841b4291577628fc4da82, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1204092670 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 4937769498909641468, guid: 94b6d1b4cab84fd49a8cf316739259c0, type: 3}
   m_PrefabInstance: {fileID: 5532498795758368170}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1266614049 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8314340867665787322, guid: 7e01f30968a54764c9091596f316b618, type: 3}
+  m_PrefabInstance: {fileID: 8314340867570035015}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3be47cf85ed841b4291577628fc4da82, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1297716920
 GameObject:
   m_ObjectHideFlags: 0
@@ -1840,7 +1888,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8314340867665787323, guid: 7e01f30968a54764c9091596f316b618, type: 3}
       propertyPath: m_Name
-      value: ItemSpawner
+      value: CoffeeSpawner
+      objectReference: {fileID: 0}
+    - target: {fileID: 8314340867665787323, guid: 7e01f30968a54764c9091596f316b618, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7e01f30968a54764c9091596f316b618, type: 3}
@@ -1935,6 +1987,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: TrainSpawner
       objectReference: {fileID: 0}
+    - target: {fileID: 8314340867665787323, guid: 7e01f30968a54764c9091596f316b618, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7e01f30968a54764c9091596f316b618, type: 3}
 --- !u!1 &1687973406
@@ -1981,6 +2037,66 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1729361772 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8314340867665787322, guid: 7e01f30968a54764c9091596f316b618, type: 3}
+  m_PrefabInstance: {fileID: 1495918617}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3be47cf85ed841b4291577628fc4da82, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!1 &1764455772
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1764455774}
+  - component: {fileID: 1764455773}
+  m_Layer: 0
+  m_Name: SpawnManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1764455773
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1764455772}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8d27637f90326064daf30256609568ed, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  columnSpawner: {fileID: 1166912079}
+  coffeeSpawner: {fileID: 867102354}
+  sunglassesSpawner: {fileID: 482297233}
+  ratSpawner: {fileID: 1266614049}
+  trainSpawner: {fileID: 1729361772}
+--- !u!4 &1764455774
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1764455772}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 3.8577409, y: 0.59510934, z: 0.032929502}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 15
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1870075433
 GameObject:
@@ -2662,6 +2778,10 @@ PrefabInstance:
     - target: {fileID: 8314340867665787323, guid: 7e01f30968a54764c9091596f316b618, type: 3}
       propertyPath: m_Name
       value: RatSpawner
+      objectReference: {fileID: 0}
+    - target: {fileID: 8314340867665787323, guid: 7e01f30968a54764c9091596f316b618, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7e01f30968a54764c9091596f316b618, type: 3}

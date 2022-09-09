@@ -12,7 +12,7 @@ public class TrackManager : MonoBehaviour
     List<TrackSection> trackSections = new List<TrackSection>();
     public enum TrackSectionKey { RailOne, ChannelOne, RailTwo, ChannelTwo, RailThree, ChannelThree, RailFour }
 
-    static List<TrackSectionKey> TrackSectionKeyList = new List<TrackSectionKey>()
+    public static List<TrackSectionKey> TrackSectionKeyList = new List<TrackSectionKey>()
     {
         TrackSectionKey.RailOne,
         TrackSectionKey.ChannelOne,
