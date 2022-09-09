@@ -7,7 +7,7 @@ public class SpawnManager : MonoBehaviour
     float spawnTick = 0.25f;
 
     // Where we initialize all of the 'rules' that dictate what is spawned on each tick
-    List<ISpawnRule> spawnRules = new List<ISpawnRule>() { new ColumnRule(), new ItemRule() };
+    List<ISpawnRule> spawnRules;
     Dictionary<TrackManager.TrackSectionKey, Dictionary<SpawnableType, float>> latestSpawnTimes;
 
     enum SpawnableType { Rat, Coffee, Column, Train, Sunglasses }
@@ -45,6 +45,9 @@ public class SpawnManager : MonoBehaviour
             {SpawnableType.Train, trainSpawner }
 
         };
+
+        // Construct spawnRules
+        spawnRules = new List<ISpawnRule>() { new ColumnRule(), new ItemRule(), new EnemyRule() };
     }
 
     private void Start()
@@ -184,6 +187,88 @@ public class SpawnManager : MonoBehaviour
             }
             timeAtLastTick = Time.time;
             return nextSpawnMap;
+        }
+    }
+
+    class EnemyRule : ISpawnRule
+    {
+        float timeBetweenWaves = 2;
+
+        float trainToRatRatio = 0.2f;
+
+        int minEnemiesPerWave = 4;
+
+        int maxEnemiesPerWave = 10;
+
+
+        // Waits are used for what is coming next - so if we are waiting to spawn a rat
+        // use the rat wait range
+        float minRatWait = 0.5f;
+        float maxRatWait = 1;
+
+        float minTrainWait = 2;
+        float maxTrainWait = 2;
+
+
+        float waitForNext;
+        TrackManager.TrackSectionKey trackSectionForNext;
+        float lastSpawnTime = float.NegativeInfinity;
+
+        Stack<SpawnableType> enemiesForWave;
+
+        List<TrackManager.TrackSectionKey> allowedTrackSections = new List<TrackManager.TrackSectionKey>() {
+            TrackManager.TrackSectionKey.ChannelOne,
+            TrackManager.TrackSectionKey.ChannelThree,
+        };
+
+        public EnemyRule()
+        {
+            enemiesForWave = CreateWave();
+            lastSpawnTime = Time.time;
+            waitForNext = timeBetweenWaves;
+            trackSectionForNext = allowedTrackSections[Random.Range(0, allowedTrackSections.Count)];
+        }
+
+
+
+        public Dictionary<TrackManager.TrackSectionKey, SpawnableType?> Evaluate(
+            Dictionary<TrackManager.TrackSectionKey, Dictionary<SpawnableType, float>> latestSpawnTimes,
+            Dictionary<TrackManager.TrackSectionKey, SpawnableType?> nextSpawnMap
+        )
+        {
+            if (Time.time - lastSpawnTime >= waitForNext)
+            {
+                nextSpawnMap[trackSectionForNext] = enemiesForWave.Pop();
+                lastSpawnTime = Time.time;
+                waitForNext = 0; // clear wait so we can build it below
+
+                if (enemiesForWave.Count <= 0)
+                {
+                    enemiesForWave = CreateWave();
+                    waitForNext += timeBetweenWaves; // add time between wave in addition to whatever wait for next enemy
+                }
+
+                // TODO: add logic to manage repeating trains on a single rail
+                // TODO: add logic for double rat spawns
+                trackSectionForNext = allowedTrackSections[Random.Range(0, allowedTrackSections.Count)];
+                waitForNext += enemiesForWave.Peek() == SpawnableType.Rat ? Random.Range(minRatWait, maxRatWait) : Random.Range(minTrainWait, maxTrainWait);
+            }
+
+            return nextSpawnMap;
+        }
+
+        Stack<SpawnableType> CreateWave()
+        {
+            Stack<SpawnableType> newWave = new Stack<SpawnableType>();
+            int enemyCount = Random.Range(minEnemiesPerWave, maxEnemiesPerWave);
+
+            for (int i = 0; i <= enemyCount; i++)
+            {
+                SpawnableType enemy = Random.value < trainToRatRatio ? SpawnableType.Train : SpawnableType.Rat;
+                newWave.Push(enemy);
+            }
+
+            return newWave;
         }
     }
 }
