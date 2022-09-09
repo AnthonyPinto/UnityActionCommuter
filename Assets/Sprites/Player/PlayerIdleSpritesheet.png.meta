@@ -67,7 +67,7 @@ TextureImporter:
   - serializedVersion: 3
     buildTarget: DefaultTexturePlatform
     maxTextureSize: 2048
-    resizeAlgorithm: 1
+    resizeAlgorithm: 0
     textureFormat: -1
     textureCompression: 0
     compressionQuality: 50
@@ -130,8 +130,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: a2dc1833849a846e6a122e79faa3e724
-      internalID: -1765659813
+      spriteID: ac0f35b6a09ad49f292904b5a5070b04
+      internalID: 1646265000
       vertices: []
       indices: 
       edges: []
@@ -144,15 +144,15 @@ TextureImporter:
         y: 32
         width: 32
         height: 32
-      alignment: 9
-      pivot: {x: 0.5, y: 0.2}
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 95e3e206b164644dc8e5b71ed3e61831
-      internalID: -2049689665
+      spriteID: fdc5d988992344dee9c5a76f552beb40
+      internalID: -806368775
       vertices: []
       indices: 
       edges: []
@@ -161,19 +161,19 @@ TextureImporter:
       name: PlayerIdleSpritesheet_2
       rect:
         serializedVersion: 2
-        x: 0
-        y: 0
+        x: 64
+        y: 32
         width: 32
         height: 32
-      alignment: 9
-      pivot: {x: 0.5, y: 0.2}
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 4f5d6fee84ca44299a671377894b814a
-      internalID: 644016265
+      spriteID: 55ed6ce7c3ca3478698d050d64591de6
+      internalID: -464990891
       vertices: []
       indices: 
       edges: []
@@ -182,19 +182,40 @@ TextureImporter:
       name: PlayerIdleSpritesheet_3
       rect:
         serializedVersion: 2
-        x: 32
+        x: 0
         y: 0
         width: 32
         height: 32
-      alignment: 9
-      pivot: {x: 0.5, y: 0.2}
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: e7949c46aeba94d3d843ab03586bfb44
-      internalID: -264601000
+      spriteID: 7ac771102c88844ec81e720cdea97dd0
+      internalID: 2040880824
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PlayerIdleSpritesheet_4
+      rect:
+        serializedVersion: 2
+        x: 32
+        y: 0
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e0bbfb912a17146eb9782e5efdff11fc
+      internalID: -1344737716
       vertices: []
       indices: 
       edges: []
@@ -210,10 +231,11 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      PlayerIdleSpritesheet_0: -1765659813
-      PlayerIdleSpritesheet_1: -2049689665
-      PlayerIdleSpritesheet_3: -264601000
-      PlayerIdleSpritesheet_2: 644016265
+      PlayerIdleSpritesheet_0: 1646265000
+      PlayerIdleSpritesheet_4: -1344737716
+      PlayerIdleSpritesheet_1: -806368775
+      PlayerIdleSpritesheet_3: 2040880824
+      PlayerIdleSpritesheet_2: -464990891
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0
