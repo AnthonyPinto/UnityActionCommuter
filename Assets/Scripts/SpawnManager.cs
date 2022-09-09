@@ -47,6 +47,7 @@ public class SpawnManager : MonoBehaviour
         };
 
         // Construct spawnRules
+        // NOTE order matters
         spawnRules = new List<ISpawnRule>() { new ColumnRule(), new ItemRule(), new EnemyRule() };
     }
 
@@ -169,7 +170,7 @@ public class SpawnManager : MonoBehaviour
 
             // If we have finished the waitfornextitem add something
             if (
-                Time.time - latestItemTime >= waitForNextItem
+                Time.time - latestItemTime >= waitForNextItem && !SpawnmapHasColumn(nextSpawnMap)
             )
             {
                 waitForNextItem = Random.Range(minItemWait, maxItemWait); // no matter what item we spawn push out next item wait
@@ -187,6 +188,18 @@ public class SpawnManager : MonoBehaviour
             }
             timeAtLastTick = Time.time;
             return nextSpawnMap;
+        }
+
+        bool SpawnmapHasColumn(Dictionary<TrackManager.TrackSectionKey, SpawnableType?> nextSpawnMap)
+        {
+            foreach (TrackManager.TrackSectionKey trackSectionKey in TrackManager.TrackSectionKeyList)
+            {
+                if (nextSpawnMap.GetValueOrDefault(trackSectionKey, null) == SpawnableType.Column)
+                {
+                    return true;
+                }
+            }
+            return false;
         }
     }
 
