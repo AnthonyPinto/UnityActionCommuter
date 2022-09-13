@@ -51,6 +51,11 @@ public class GameManager : MonoBehaviour
         return gameSpeed;
     }
 
+    public bool GetIsGameOver()
+    {
+        return isGameOver;
+    }
+
     public void ScorePointsEvent(int pointsToAdd, Vector3 positionOfEvent)
     {
         AddPoints(pointsToAdd);
@@ -92,6 +97,7 @@ public class GameManager : MonoBehaviour
         backgroundMusic.loop = false;
         backgroundMusic.PlayDelayed(0.5f);
         uiManager.SetGameOver(true);
+        gameSpeed = 0;
     }
 
 

@@ -40,13 +40,19 @@ public class TrainSequence : MonoBehaviour
         // wait for the OnEnable call to resolve so that we use thisgameObjects position AFTER it is repositioned by the object spawner
         yield return new WaitForSeconds(0);
         train.SetActive(true);
-        trainAudioSource.PlayOneShot(trainHornClip);
+        if (!GameManager.instance.GetIsGameOver())
+        {
+            trainAudioSource.PlayOneShot(trainHornClip);
+        }
         train.GetComponent<MovingObject>().enabled = false;
         train.SetLayerRecursively(gameObject.layer);
         train.transform.position = transform.position + Vector3.up * trainYOffset + Vector3.left * 10;
 
         yield return new WaitForSeconds(trainLightDuration);
-        trainAudioSource.PlayOneShot(trainPassingClip);
+        if (!GameManager.instance.GetIsGameOver())
+        {
+            trainAudioSource.PlayOneShot(trainPassingClip);
+        }
         train.GetComponent<MovingObject>().enabled = true;
 
         yield return new WaitForSeconds(trainDuration);
