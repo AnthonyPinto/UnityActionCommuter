@@ -48,7 +48,12 @@ public class SpawnManager : MonoBehaviour
 
         // Construct spawnRules
         // NOTE order matters
-        spawnRules = new List<ISpawnRule>() { new ColumnRule(), new ItemRule(), new EnemyRule() };
+        spawnRules = new List<ISpawnRule>() {
+            // NOTE Uncomment to enable columns
+            //new ColumnRule(), 
+            new ItemRule(),
+            new EnemyRule()
+        };
     }
 
     private void Start()
