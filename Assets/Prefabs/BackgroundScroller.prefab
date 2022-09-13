@@ -25,7 +25,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1057200503}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 2.6461, y: -0.47000003, z: 0}
+  m_LocalPosition: {x: 1.923, y: -0.47000003, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -78,7 +78,7 @@ SpriteRenderer:
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 2
-  m_Size: {x: 25.498125, y: 2.5}
+  m_Size: {x: 26.345856, y: 2.5}
   m_AdaptiveModeThreshold: 0
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -109,7 +109,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1163552646}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 2.6195, y: -3.48, z: 0}
+  m_LocalPosition: {x: 1.9562, y: -3.4551, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -162,7 +162,7 @@ SpriteRenderer:
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 2
-  m_Size: {x: 25.444912, y: 2.5}
+  m_Size: {x: 26.31239, y: 2.4501338}
   m_AdaptiveModeThreshold: 0
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -193,8 +193,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4974114680315849531}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 2.4967, y: -1.8479, z: 0}
-  m_LocalScale: {x: 1.2497, y: 0.6304, z: 1}
+  m_LocalPosition: {x: 1.8982, y: -2.3965, z: 0}
+  m_LocalScale: {x: 26.38273, y: 7.11224, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 4974114680902852426}
@@ -241,12 +241,12 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: -10
-  m_Sprite: {fileID: 21300000, guid: 8c7dd768332714bf488a57fb7c4710ff, type: 3}
-  m_Color: {r: 1, g: 0.8083922, b: 0, a: 1}
+  m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
+  m_Color: {r: 0.26666668, g: 0.14117648, b: 0.20392157, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 20, y: 10}
+  m_Size: {x: 1, y: 1}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -303,7 +303,7 @@ MonoBehaviour:
   tier1Sprite: {fileID: 4974114680315849524}
   tier1Speed: 0
   tier2Sprite: {fileID: 4974114681573039781}
-  tier2Speed: 0
+  tier2Speed: 15
   tier3Sprite: {fileID: 1057200505}
   tier3Speed: 0
   tier4Sprite: {fileID: 1163552648}
