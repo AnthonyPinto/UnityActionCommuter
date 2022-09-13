@@ -12,6 +12,9 @@ public class GameManager : MonoBehaviour
     public UIManager uiManager;
     public PointsPopupsManager pointsPopupsManager;
 
+
+    float gameSpeed = 10;
+
     int score = 0;
     int distance = 0;
     bool isGameOver = false;
@@ -41,6 +44,11 @@ public class GameManager : MonoBehaviour
     private void Start()
     {
         StartCoroutine(IncreaseScoreAndDistanceOverTimeRoutine());
+    }
+
+    public float GetGameSpeed()
+    {
+        return gameSpeed;
     }
 
     public void ScorePointsEvent(int pointsToAdd, Vector3 positionOfEvent)

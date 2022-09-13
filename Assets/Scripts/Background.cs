@@ -61,7 +61,7 @@ public class Background : MonoBehaviour
 
         public void UpdateTier(float deltaTime)
         {
-            Vector3 distanceToMove = Vector3.left * speed * Time.deltaTime;
+            Vector3 distanceToMove = Vector3.left * (speed + GameManager.instance.GetGameSpeed()) * Time.deltaTime;
             Vector3 newPosition = baseSprite.transform.position + distanceToMove;
 
             // If the sprite is about to move past it's full width to the left

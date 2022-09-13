@@ -12,7 +12,7 @@ public class MovingObject : MonoBehaviour
 
     private void Update()
     {
-        transform.position += Vector3.left * speed * Time.deltaTime;
+        transform.position += Vector3.left * (speed + GameManager.instance.GetGameSpeed()) * Time.deltaTime;
 
         if (transform.position.x < -60 && !disableAutomaticRelease)
         {
