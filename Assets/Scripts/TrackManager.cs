@@ -34,6 +34,20 @@ public class TrackManager : MonoBehaviour
         [TrackSectionKey.RailFour] = "RailFour",
     };
 
+    public TrackSectionKey GetTrackSectionKeyForLayer(int layer)
+    {
+        string layerName = LayerMask.LayerToName(layer);
+
+        foreach (TrackSectionKey k in TrackSectionLayerName.Keys)
+        {
+            if (TrackSectionLayerName[k] == layerName)
+            {
+                return k;
+            }
+        };
+        throw new System.Exception("no tracksectionkey associated with layername: " + layerName);
+    }
+
     private void Awake()
     {
         if (instance != null && instance != this)
