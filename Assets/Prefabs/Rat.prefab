@@ -96,7 +96,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4516618795885610299}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1.6364565, y: 0.2610314, z: 0.041000213}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -150,7 +150,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5096045554344974411}
   m_LocalRotation: {x: -0, y: 1, z: -0, w: 0}
-  m_LocalPosition: {x: 1.6364565, y: -0.2610314, z: 0.041000213}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -322,6 +322,7 @@ MonoBehaviour:
   pointsOnDestroy: 50
   WasHitAnimationDuration: 0.75
   animator: {fileID: 2430815958593866524}
+  wrapperAnimator: {fileID: 9132298306488307416}
   deathAudioClip: {fileID: 8300000, guid: d70d71a6c35be48f482c2c9bc27fe53b, type: 3}
   attackAudioClip: {fileID: 8300000, guid: 1ff2d116ae81143f9ba031e11e4e96aa, type: 3}
   attackTrigger: {fileID: 451596740430693480}

@@ -10,6 +10,7 @@ public class Enemy : MonoBehaviour
     public int pointsOnDestroy = 50;
     public float WasHitAnimationDuration = 0.75f;
     public Animator animator;
+    public Animator wrapperAnimator;
     public AudioClip deathAudioClip;
     public AudioClip attackAudioClip;
     public OnTriggerEmitter attackTrigger;
@@ -31,15 +32,24 @@ public class Enemy : MonoBehaviour
     // triggered when player is close enough to be attacked by rat
     private void OnAttackTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.CompareTag("Player") && !CollisionIsFromAbove(collision))
+        if (collision.gameObject.CompareTag("Player"))
         {
             isAttacking = true;
             audioSource.PlayOneShot(attackAudioClip);
             animator.SetTrigger("Attack");
+
+            if (IsCollisionIsFromAbove(collision))
+            {
+                wrapperAnimator.SetTrigger("Up");
+            }
+            else if (IsCollisionIsFromBelow(collision))
+            {
+                wrapperAnimator.SetTrigger("Down");
+            }
         }
     }
 
-    bool CollisionIsFromAbove(Collider2D collision)
+    bool IsCollisionIsFromAbove(Collider2D collision)
     {
         TrackManager.TrackSectionKey thisEnemyTrackSectionKey = TrackManager.instance.GetTrackSectionKeyForLayer(gameObject.layer);
         TrackManager.TrackSectionKey collisionTrackSectionKey = TrackManager.instance.GetTrackSectionKeyForLayer(collision.gameObject.layer);
@@ -47,14 +57,21 @@ public class Enemy : MonoBehaviour
         return TrackManager.TrackSectionKeyList.FindIndex(0, (k) => k == thisEnemyTrackSectionKey) < TrackManager.TrackSectionKeyList.FindIndex(0, (k) => k == collisionTrackSectionKey);
     }
 
+    bool IsCollisionIsFromBelow(Collider2D collision)
+    {
+        TrackManager.TrackSectionKey thisEnemyTrackSectionKey = TrackManager.instance.GetTrackSectionKeyForLayer(gameObject.layer);
+        TrackManager.TrackSectionKey collisionTrackSectionKey = TrackManager.instance.GetTrackSectionKeyForLayer(collision.gameObject.layer);
+
+        return TrackManager.TrackSectionKeyList.FindIndex(0, (k) => k == thisEnemyTrackSectionKey) > TrackManager.TrackSectionKeyList.FindIndex(0, (k) => k == collisionTrackSectionKey);
+    }
+
     // triggered on collision with rat
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (isHitRoutineRunning || CollisionIsFromAbove(collision))
+        if (isHitRoutineRunning)
         {
             return;
         }
-
 
 
         // We handle the results of collisions in LateUpdate because
