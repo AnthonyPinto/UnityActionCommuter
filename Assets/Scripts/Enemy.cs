@@ -31,7 +31,7 @@ public class Enemy : MonoBehaviour
     // triggered when player is close enough to be attacked by rat
     private void OnAttackTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.CompareTag("Player"))
+        if (collision.gameObject.CompareTag("Player") && !CollisionIsFromAbove(collision))
         {
             isAttacking = true;
             audioSource.PlayOneShot(attackAudioClip);
@@ -39,13 +39,23 @@ public class Enemy : MonoBehaviour
         }
     }
 
+    bool CollisionIsFromAbove(Collider2D collision)
+    {
+        TrackManager.TrackSectionKey thisEnemyTrackSectionKey = TrackManager.instance.GetTrackSectionKeyForLayer(gameObject.layer);
+        TrackManager.TrackSectionKey collisionTrackSectionKey = TrackManager.instance.GetTrackSectionKeyForLayer(collision.gameObject.layer);
+
+        return TrackManager.TrackSectionKeyList.FindIndex(0, (k) => k == thisEnemyTrackSectionKey) < TrackManager.TrackSectionKeyList.FindIndex(0, (k) => k == collisionTrackSectionKey);
+    }
+
     // triggered on collision with rat
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (isHitRoutineRunning)
+        if (isHitRoutineRunning || CollisionIsFromAbove(collision))
         {
             return;
         }
+
+
 
         // We handle the results of collisions in LateUpdate because
         // OnTriggerEnter2D can be called multiple times in a single frame
