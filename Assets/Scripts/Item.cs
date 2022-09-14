@@ -30,6 +30,7 @@ public class Item : MonoBehaviour
         if (canStillBeMissed && transform.position.x <= -10)
         {
             canStillBeMissed = false;
+            GameManager.instance.OnPageMissed();
             GameManager.instance.ClearItemStreak();
         }
     }
@@ -49,6 +50,7 @@ public class Item : MonoBehaviour
         canStillBeMissed = false;
         sr.enabled = false;
         audioSource.PlayOneShot(audioClip);
+        GameManager.instance.OnPageCollected();
         yield return new WaitForSeconds(audioClipLength);
         sr.enabled = true;
         GetComponent<Poolable>().pool.Release(gameObject);

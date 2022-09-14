@@ -22,6 +22,11 @@ public class GameManager : MonoBehaviour
     bool isGameOver = false;
     public bool playerHasSunglasses = false;
 
+
+    public int pagesToCollect = 20;
+
+    public List<bool> EncounteredPagesCollected;
+
     private void Awake()
     {
         // Singleton pattern
@@ -41,6 +46,21 @@ public class GameManager : MonoBehaviour
         {
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
         }
+
+        if (EncounteredPagesCollected.Count >= pagesToCollect)
+        {
+            GameOver();
+        }
+    }
+
+    public void OnPageCollected()
+    {
+        EncounteredPagesCollected.Add(true);
+    }
+
+    public void OnPageMissed()
+    {
+        EncounteredPagesCollected.Add(false);
     }
 
     private void Start()
