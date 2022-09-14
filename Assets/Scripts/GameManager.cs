@@ -13,7 +13,7 @@ public class GameManager : MonoBehaviour
     public PointsPopupsManager pointsPopupsManager;
 
 
-    float gameSpeed = 10;
+    float gameSpeed = 15;
 
     int score = 0;
     int distance = 0;

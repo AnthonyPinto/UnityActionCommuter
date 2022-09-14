@@ -303,7 +303,7 @@ MonoBehaviour:
   tier1Sprite: {fileID: 4974114680315849524}
   tier1Speed: 0
   tier2Sprite: {fileID: 4974114681573039781}
-  tier2Speed: 15
+  tier2Speed: 0
   tier3Sprite: {fileID: 1057200505}
   tier3Speed: 0
   tier4Sprite: {fileID: 1163552648}
