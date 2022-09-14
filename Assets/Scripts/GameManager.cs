@@ -15,6 +15,8 @@ public class GameManager : MonoBehaviour
 
     float gameSpeed = 11;
 
+    int itemStreak = 0;
+
     int score = 0;
     int distance = 0;
     bool isGameOver = false;
@@ -46,6 +48,11 @@ public class GameManager : MonoBehaviour
         StartCoroutine(IncreaseScoreAndDistanceOverTimeRoutine());
     }
 
+    public int GetScoreMultiplier()
+    {
+        return itemStreak;
+    }
+
     public float GetGameSpeed()
     {
         return gameSpeed;
@@ -58,8 +65,14 @@ public class GameManager : MonoBehaviour
 
     public void ScorePointsEvent(int pointsToAdd, Vector3 positionOfEvent)
     {
-        AddPoints(pointsToAdd);
-        pointsPopupsManager.RunPointsPopupAtPosition(pointsToAdd, positionOfEvent);
+        itemStreak++;
+        AddPoints(pointsToAdd * itemStreak);
+        pointsPopupsManager.RunPointsPopupAtPosition(pointsToAdd * itemStreak, positionOfEvent);
+    }
+
+    public void ClearItemStreak()
+    {
+        itemStreak = 0;
     }
 
     void AddPoints(int pointsToAdd)

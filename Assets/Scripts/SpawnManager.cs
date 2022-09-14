@@ -129,13 +129,13 @@ public class SpawnManager : MonoBehaviour
 
     class ItemRule : ISpawnRule
     {
-        float minItemWait = 0.5f;
-        float maxItemWait = 1;
+        float minItemWait = 1f;
+        float maxItemWait = 2;
 
         float waitForNextItem;
 
-        float minSunglassesWait = 4;
-        float maxSunglassesWait = 4;
+        float minSunglassesWait = 8;
+        float maxSunglassesWait = 8;
 
         float waitForNextSungglasses;
 

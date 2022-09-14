@@ -11,11 +11,27 @@ public class Item : MonoBehaviour
     SpriteRenderer sr;
     float audioClipLength = 0.5f;
 
+    bool canStillBeMissed = true;
+
 
     private void Awake()
     {
         audioSource = GetComponent<AudioSource>();
         sr = GetComponent<SpriteRenderer>();
+    }
+
+    private void Update()
+    {
+        if (transform.position.x >= 0)
+        {
+            canStillBeMissed = true;
+        }
+
+        if (canStillBeMissed && transform.position.x <= -10)
+        {
+            canStillBeMissed = false;
+            GameManager.instance.ClearItemStreak();
+        }
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -30,10 +46,12 @@ public class Item : MonoBehaviour
 
     private IEnumerator WasCollectedSequence()
     {
+        canStillBeMissed = false;
         sr.enabled = false;
         audioSource.PlayOneShot(audioClip);
         yield return new WaitForSeconds(audioClipLength);
         sr.enabled = true;
         GetComponent<Poolable>().pool.Release(gameObject);
+
     }
 }
