@@ -23,7 +23,9 @@ public class Item : MonoBehaviour
         if (collision.gameObject.CompareTag("Player"))
         {
             GameManager.instance.ScorePointsEvent(pointValue, transform.position);
+            GameManager.instance.AddCaffeine();
             StartCoroutine(WasCollectedSequence());
+
         }
     }
 

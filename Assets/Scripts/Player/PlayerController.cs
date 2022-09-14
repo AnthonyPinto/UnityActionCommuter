@@ -75,6 +75,14 @@ namespace Player
 
         private void Update()
         {
+            // Player dies if going too slow
+            if (GameManager.instance.GetCaffeinePercentage() <= 0 && playerState.currentAction != ActionType.Death)
+            {
+                RemoveSunglasses();
+                OnHit();
+            }
+
+
             // Get user input and queue it up to either start this frame - or possibly start on a later
             // frame if it becomes possible during the earlyInputAllowance window
             if (

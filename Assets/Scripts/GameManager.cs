@@ -15,6 +15,8 @@ public class GameManager : MonoBehaviour
 
     float gameSpeed = 11;
 
+    float caffeinePercentage = 1;
+
     int score = 0;
     int distance = 0;
     bool isGameOver = false;
@@ -44,11 +46,25 @@ public class GameManager : MonoBehaviour
     private void Start()
     {
         StartCoroutine(IncreaseScoreAndDistanceOverTimeRoutine());
+        StartCoroutine(DecreaseCaffeineOverTimeRoutine());
+    }
+
+    public float GetCaffeinePercentage()
+    {
+        return caffeinePercentage;
     }
 
     public float GetGameSpeed()
     {
-        return gameSpeed;
+        if (caffeinePercentage >= 0.5f)
+        {
+            return gameSpeed;
+        }
+        else
+        {
+            return gameSpeed * 2 * Mathf.Max(caffeinePercentage, 0.25f);
+        }
+
     }
 
     public bool GetIsGameOver()
@@ -68,6 +84,11 @@ public class GameManager : MonoBehaviour
         uiManager.UpdateScore(score);
     }
 
+    public void AddCaffeine()
+    {
+        caffeinePercentage = Mathf.Min(caffeinePercentage + 0.25f, 1);
+    }
+
     public void AddDistance(int distanceToAdd)
     {
         distance += distanceToAdd;
@@ -85,6 +106,16 @@ public class GameManager : MonoBehaviour
         {
             AddPoints(1);
             AddDistance(3);
+            yield return new WaitForSeconds(0.1f);
+        }
+    }
+
+    IEnumerator DecreaseCaffeineOverTimeRoutine()
+    {
+        while (!isGameOver)
+        {
+            caffeinePercentage -= 0.01f;
+            caffeinePercentage = Mathf.Max(caffeinePercentage, 0);
             yield return new WaitForSeconds(0.1f);
         }
     }
