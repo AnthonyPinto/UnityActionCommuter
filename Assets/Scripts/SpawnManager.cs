@@ -44,7 +44,7 @@ public class SpawnManager : MonoBehaviour
             {SpawnableType.Coffee, coffeeSpawner },
             {SpawnableType.Sunglasses, sunglassesSpawner },
             {SpawnableType.Rat, ratSpawner },
-            {SpawnableType.TrainFromFront, trainFromFront },
+            {SpawnableType.TrainFromFront, trainFromBehind },
             {SpawnableType.TrainFromBehind, trainFromBehind }
         };
 
