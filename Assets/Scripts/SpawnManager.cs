@@ -10,14 +10,16 @@ public class SpawnManager : MonoBehaviour
     List<ISpawnRule> spawnRules;
     Dictionary<TrackManager.TrackSectionKey, Dictionary<SpawnableType, float>> latestSpawnTimes;
 
-    enum SpawnableType { Rat, Coffee, Column, Train, Sunglasses }
-    List<SpawnableType> SpawnableTypeList = new List<SpawnableType>() { SpawnableType.Rat, SpawnableType.Coffee, SpawnableType.Column, SpawnableType.Train, SpawnableType.Sunglasses };
+    enum SpawnableType { Rat, Coffee, Column, TrainFromFront, TrainFromBehind, Sunglasses }
+    List<SpawnableType> SpawnableTypeList = new List<SpawnableType>() { SpawnableType.Rat, SpawnableType.Coffee, SpawnableType.Column, SpawnableType.TrainFromFront, SpawnableType.TrainFromBehind, SpawnableType.Sunglasses };
 
     public ObjectSpawner columnSpawner;
     public ObjectSpawner coffeeSpawner;
     public ObjectSpawner sunglassesSpawner;
     public ObjectSpawner ratSpawner;
-    public ObjectSpawner trainSpawner;
+    public ObjectSpawner trainFromFront;
+    public ObjectSpawner trainFromBehind;
+
 
 
     Dictionary<SpawnableType, ObjectSpawner> spawnerMap;
@@ -42,8 +44,8 @@ public class SpawnManager : MonoBehaviour
             {SpawnableType.Coffee, coffeeSpawner },
             {SpawnableType.Sunglasses, sunglassesSpawner },
             {SpawnableType.Rat, ratSpawner },
-            {SpawnableType.Train, trainSpawner }
-
+            {SpawnableType.TrainFromFront, trainFromFront },
+            {SpawnableType.TrainFromBehind, trainFromBehind }
         };
 
         // Construct spawnRules
@@ -234,9 +236,10 @@ public class SpawnManager : MonoBehaviour
 
         Stack<SpawnableType> enemiesForWave;
 
-        List<TrackManager.TrackSectionKey> allowedTrackSections = new List<TrackManager.TrackSectionKey>() {
-            TrackManager.TrackSectionKey.ChannelOne,
-            TrackManager.TrackSectionKey.ChannelThree,
+        Dictionary<SpawnableType, List<TrackManager.TrackSectionKey>> allowedTrackSections = new Dictionary<SpawnableType, List<TrackManager.TrackSectionKey>>() {
+            {SpawnableType.Rat, new List<TrackManager.TrackSectionKey>() {TrackManager.TrackSectionKey.ChannelOne, TrackManager.TrackSectionKey.ChannelThree} },
+            {SpawnableType.TrainFromFront, new List<TrackManager.TrackSectionKey>() {TrackManager.TrackSectionKey.ChannelOne}},
+            {SpawnableType.TrainFromBehind, new List<TrackManager.TrackSectionKey>() {TrackManager.TrackSectionKey.ChannelThree}}
         };
 
         public EnemyRule()
@@ -244,7 +247,7 @@ public class SpawnManager : MonoBehaviour
             enemiesForWave = CreateWave();
             lastSpawnTime = Time.time;
             waitForNext = timeBetweenWaves;
-            trackSectionForNext = allowedTrackSections[Random.Range(0, allowedTrackSections.Count)];
+            trackSectionForNext = allowedTrackSections[enemiesForWave.Peek()][Random.Range(0, allowedTrackSections[enemiesForWave.Peek()].Count)];
         }
 
 
@@ -268,7 +271,7 @@ public class SpawnManager : MonoBehaviour
 
                 // TODO: add logic to manage repeating trains on a single rail
                 // TODO: add logic for double rat spawns
-                trackSectionForNext = allowedTrackSections[Random.Range(0, allowedTrackSections.Count)];
+                trackSectionForNext = allowedTrackSections[enemiesForWave.Peek()][Random.Range(0, allowedTrackSections[enemiesForWave.Peek()].Count)];
                 waitForNext += enemiesForWave.Peek() == SpawnableType.Rat ? Random.Range(minRatWait, maxRatWait) : Random.Range(minTrainWait, maxTrainWait);
             }
 
@@ -282,7 +285,13 @@ public class SpawnManager : MonoBehaviour
 
             for (int i = 0; i <= enemyCount; i++)
             {
-                SpawnableType enemy = Random.value < trainToRatRatio ? SpawnableType.Train : SpawnableType.Rat;
+                float trainFromFrontPercent = trainToRatRatio / 2f;
+                float seed = Random.value;
+
+                SpawnableType enemy = seed < trainFromFrontPercent ? SpawnableType.TrainFromFront :
+                    seed < trainToRatRatio ? SpawnableType.TrainFromBehind :
+                    SpawnableType.Rat;
+
                 newWave.Push(enemy);
             }
 
