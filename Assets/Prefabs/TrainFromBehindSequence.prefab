@@ -47,7 +47,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   trainPassingClip: {fileID: 8300000, guid: b44ef112491554b31a6401b0d1df5927, type: 3}
   trainHornClip: {fileID: 8300000, guid: 727d82098e3fa4a728ddfc82ceeaa9da, type: 3}
-  trainPrefab: {fileID: 4437118049198327738, guid: 35a0832adb06c944daf51ab0f1d195d8, type: 3}
+  trainPrefab: {fileID: 4437118049198327738, guid: f352f593f6518e244a413991171d8230, type: 3}
   isTrainFromBehind: 1
 --- !u!114 &3884227521008498485
 MonoBehaviour:

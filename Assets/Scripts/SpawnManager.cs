@@ -44,7 +44,7 @@ public class SpawnManager : MonoBehaviour
             {SpawnableType.Coffee, coffeeSpawner },
             {SpawnableType.Sunglasses, sunglassesSpawner },
             {SpawnableType.Rat, ratSpawner },
-            {SpawnableType.TrainFromFront, trainFromBehind },
+            {SpawnableType.TrainFromFront, trainFromFront },
             {SpawnableType.TrainFromBehind, trainFromBehind }
         };
 
@@ -214,7 +214,7 @@ public class SpawnManager : MonoBehaviour
     {
         float timeBetweenWaves = 2;
 
-        float trainToRatRatio = 0.2f;
+        float trainToRatRatio = 0.6f;
 
         int minEnemiesPerWave = 4;
 
