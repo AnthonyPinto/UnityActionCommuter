@@ -10,16 +10,16 @@ public class SpawnManager : MonoBehaviour
     List<ISpawnRule> spawnRules;
     Dictionary<TrackManager.TrackSectionKey, Dictionary<SpawnableType, float>> latestSpawnTimes;
 
-    enum SpawnableType { Rat, Coffee, Column, Train, Sunglasses, Paper }
-    List<SpawnableType> SpawnableTypeList = new List<SpawnableType>() { SpawnableType.Rat, SpawnableType.Coffee, SpawnableType.Column, SpawnableType.Train, SpawnableType.Sunglasses };
+    enum SpawnableType { Rat, Coffee, Column, TrainFromFront, TrainFromBehind, Sunglasses, Paper }
+    List<SpawnableType> SpawnableTypeList = new List<SpawnableType>() { SpawnableType.Rat, SpawnableType.Coffee, SpawnableType.Column, SpawnableType.TrainFromFront, SpawnableType.TrainFromBehind, SpawnableType.Sunglasses, SpawnableType.Paper };
 
     public ObjectSpawner columnSpawner;
     public ObjectSpawner coffeeSpawner;
     public ObjectSpawner sunglassesSpawner;
     public ObjectSpawner ratSpawner;
-    public ObjectSpawner trainSpawner;
+    public ObjectSpawner trainFromFront;
+    public ObjectSpawner trainFromBehind;
     public ObjectSpawner paperSpawner;
-
 
     Dictionary<SpawnableType, ObjectSpawner> spawnerMap;
 
@@ -43,7 +43,8 @@ public class SpawnManager : MonoBehaviour
             {SpawnableType.Coffee, coffeeSpawner },
             {SpawnableType.Sunglasses, sunglassesSpawner },
             {SpawnableType.Rat, ratSpawner },
-            {SpawnableType.Train, trainSpawner },
+            {SpawnableType.TrainFromFront, trainFromFront },
+            {SpawnableType.TrainFromBehind, trainFromBehind },
             {SpawnableType.Paper, paperSpawner }
 
         };
@@ -235,9 +236,14 @@ public class SpawnManager : MonoBehaviour
         Dictionary<SpawnableType, List<TrackManager.TrackSectionKey>> allowedTrackSectionsByEnemy =
         new Dictionary<SpawnableType, List<TrackManager.TrackSectionKey>>() {
             {
-                SpawnableType.Train,
+                SpawnableType.TrainFromFront,
                 new List<TrackManager.TrackSectionKey>() {
                     TrackManager.TrackSectionKey.ChannelOne,
+                }
+            },
+            {
+                SpawnableType.TrainFromBehind,
+                new List<TrackManager.TrackSectionKey>() {
                     TrackManager.TrackSectionKey.ChannelThree,
                 }
             },
@@ -302,7 +308,13 @@ public class SpawnManager : MonoBehaviour
 
             for (int i = 0; i <= enemyCount; i++)
             {
-                SpawnableType enemy = Random.value < trainToRatRatio ? SpawnableType.Train : SpawnableType.Rat;
+                float trainFromFrontPercent = trainToRatRatio / 2f;
+                float seed = Random.value;
+
+                SpawnableType enemy = seed < trainFromFrontPercent ? SpawnableType.TrainFromFront :
+                    seed < trainToRatRatio ? SpawnableType.TrainFromBehind :
+                    SpawnableType.Rat;
+
                 newWave.Push(enemy);
             }
 

@@ -8,16 +8,17 @@ public class TrainSequence : MonoBehaviour
     public AudioClip trainPassingClip;
     public AudioClip trainHornClip;
 
-    public GameObject trainLightPrefab;
     public GameObject trainPrefab;
 
     AudioSource trainAudioSource;
     GameObject train;
 
     float trainLightDuration = 1f;
-    float trainDuration = 2f;
+    float trainDuration = 4f;
 
     float trainYOffset = -0.4f;
+
+    public bool isTrainFromBehind;
 
     private void Awake()
     {
@@ -46,7 +47,9 @@ public class TrainSequence : MonoBehaviour
         }
         train.GetComponent<MovingObject>().enabled = false;
         train.SetLayerRecursively(gameObject.layer);
-        train.transform.position = transform.position + Vector3.up * trainYOffset + Vector3.left * 10;
+        float trainXOffset = isTrainFromBehind ? 30 : 10;
+
+        train.transform.position = transform.position + Vector3.up * trainYOffset + Vector3.left * trainXOffset;
 
         yield return new WaitForSeconds(trainLightDuration);
         if (!GameManager.instance.GetIsGameOver())
