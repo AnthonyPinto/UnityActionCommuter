@@ -304,11 +304,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6387732514300612563, guid: 77a1951754674497a91cd3c89bf20a06, type: 3}
       propertyPath: m_Name
-      value: StreakMultiplier
+      value: StreakBonus
       objectReference: {fileID: 0}
     - target: {fileID: 8164888296186206954, guid: 77a1951754674497a91cd3c89bf20a06, type: 3}
       propertyPath: m_text
-      value: Streak Multiplier
+      value: Streak Bonus
       objectReference: {fileID: 0}
     - target: {fileID: 8164888296186206954, guid: 77a1951754674497a91cd3c89bf20a06, type: 3}
       propertyPath: m_margin.z
