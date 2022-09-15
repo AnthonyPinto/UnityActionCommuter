@@ -31,7 +31,8 @@ public class Enemy : MonoBehaviour
     // triggered when player is close enough to be attacked by rat
     private void OnAttackTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.CompareTag("Player"))
+        // ignore collision if they are on a higher rail
+        if (collision.gameObject.CompareTag("Player") && !TrackManager.instance.IsFirstObjectOnATrackAboveTheSecond(collision.gameObject, gameObject))
         {
             isAttacking = true;
             audioSource.PlayOneShot(attackAudioClip);
@@ -42,7 +43,9 @@ public class Enemy : MonoBehaviour
     // triggered on collision with rat
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (isHitRoutineRunning)
+        // ignore if we are already handling being hit
+        // or if the collision is on a higher rail
+        if (isHitRoutineRunning || TrackManager.instance.IsFirstObjectOnATrackAboveTheSecond(collision.gameObject, gameObject))
         {
             return;
         }

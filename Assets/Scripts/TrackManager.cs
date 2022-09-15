@@ -34,6 +34,28 @@ public class TrackManager : MonoBehaviour
         [TrackSectionKey.RailFour] = "RailFour",
     };
 
+    TrackSectionKey GetTrackSectionKeyForLayer(int layer)
+    {
+        string layerName = LayerMask.LayerToName(layer);
+
+        foreach (TrackSectionKey k in TrackSectionLayerName.Keys)
+        {
+            if (TrackSectionLayerName[k] == layerName)
+            {
+                return k;
+            }
+        };
+        throw new System.Exception("no tracksectionkey associated with layername: " + layerName);
+    }
+
+    public bool IsFirstObjectOnATrackAboveTheSecond(GameObject firstObject, GameObject secondObject)
+    {
+        TrackSectionKey firstObjectTrackSectionKey = GetTrackSectionKeyForLayer(firstObject.layer);
+        TrackSectionKey secondObjectTrackSectionKey = GetTrackSectionKeyForLayer(secondObject.layer);
+
+        return TrackSectionKeyList.FindIndex(0, (k) => k == firstObjectTrackSectionKey) > TrackSectionKeyList.FindIndex(0, (k) => k == secondObjectTrackSectionKey);
+    }
+
     private void Awake()
     {
         if (instance != null && instance != this)
@@ -54,7 +76,7 @@ public class TrackManager : MonoBehaviour
 
     public void SetObjectLayerToMatchTrackSection(GameObject objectToSet, TrackSection trackSection)
     {
-        objectToSet.SetLayerRecursively(LayerMask.NameToLayer(TrackManager.TrackSectionLayerName[trackSection.key]));
+        objectToSet.SetLayerRecursively(LayerMask.NameToLayer(TrackSectionLayerName[trackSection.key]));
     }
 
     public bool isIndexAValidTrackSection(int index)
