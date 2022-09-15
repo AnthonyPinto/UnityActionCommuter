@@ -234,9 +234,22 @@ public class SpawnManager : MonoBehaviour
 
         Stack<SpawnableType> enemiesForWave;
 
-        List<TrackManager.TrackSectionKey> allowedTrackSections = new List<TrackManager.TrackSectionKey>() {
-            TrackManager.TrackSectionKey.ChannelOne,
-            TrackManager.TrackSectionKey.ChannelThree,
+        Dictionary<SpawnableType, List<TrackManager.TrackSectionKey>> allowedTrackSectionsByEnemy =
+        new Dictionary<SpawnableType, List<TrackManager.TrackSectionKey>>() {
+            {
+                SpawnableType.Train,
+                new List<TrackManager.TrackSectionKey>() {
+                    TrackManager.TrackSectionKey.ChannelOne,
+                    TrackManager.TrackSectionKey.ChannelThree,
+                }
+            },
+            {
+                SpawnableType.Rat,
+                new List<TrackManager.TrackSectionKey>() {
+                    TrackManager.TrackSectionKey.ChannelOne,
+                    TrackManager.TrackSectionKey.ChannelThree,
+                }
+            }
         };
 
         public EnemyRule()
@@ -244,9 +257,16 @@ public class SpawnManager : MonoBehaviour
             enemiesForWave = CreateWave();
             lastSpawnTime = Time.time;
             waitForNext = timeBetweenWaves;
-            trackSectionForNext = allowedTrackSections[Random.Range(0, allowedTrackSections.Count)];
+            trackSectionForNext = GetAllowedNextTrackSection(enemiesForWave);
+
         }
 
+
+        TrackManager.TrackSectionKey GetAllowedNextTrackSection(Stack<SpawnableType> enemiesForWave)
+        {
+            return allowedTrackSectionsByEnemy[enemiesForWave.Peek()] // from the allowed track sections for the upcoming enemy
+                    [Random.Range(0, allowedTrackSectionsByEnemy[enemiesForWave.Peek()].Count)]; // select one at random
+        }
 
 
         public Dictionary<TrackManager.TrackSectionKey, SpawnableType?> Evaluate(
@@ -268,7 +288,7 @@ public class SpawnManager : MonoBehaviour
 
                 // TODO: add logic to manage repeating trains on a single rail
                 // TODO: add logic for double rat spawns
-                trackSectionForNext = allowedTrackSections[Random.Range(0, allowedTrackSections.Count)];
+                trackSectionForNext = GetAllowedNextTrackSection(enemiesForWave);
                 waitForNext += enemiesForWave.Peek() == SpawnableType.Rat ? Random.Range(minRatWait, maxRatWait) : Random.Range(minTrainWait, maxTrainWait);
             }
 
