@@ -247,7 +247,9 @@ public class SpawnManager : MonoBehaviour
                 SpawnableType.Rat,
                 new List<TrackManager.TrackSectionKey>() {
                     TrackManager.TrackSectionKey.ChannelOne,
+                    TrackManager.TrackSectionKey.ChannelTwo,
                     TrackManager.TrackSectionKey.ChannelThree,
+                    TrackManager.TrackSectionKey.ChannelFour
                 }
             }
         };

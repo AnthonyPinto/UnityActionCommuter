@@ -10,7 +10,7 @@ public class TrackManager : MonoBehaviour
     public List<GameObject> trackSectionGameObjects;
 
     List<TrackSection> trackSections = new List<TrackSection>();
-    public enum TrackSectionKey { RailOne, ChannelOne, RailTwo, ChannelTwo, RailThree, ChannelThree, RailFour }
+    public enum TrackSectionKey { RailOne, ChannelOne, RailTwo, ChannelTwo, RailThree, ChannelThree, RailFour, ChannelFour }
 
     public static List<TrackSectionKey> TrackSectionKeyList = new List<TrackSectionKey>()
     {
@@ -21,10 +21,13 @@ public class TrackManager : MonoBehaviour
         TrackSectionKey.RailThree,
         TrackSectionKey.ChannelThree,
         TrackSectionKey.RailFour,
+        TrackSectionKey.ChannelFour,
     };
 
     static Dictionary<TrackSectionKey, string> TrackSectionLayerName = new Dictionary<TrackSectionKey, string>()
     {
+        // These are the string literal names of the layers in the editor
+        // Do not change them without changing the layer names in the editor as well, or vice-versa
         [TrackSectionKey.RailOne] = "RailOne",
         [TrackSectionKey.ChannelOne] = "ChannelOne",
         [TrackSectionKey.RailTwo] = "RailTwo",
@@ -32,6 +35,7 @@ public class TrackManager : MonoBehaviour
         [TrackSectionKey.RailThree] = "RailThree",
         [TrackSectionKey.ChannelThree] = "ChannelThree",
         [TrackSectionKey.RailFour] = "RailFour",
+        [TrackSectionKey.ChannelFour] = "ChannelFour",
     };
 
     TrackSectionKey GetTrackSectionKeyForLayer(int layer)
