@@ -10,7 +10,7 @@ public class SpawnManager : MonoBehaviour
     List<ISpawnRule> spawnRules;
     Dictionary<TrackManager.TrackSectionKey, Dictionary<SpawnableType, float>> latestSpawnTimes;
 
-    enum SpawnableType { Rat, Coffee, Column, Train, Sunglasses }
+    enum SpawnableType { Rat, Coffee, Column, Train, Sunglasses, Paper }
     List<SpawnableType> SpawnableTypeList = new List<SpawnableType>() { SpawnableType.Rat, SpawnableType.Coffee, SpawnableType.Column, SpawnableType.Train, SpawnableType.Sunglasses };
 
     public ObjectSpawner columnSpawner;
@@ -18,6 +18,7 @@ public class SpawnManager : MonoBehaviour
     public ObjectSpawner sunglassesSpawner;
     public ObjectSpawner ratSpawner;
     public ObjectSpawner trainSpawner;
+    public ObjectSpawner paperSpawner;
 
 
     Dictionary<SpawnableType, ObjectSpawner> spawnerMap;
@@ -42,7 +43,8 @@ public class SpawnManager : MonoBehaviour
             {SpawnableType.Coffee, coffeeSpawner },
             {SpawnableType.Sunglasses, sunglassesSpawner },
             {SpawnableType.Rat, ratSpawner },
-            {SpawnableType.Train, trainSpawner }
+            {SpawnableType.Train, trainSpawner },
+            {SpawnableType.Paper, paperSpawner }
 
         };
 
@@ -50,9 +52,9 @@ public class SpawnManager : MonoBehaviour
         // NOTE order matters
         spawnRules = new List<ISpawnRule>() {
             // NOTE Uncomment to enable columns
-            //new ColumnRule(), 
-            new ItemRule(),
-            new EnemyRule()
+            //new ColumnRule(),
+            new EnemyRule(),
+            new ItemRule()
         };
     }
 
@@ -129,15 +131,20 @@ public class SpawnManager : MonoBehaviour
 
     class ItemRule : ISpawnRule
     {
-        float minItemWait = 0.5f;
-        float maxItemWait = 1;
+        float lastCoffeeTime = float.NegativeInfinity;
+        float currentCoffeeWait;
+        float minCoffeeWait = 2f;
+        float maxCoffeeWait = 2;
 
-        float waitForNextItem;
+        float lastSunglassesTime = float.NegativeInfinity;
+        float currentSunglassesWait;
+        float minSunglassesWait = 5;
+        float maxSunglassesWait = 5;
 
-        float minSunglassesWait = 4;
-        float maxSunglassesWait = 4;
-
-        float waitForNextSungglasses;
+        float lastPaperTime = float.NegativeInfinity;
+        float currentPaperWait;
+        float minPaperWait = 7;
+        float maxPaperWait = 7;
 
         float timeAtLastTick;
 
@@ -148,6 +155,13 @@ public class SpawnManager : MonoBehaviour
             TrackManager.TrackSectionKey.RailFour
         };
 
+        public ItemRule()
+        {
+            currentCoffeeWait = Random.Range(minCoffeeWait, maxCoffeeWait);
+            currentSunglassesWait = Random.Range(minSunglassesWait, maxSunglassesWait);
+            currentPaperWait = Random.Range(minPaperWait, maxPaperWait);
+        }
+
 
 
         public Dictionary<TrackManager.TrackSectionKey, SpawnableType?> Evaluate(
@@ -155,56 +169,40 @@ public class SpawnManager : MonoBehaviour
             Dictionary<TrackManager.TrackSectionKey, SpawnableType?> nextSpawnMap
         )
         {
-            float latestItemTime = float.NegativeInfinity;
-            float latestSunglassesTime = float.NegativeInfinity;
-
             // If player already has sunglasses, keep pushing back the timing for the next ones
             // This way we don't immediately spawn new ones after the player loses them
             if (GameManager.instance.playerHasSunglasses)
             {
-                waitForNextSungglasses += Time.time - timeAtLastTick;
+                lastSunglassesTime = Time.time;
             }
 
-            foreach (TrackManager.TrackSectionKey trackSectionKey in TrackManager.TrackSectionKeyList)
+
+
+            if (lastPaperTime + currentPaperWait < Time.time)
             {
-                latestItemTime = Mathf.Max(latestItemTime, latestSpawnTimes[trackSectionKey][SpawnableType.Sunglasses]);
-                latestItemTime = Mathf.Max(latestItemTime, latestSpawnTimes[trackSectionKey][SpawnableType.Coffee]);
-
-                latestSunglassesTime = Mathf.Max(latestSunglassesTime, latestSpawnTimes[trackSectionKey][SpawnableType.Sunglasses]);
+                nextSpawnMap[GetAllowedNextTrackSection()] = SpawnableType.Paper;
+                lastPaperTime = Time.time;
+                currentPaperWait = Random.Range(minPaperWait, maxPaperWait);
             }
-
-            // If we have finished the waitfornextitem add something
-            if (
-                Time.time - latestItemTime >= waitForNextItem && !SpawnmapHasColumn(nextSpawnMap)
-            )
+            else if (lastSunglassesTime + currentSunglassesWait < Time.time)
             {
-                waitForNextItem = Random.Range(minItemWait, maxItemWait); // no matter what item we spawn push out next item wait
-                TrackManager.TrackSectionKey trackSectionKey = allowedTrackSections[Random.Range(0, allowedTrackSections.Count)];
-
-                if (Time.time - latestSunglassesTime >= waitForNextSungglasses)
-                {
-                    nextSpawnMap[trackSectionKey] = SpawnableType.Sunglasses;
-                    waitForNextSungglasses = Random.Range(minSunglassesWait, maxSunglassesWait);
-                }
-                else
-                {
-                    nextSpawnMap[trackSectionKey] = SpawnableType.Coffee;
-                }
+                nextSpawnMap[GetAllowedNextTrackSection()] = SpawnableType.Sunglasses;
+                lastSunglassesTime = Time.time;
+                currentSunglassesWait = Random.Range(minSunglassesWait, maxSunglassesWait);
             }
-            timeAtLastTick = Time.time;
+            else if (lastCoffeeTime + currentCoffeeWait < Time.time)
+            {
+                nextSpawnMap[GetAllowedNextTrackSection()] = SpawnableType.Coffee;
+                lastCoffeeTime = Time.time;
+                currentCoffeeWait = Random.Range(minCoffeeWait, maxCoffeeWait);
+            }
+
             return nextSpawnMap;
         }
 
-        bool SpawnmapHasColumn(Dictionary<TrackManager.TrackSectionKey, SpawnableType?> nextSpawnMap)
+        TrackManager.TrackSectionKey GetAllowedNextTrackSection()
         {
-            foreach (TrackManager.TrackSectionKey trackSectionKey in TrackManager.TrackSectionKeyList)
-            {
-                if (nextSpawnMap.GetValueOrDefault(trackSectionKey, null) == SpawnableType.Column)
-                {
-                    return true;
-                }
-            }
-            return false;
+            return allowedTrackSections[Random.Range(0, allowedTrackSections.Count)]; // select one at random
         }
     }
 
