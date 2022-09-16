@@ -38,7 +38,7 @@ public class TrackManager : MonoBehaviour
         [TrackSectionKey.ChannelFour] = "ChannelFour",
     };
 
-    TrackSectionKey GetTrackSectionKeyForLayer(int layer)
+    TrackSectionKey? GetTrackSectionKeyForLayer(int layer)
     {
         string layerName = LayerMask.LayerToName(layer);
 
@@ -49,13 +49,18 @@ public class TrackManager : MonoBehaviour
                 return k;
             }
         };
-        throw new System.Exception("no tracksectionkey associated with layername: " + layerName);
+        return null;
     }
 
     public bool IsFirstObjectOnATrackAboveTheSecond(GameObject firstObject, GameObject secondObject)
     {
-        TrackSectionKey firstObjectTrackSectionKey = GetTrackSectionKeyForLayer(firstObject.layer);
-        TrackSectionKey secondObjectTrackSectionKey = GetTrackSectionKeyForLayer(secondObject.layer);
+        TrackSectionKey? firstObjectTrackSectionKey = GetTrackSectionKeyForLayer(firstObject.layer);
+        TrackSectionKey? secondObjectTrackSectionKey = GetTrackSectionKeyForLayer(secondObject.layer);
+
+        if (!firstObjectTrackSectionKey.HasValue || !secondObjectTrackSectionKey.HasValue)
+        {
+            return false;
+        }
 
         return TrackSectionKeyList.FindIndex(0, (k) => k == firstObjectTrackSectionKey) > TrackSectionKeyList.FindIndex(0, (k) => k == secondObjectTrackSectionKey);
     }

@@ -15,6 +15,9 @@ public class GameManager : MonoBehaviour
 
     float gameSpeed = 11;
 
+    int totalPapers = 4; // temporary UI supports up to 20 keeping it low for testing;
+    List<bool> encounteredPapersCollected = new List<bool>();
+
     int score = 0;
     int distance = 0;
     bool isGameOver = false;
@@ -46,6 +49,16 @@ public class GameManager : MonoBehaviour
         StartCoroutine(IncreaseScoreAndDistanceOverTimeRoutine());
     }
 
+    public int GetTotalPapers()
+    {
+        return totalPapers;
+    }
+
+    public List<bool> GetEncounteredPapersCollected()
+    {
+        return encounteredPapersCollected;
+    }
+
     public float GetGameSpeed()
     {
         return gameSpeed;
@@ -60,6 +73,16 @@ public class GameManager : MonoBehaviour
     {
         AddPoints(pointsToAdd);
         pointsPopupsManager.RunPointsPopupAtPosition(pointsToAdd, positionOfEvent);
+    }
+
+    public void OnPaperCollected()
+    {
+        encounteredPapersCollected.Add(true);
+    }
+
+    public void OnPaperMissed()
+    {
+        encounteredPapersCollected.Add(false);
     }
 
     void AddPoints(int pointsToAdd)
