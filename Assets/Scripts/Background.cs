@@ -4,17 +4,16 @@ using UnityEngine;
 
 public class Background : MonoBehaviour
 {
+    // To add new sprites that also scroll:
+    // - add spriterenderer here with naming tierXSprite
+    // - add speed for the tier with naming tierXSpeed
+    // - add sprite & speed to backgroundTiers in Start()
+
     public SpriteRenderer tier1Sprite;
     public float tier1Speed = 15;
 
     public SpriteRenderer tier2Sprite;
     public float tier2Speed = 10;
-
-    public SpriteRenderer tier3Sprite;
-    public float tier3Speed = 15;
-
-    public SpriteRenderer tier4Sprite;
-    public float tier4Speed = 15;
 
     List<BackgroundTier> backgroundTiers = new List<BackgroundTier>();
 
@@ -23,8 +22,6 @@ public class Background : MonoBehaviour
     {
         backgroundTiers.Add(new BackgroundTier(tier1Sprite, tier1Speed));
         backgroundTiers.Add(new BackgroundTier(tier2Sprite, tier2Speed));
-        backgroundTiers.Add(new BackgroundTier(tier3Sprite, tier3Speed));
-        backgroundTiers.Add(new BackgroundTier(tier4Sprite, tier4Speed));
     }
 
     private void Update()
