@@ -17,6 +17,8 @@ public class GameManager : MonoBehaviour
 
     int totalPapers = 4; // temporary UI supports up to 20 keeping it low for testing;
     List<bool> encounteredPapersCollected = new List<bool>();
+    int paperStreak = 0;
+
 
     int score = 0;
     int distance = 0;
@@ -74,21 +76,41 @@ public class GameManager : MonoBehaviour
         return isGameOver;
     }
 
-    public void ScorePointsEvent(int pointsToAdd, Vector3 positionOfEvent)
+    public int GetPaperStreak()
     {
+        return paperStreak;
+    }
+
+    public void ScorePointsEvent(int eventBaseValue, Vector3 positionOfEvent, bool isPaper)
+    {
+        int pointsToAdd = eventBaseValue;
+        if (isPaper)
+        {
+            OnPaperCollected();
+            pointsToAdd *= paperStreak;
+        }
+
         AddPoints(pointsToAdd);
         pointsPopupsManager.RunPointsPopupAtPosition(pointsToAdd, positionOfEvent);
     }
 
-    public void OnPaperCollected()
+    void OnPaperCollected()
     {
         encounteredPapersCollected.Add(true);
+        paperStreak++;
     }
 
     public void OnPaperMissed()
     {
         encounteredPapersCollected.Add(false);
+        OnStreakBroken();
     }
+
+    public void OnStreakBroken()
+    {
+        paperStreak = 0;
+    }
+
 
     void AddPoints(int pointsToAdd)
     {

@@ -30,7 +30,7 @@ public class Item : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Player"))
         {
-            GameManager.instance.ScorePointsEvent(pointValue, transform.position);
+            GameManager.instance.ScorePointsEvent(pointValue, transform.position, isPaper);
             StartCoroutine(WasCollectedSequence());
         }
         else if (collision.gameObject.CompareTag("MissedItemZone") && !wasCollected && isPaper)
@@ -45,11 +45,6 @@ public class Item : MonoBehaviour
         wasCollected = true;
         sr.enabled = false;
         audioSource.PlayOneShot(audioClip);
-        if (isPaper)
-        {
-            GameManager.instance.OnPaperCollected();
-        }
-
         yield return new WaitForSeconds(audioClipLength);
         sr.enabled = true;
         GetComponent<Poolable>().pool.Release(gameObject);

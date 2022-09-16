@@ -173,6 +173,7 @@ namespace Player
                 playerState.currentInvincibilityDuration = invincibilityDuration;
 
                 RemoveSunglasses();
+                GameManager.instance.OnStreakBroken();
             }
             else
             {
@@ -182,6 +183,7 @@ namespace Player
                 boxCollider.enabled = false;
                 StartCoroutine(OnDeathRoutine());
                 GameManager.instance.GameOver();
+                GameManager.instance.OnStreakBroken();
             }
         }
 
