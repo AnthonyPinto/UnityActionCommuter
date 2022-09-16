@@ -134,10 +134,6 @@ MonoBehaviour:
   tier1Speed: 0
   tier2Sprite: {fileID: 4974114681573039781}
   tier2Speed: 0
-  tier3Sprite: {fileID: 0}
-  tier3Speed: 0
-  tier4Sprite: {fileID: 0}
-  tier4Speed: 0
 --- !u!1 &4974114681573039780
 GameObject:
   m_ObjectHideFlags: 0
