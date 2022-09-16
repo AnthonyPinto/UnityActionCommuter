@@ -13,7 +13,8 @@ public class GameManager : MonoBehaviour
     public PointsPopupsManager pointsPopupsManager;
 
 
-    float gameSpeed = 11;
+    float baseGameSpeed = 11;
+    float caffeinePercentage = 1;
 
     int totalPapers = 4; // temporary UI supports up to 20 keeping it low for testing;
     List<bool> encounteredPapersCollected = new List<bool>();
@@ -54,6 +55,17 @@ public class GameManager : MonoBehaviour
     private void Start()
     {
         StartCoroutine(IncreaseDistanceOverTimeRoutine());
+        StartCoroutine(DecreaseCaffeineOverTimeRoutine());
+    }
+
+    public float GetCaffeinePercentage()
+    {
+        return caffeinePercentage;
+    }
+
+    public void AddCaffeine()
+    {
+        caffeinePercentage = Mathf.Min(caffeinePercentage + 0.25f, 1);
     }
 
     public int GetTotalPapers()
@@ -68,7 +80,14 @@ public class GameManager : MonoBehaviour
 
     public float GetGameSpeed()
     {
-        return gameSpeed;
+        if (caffeinePercentage >= 0.5f)
+        {
+            return baseGameSpeed;
+        }
+        else
+        {
+            return baseGameSpeed * 2 * Mathf.Max(caffeinePercentage, 0.25f);
+        }
     }
 
     public bool GetIsGameOver()
@@ -88,6 +107,10 @@ public class GameManager : MonoBehaviour
         {
             OnPaperCollected();
             pointsToAdd *= paperStreak;
+        }
+        else // if it isn't paper it is coffee
+        {
+            AddCaffeine();
         }
 
         AddPoints(pointsToAdd);
@@ -138,6 +161,16 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    IEnumerator DecreaseCaffeineOverTimeRoutine()
+    {
+        while (!isGameOver)
+        {
+            caffeinePercentage -= 0.01f;
+            caffeinePercentage = Mathf.Max(caffeinePercentage, 0);
+            yield return new WaitForSeconds(0.1f);
+        }
+    }
+
     public void GameOver()
     {
         isGameOver = true;
@@ -146,7 +179,7 @@ public class GameManager : MonoBehaviour
         backgroundMusic.loop = false;
         backgroundMusic.PlayDelayed(0.5f);
         uiManager.SetGameOver(true);
-        gameSpeed = 0;
+        baseGameSpeed = 0;
     }
 
 
