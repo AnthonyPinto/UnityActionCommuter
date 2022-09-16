@@ -53,7 +53,7 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
-        StartCoroutine(IncreaseScoreAndDistanceOverTimeRoutine());
+        StartCoroutine(IncreaseDistanceOverTimeRoutine());
     }
 
     public int GetTotalPapers()
@@ -129,11 +129,10 @@ public class GameManager : MonoBehaviour
         playerHasSunglasses = hasSunglasses;
     }
 
-    IEnumerator IncreaseScoreAndDistanceOverTimeRoutine()
+    IEnumerator IncreaseDistanceOverTimeRoutine()
     {
         while (!isGameOver)
         {
-            AddPoints(1);
             AddDistance(3);
             yield return new WaitForSeconds(0.1f);
         }
