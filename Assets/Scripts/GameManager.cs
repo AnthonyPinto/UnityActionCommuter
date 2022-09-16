@@ -21,8 +21,6 @@ public class GameManager : MonoBehaviour
     int paperStreak = 0;
 
 
-    int score = 0;
-    int distance = 0;
     bool isGameOver = false;
     public bool playerHasSunglasses = false;
 
@@ -39,6 +37,13 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    private void Start()
+    {
+        GameState.Instance.ClearScore();
+        StartCoroutine(IncreaseDistanceOverTimeRoutine());
+        StartCoroutine(DecreaseCaffeineOverTimeRoutine());
+    }
+
     private void Update()
     {
         if (isGameOver && Input.GetKeyDown(KeyCode.C))
@@ -48,14 +53,8 @@ public class GameManager : MonoBehaviour
 
         if (!isGameOver && encounteredPapersCollected.Count >= totalPapers)
         {
-            GameOver();
+            SceneManager.LoadScene(SceneHelper.EndingSceneIndex);
         }
-    }
-
-    private void Start()
-    {
-        StartCoroutine(IncreaseDistanceOverTimeRoutine());
-        StartCoroutine(DecreaseCaffeineOverTimeRoutine());
     }
 
     public float GetCaffeinePercentage()
@@ -102,25 +101,23 @@ public class GameManager : MonoBehaviour
 
     public void ScorePointsEvent(int eventBaseValue, Vector3 positionOfEvent, bool isPaper)
     {
-        int pointsToAdd = eventBaseValue;
+        int totalPoints = eventBaseValue;
         if (isPaper)
         {
-            OnPaperCollected();
-            pointsToAdd *= paperStreak;
+            encounteredPapersCollected.Add(true);
+            paperStreak++;
+            totalPoints *= paperStreak;
+            GameState.Instance.PapersScore += eventBaseValue;
+            GameState.Instance.StreakScore += totalPoints - eventBaseValue;
+
         }
         else // if it isn't paper it is coffee
         {
+            GameState.Instance.CoffeeScore += totalPoints;
             AddCaffeine();
         }
 
-        AddPoints(pointsToAdd);
-        pointsPopupsManager.RunPointsPopupAtPosition(pointsToAdd, positionOfEvent);
-    }
-
-    void OnPaperCollected()
-    {
-        encounteredPapersCollected.Add(true);
-        paperStreak++;
+        pointsPopupsManager.RunPointsPopupAtPosition(totalPoints, positionOfEvent);
     }
 
     public void OnPaperMissed()
@@ -134,19 +131,6 @@ public class GameManager : MonoBehaviour
         paperStreak = 0;
     }
 
-
-    void AddPoints(int pointsToAdd)
-    {
-        score += pointsToAdd;
-        uiManager.UpdateScore(score);
-    }
-
-    public void AddDistance(int distanceToAdd)
-    {
-        distance += distanceToAdd;
-        uiManager.UpdateDistance(distance);
-    }
-
     public void SetPlayerHasSunglasses(bool hasSunglasses)
     {
         playerHasSunglasses = hasSunglasses;
@@ -156,7 +140,7 @@ public class GameManager : MonoBehaviour
     {
         while (!isGameOver)
         {
-            AddDistance(3);
+            GameState.Instance.Distance += 3;
             yield return new WaitForSeconds(0.1f);
         }
     }

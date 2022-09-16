@@ -127,7 +127,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: be4414a52bdd7764fa97872c3228a1bf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pointValue: 100
+  isPaper: 0
+  pointValue: 25
   audioClip: {fileID: 8300000, guid: 49a6dc395f4c44192990c6afe4a86551, type: 3}
 --- !u!61 &1415263052553856669
 BoxCollider2D:
@@ -145,7 +146,7 @@ BoxCollider2D:
   m_Offset: {x: 0, y: 0}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
+    pivot: {x: 0.5, y: 0.1875}
     oldSize: {x: 0.8, y: 0.8}
     newSize: {x: 0.16, y: 0.16}
     adaptiveTilingThreshold: 0.5
