@@ -42,6 +42,11 @@ public class GameManager : MonoBehaviour
         {
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
         }
+
+        if (!isGameOver && encounteredPapersCollected.Count >= totalPapers)
+        {
+            GameOver();
+        }
     }
 
     private void Start()
