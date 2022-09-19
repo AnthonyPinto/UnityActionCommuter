@@ -16,5 +16,11 @@ public class HighScoreEntry : MonoBehaviour
         (string, int) entryValues = GameState.Instance.HighScores[entryIndex];
         initialsText.text = entryValues.Item1;
         scoreText.text = entryValues.Item2.ToString();
+
+        if (entryIndex == GameState.Instance.CurrentHighScoreIndex)
+        {
+            initialsText.color = Color.cyan;
+            scoreText.color = Color.cyan;
+        }
     }
 }

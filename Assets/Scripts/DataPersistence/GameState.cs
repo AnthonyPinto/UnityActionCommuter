@@ -60,7 +60,6 @@ public class GameState : MonoBehaviour
             List<(string, int)> updatedHighScores = new List<(string, int)>(HighScores);
             updatedHighScores.Insert(currentHighScoreIndex.Value, (initials.Substring(0, initialsCharacterLimit), TotalScore));
             HighScores = updatedHighScores;
-            Debug.Log(HighScores);
         }
     }
 
