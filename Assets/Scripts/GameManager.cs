@@ -53,6 +53,7 @@ public class GameManager : MonoBehaviour
 
         if (!isGameOver && encounteredPapersCollected.Count >= totalPapers)
         {
+            GameState.Instance.OnGameOver();
             SceneManager.LoadScene(SceneHelper.EndingSceneIndex);
         }
     }
