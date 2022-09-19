@@ -11,11 +11,21 @@ public class GameState : MonoBehaviour
     int coffeeScore = 0;
     int distance = 0;
 
+    int? currentHighScoreIndex;
+
+    List<(string, int)> highScores;
+
+    const int HighScoreListLength = 5;
+
+    const int initialsCharacterLimit = 3;
+
     public int PapersScore { get => papersScore; set => papersScore = value; }
     public int StreakScore { get => streakScore; set => streakScore = value; }
     public int CoffeeScore { get => coffeeScore; set => coffeeScore = value; }
     public int TotalScore { get => papersScore + streakScore + coffeeScore; }
     public int Distance { get => distance; set => distance = value; }
+    public List<(string, int)> HighScores { get => highScores.GetRange(0, HighScoreListLength); set => highScores = value.GetRange(0, HighScoreListLength); }
+    public int? CurrentHighScoreIndex { get => currentHighScoreIndex; set => currentHighScoreIndex = value; }
 
     private void Awake()
     {
@@ -27,6 +37,44 @@ public class GameState : MonoBehaviour
 
         Instance = this;
         DontDestroyOnLoad(gameObject);
+
+        if (highScores == null)
+        {
+            highScores = new List<(string, int)>();
+            for (int i = 0; i < HighScoreListLength; i++)
+            {
+                highScores.Add(("___", 0));
+            }
+        }
+    }
+
+    public void OnGameOver()
+    {
+        CurrentHighScoreIndex = GetCurrentHighScoreIndex();
+    }
+
+    public void AddHighScoreEntry(string initials)
+    {
+        if (currentHighScoreIndex.HasValue)
+        {
+            List<(string, int)> updatedHighScores = new List<(string, int)>(HighScores);
+            updatedHighScores.Insert(currentHighScoreIndex.Value, (initials.Substring(0, initialsCharacterLimit), TotalScore));
+        }
+    }
+
+
+
+    int? GetCurrentHighScoreIndex()
+    {
+        for (int i = 0; i < HighScoreListLength; i++)
+        {
+            if (HighScores[i].Item2 < TotalScore)
+            {
+                return i;
+            }
+        }
+
+        return null;
     }
 
 
@@ -37,5 +85,8 @@ public class GameState : MonoBehaviour
         StreakScore = 0;
         CoffeeScore = 0;
     }
+
+
+
 
 }
