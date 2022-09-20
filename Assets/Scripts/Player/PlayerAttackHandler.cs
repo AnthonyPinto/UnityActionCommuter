@@ -17,7 +17,7 @@ namespace Player
 
         float attackDuration = 0.3f;
 
-        float attackCooldown = 0.4f;
+        float attackCooldown = 0.1f;
 
         public PlayerController.PlayerState HandleStart(PlayerController.PlayerState state)
         {
