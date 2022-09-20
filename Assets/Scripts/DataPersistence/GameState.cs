@@ -38,13 +38,18 @@ public class GameState : MonoBehaviour
         Instance = this;
         DontDestroyOnLoad(gameObject);
 
+        highScores = FileDataHandler.Load();
+
         if (highScores == null)
         {
             highScores = new List<(string, int)>();
-            for (int i = 0; i < HighScoreListLength; i++)
-            {
-                highScores.Add(("___", 0));
-            }
+        }
+
+        // if we have fewer than the expected number of entries
+        // pad with empty entries
+        for (int i = highScores.Count; i < HighScoreListLength; i++)
+        {
+            highScores.Add(("___", 0));
         }
     }
 
@@ -60,6 +65,7 @@ public class GameState : MonoBehaviour
             List<(string, int)> updatedHighScores = new List<(string, int)>(HighScores);
             updatedHighScores.Insert(currentHighScoreIndex.Value, (initials.Substring(0, initialsCharacterLimit), TotalScore));
             HighScores = updatedHighScores;
+            FileDataHandler.Save(updatedHighScores);
         }
     }
 
@@ -86,8 +92,4 @@ public class GameState : MonoBehaviour
         StreakScore = 0;
         CoffeeScore = 0;
     }
-
-
-
-
 }
