@@ -580,7 +580,11 @@ PrefabInstance:
       propertyPath: m_SortingOrder
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 2149972055078957225, guid: 9eb3160f300c044ae867c2d585591135, type: 3}
+    - {fileID: -8296448627382107325, guid: 9eb3160f300c044ae867c2d585591135, type: 3}
+    - {fileID: -185512037392401132, guid: 9eb3160f300c044ae867c2d585591135, type: 3}
+    - {fileID: 410013741350464426, guid: 9eb3160f300c044ae867c2d585591135, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 9eb3160f300c044ae867c2d585591135, type: 3}
 --- !u!4 &516128345 stripped
 Transform:
@@ -835,7 +839,11 @@ PrefabInstance:
       propertyPath: m_SortingOrder
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 2149972055078957225, guid: 9eb3160f300c044ae867c2d585591135, type: 3}
+    - {fileID: -8296448627382107325, guid: 9eb3160f300c044ae867c2d585591135, type: 3}
+    - {fileID: -185512037392401132, guid: 9eb3160f300c044ae867c2d585591135, type: 3}
+    - {fileID: 410013741350464426, guid: 9eb3160f300c044ae867c2d585591135, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 9eb3160f300c044ae867c2d585591135, type: 3}
 --- !u!4 &709451163 stripped
 Transform:
@@ -1443,7 +1451,11 @@ PrefabInstance:
       propertyPath: m_SortingOrder
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 2149972055078957225, guid: 9eb3160f300c044ae867c2d585591135, type: 3}
+    - {fileID: -8296448627382107325, guid: 9eb3160f300c044ae867c2d585591135, type: 3}
+    - {fileID: -185512037392401132, guid: 9eb3160f300c044ae867c2d585591135, type: 3}
+    - {fileID: 410013741350464426, guid: 9eb3160f300c044ae867c2d585591135, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 9eb3160f300c044ae867c2d585591135, type: 3}
 --- !u!4 &1232753465 stripped
 Transform:
@@ -1829,7 +1841,11 @@ PrefabInstance:
       propertyPath: m_SortingOrder
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 2149972055078957225, guid: 9eb3160f300c044ae867c2d585591135, type: 3}
+    - {fileID: -8296448627382107325, guid: 9eb3160f300c044ae867c2d585591135, type: 3}
+    - {fileID: -185512037392401132, guid: 9eb3160f300c044ae867c2d585591135, type: 3}
+    - {fileID: 410013741350464426, guid: 9eb3160f300c044ae867c2d585591135, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 9eb3160f300c044ae867c2d585591135, type: 3}
 --- !u!4 &1537613346 stripped
 Transform:
