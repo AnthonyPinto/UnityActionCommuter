@@ -68,5 +68,34 @@ namespace Spawner
         }
     }
 
+    public class SpawnOptionMap
+    {
+        int numberOfTicks;
+        int numberOfTrackSections;
+
+        int initialOptionCount;
+
+        List<int> availableOptions;
+
+        public SpawnOptionMap(int numberOfTicks)
+        {
+            this.numberOfTicks = numberOfTicks;
+            this.numberOfTrackSections = TrackManager.TrackSectionKeyList.Count;
+            this.initialOptionCount = numberOfTicks * numberOfTrackSections;
+        }
+
+        public (int, TrackManager.TrackSectionKey) GetTickAndTrackSectionForOptionIndex(int option)
+        {
+            int tick = option / numberOfTrackSections;
+            int trackSectionIndex = option % numberOfTrackSections;
+            return (tick, TrackManager.TrackSectionKeyList[trackSectionIndex]);
+        }
+
+        public int GetOptionIndexForTickAndTrackSection(int tick, TrackManager.TrackSectionKey trackSectionKey)
+        {
+            return (tick * numberOfTrackSections) + TrackManager.TrackSectionKeyList.FindIndex(t => t == trackSectionKey);
+        }
+    }
+
 
 }
