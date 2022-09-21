@@ -10,11 +10,16 @@ public class TitleManager : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.C))
         {
-            LoadGame();
+            LoadIntroCutScene();
         }
     }
 
-    void LoadGame()
+    void LoadIntroCutScene()
+    {
+        SceneManager.LoadScene(SceneHelper.IntroCutSceneIndex);
+    }
+
+    public void LoadGame()
     {
         SceneManager.LoadScene(SceneHelper.GameSceneIndex);
     }
