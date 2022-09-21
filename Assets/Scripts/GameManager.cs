@@ -41,7 +41,9 @@ public class GameManager : MonoBehaviour
     {
         GameState.Instance.ClearScore();
         StartCoroutine(IncreaseDistanceOverTimeRoutine());
-        StartCoroutine(DecreaseCaffeineOverTimeRoutine());
+
+        // NOTE: uncomment next line to enable caffeine
+        //StartCoroutine(DecreaseCaffeineOverTimeRoutine());
     }
 
     private void Update()
