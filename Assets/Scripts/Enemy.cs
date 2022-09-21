@@ -59,6 +59,14 @@ public class Enemy : MonoBehaviour
         }
         else if (collision.gameObject.CompareTag("Player"))
         {
+            // If the player jumps onto the rat the rat hasn't done
+            // its attack animation or sound - the player is still
+            // hit so we trigger the sound now
+            if (!isAttacking)
+            {
+                audioSource.PlayOneShot(attackAudioClip);
+            }
+
             hasHitPlayer = true;
             playerObject = collision.gameObject;
         }
@@ -76,7 +84,7 @@ public class Enemy : MonoBehaviour
             hasHitPlayer = false;
             isAttacking = false;
         }
-        else if (hasHitPlayer && isAttacking)
+        else if (hasHitPlayer)
         {
             playerObject.GetComponent<Player.PlayerController>().OnHit();
 
