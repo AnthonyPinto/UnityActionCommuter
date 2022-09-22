@@ -60,7 +60,7 @@ namespace Player
             animator.SetTrigger("Jump");
 
             // pause grind SFX
-            audioSource.Pause();
+            audioSource.Stop();
 
             // play Jump SFX
             sfxAudioSource.PlayOneShot(jumpAudioClip);
