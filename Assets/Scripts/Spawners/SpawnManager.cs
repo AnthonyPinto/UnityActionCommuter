@@ -8,6 +8,7 @@ namespace Spawner
 
     public class SpawnManager : MonoBehaviour
     {
+        float waitBeforeSpawnStart = 1;
         float spawnTick = 0.25f;
         int currentTick = 0;
 
@@ -27,7 +28,6 @@ namespace Spawner
         {
             // Construct spawnerMap
             spawnerMap = new Dictionary<SpawnableType, ObjectSpawner> {
-                {SpawnableType.Column, columnSpawner},
                 {SpawnableType.Coffee, coffeeSpawner },
                 {SpawnableType.Sunglasses, sunglassesSpawner },
                 {SpawnableType.Rat, ratSpawner },
@@ -46,6 +46,7 @@ namespace Spawner
 
         IEnumerator SpawningRoutine()
         {
+            yield return new WaitForSeconds(waitBeforeSpawnStart);
             while (true)
             {
                 SpawnObjects(currentTick);
