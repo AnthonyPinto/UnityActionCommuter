@@ -25,7 +25,7 @@ public class EndingInputPanel : MonoBehaviour
     private void Update()
     {
 
-        if (continuePrompt.activeInHierarchy && Input.GetKeyDown(KeyCode.C))
+        if (continuePrompt.activeInHierarchy && Input.GetKeyDown(KeyCode.Return))
         {
             SceneManager.LoadScene(SceneHelper.TitleSceneIndex);
         }

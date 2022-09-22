@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.EventSystems;
 
 public class NewHighScorePrompt : MonoBehaviour
 {
@@ -14,8 +15,9 @@ public class NewHighScorePrompt : MonoBehaviour
         if (initialsInput.IsFilledOut)
         {
             continuePrompt.SetActive(true);
-            if (Input.GetKeyDown(KeyCode.C))
+            if (Input.GetKeyDown(KeyCode.Return))
             {
+                EventSystem.current.SetSelectedGameObject(null);
                 GameState.Instance.AddHighScoreEntry(initialsInput.InputFieldText);
                 SceneManager.LoadScene(SceneHelper.TitleSceneIndex);
             }

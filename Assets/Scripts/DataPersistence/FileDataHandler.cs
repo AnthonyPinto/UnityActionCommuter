@@ -65,4 +65,29 @@ public static class FileDataHandler
             Debug.LogError("Error Occured while trying to save data to file: " + FullPath + "\n" + e);
         }
     }
+
+    public static void ClearHighScores()
+    {
+        try
+        {
+
+            HighScoreData serializableData = new HighScoreData(new List<(string, int)>());
+
+            // Create directory if it doesn't exist
+            Directory.CreateDirectory(Path.GetDirectoryName(FullPath));
+            string dataToStore = JsonUtility.ToJson(serializableData, true);
+            using (FileStream stream = new FileStream(FullPath, FileMode.Create))
+            {
+                using (StreamWriter writer = new StreamWriter(stream))
+                {
+                    Debug.Log(dataToStore);
+                    writer.Write(dataToStore);
+                }
+            }
+        }
+        catch (Exception e)
+        {
+            Debug.LogError("Error Occured while trying to save data to file: " + FullPath + "\n" + e);
+        }
+    }
 }
