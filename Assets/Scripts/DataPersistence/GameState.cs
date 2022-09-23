@@ -9,6 +9,7 @@ public class GameState : MonoBehaviour
     int papersScore = 0;
     int streakScore = 0;
     int coffeeScore = 0;
+    int sunglassesScore = 0;
     int distance = 0;
 
     int? currentHighScoreIndex;
@@ -22,7 +23,8 @@ public class GameState : MonoBehaviour
     public int PapersScore { get => papersScore; set => papersScore = value; }
     public int StreakScore { get => streakScore; set => streakScore = value; }
     public int CoffeeScore { get => coffeeScore; set => coffeeScore = value; }
-    public int TotalScore { get => papersScore + streakScore + coffeeScore; }
+    public int SunglassesScore { get => sunglassesScore; set => sunglassesScore = value; }
+    public int TotalScore { get => papersScore + streakScore + coffeeScore + sunglassesScore; }
     public int Distance { get => distance; set => distance = value; }
     public List<(string, int)> HighScores { get => highScores.GetRange(0, HighScoreListLength); set => highScores = value.GetRange(0, HighScoreListLength); }
     public int? CurrentHighScoreIndex { get => currentHighScoreIndex; set => currentHighScoreIndex = value; }
@@ -53,7 +55,7 @@ public class GameState : MonoBehaviour
         }
     }
 
-    public void OnGameOver()
+    public void OnWin()
     {
         CurrentHighScoreIndex = GetCurrentHighScoreIndex();
     }

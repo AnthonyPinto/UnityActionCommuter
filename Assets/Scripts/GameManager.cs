@@ -13,6 +13,8 @@ public class GameManager : MonoBehaviour
     public PointsPopupsManager pointsPopupsManager;
 
 
+    int sunglassesBonusValue = 1000;
+
     float baseGameSpeed = 11;
     float caffeinePercentage = 1;
 
@@ -61,7 +63,11 @@ public class GameManager : MonoBehaviour
         {
             didWin = true;
             isOutroStarted = true;
-            GameState.Instance.OnGameOver();
+            if (playerHasSunglasses)
+            {
+                GameState.Instance.SunglassesScore += sunglassesBonusValue;
+            }
+            GameState.Instance.OnWin();
             TriggerOutroTimeline();
         }
     }
@@ -71,19 +77,11 @@ public class GameManager : MonoBehaviour
         GameEndTimelinePlayer.Instance.StartTimeline();
     }
 
-    public void LoadEndingScene()
+    public void LoadScoreScreen()
     {
-        // TODO: add different ending scenes
-        if (didWin)
-        {
-            GameState.Instance.OnGameOver();
-            SceneManager.LoadScene(SceneHelper.EndingSceneIndex);
-        }
-        else
-        {
-            GameState.Instance.OnGameOver();
-            SceneManager.LoadScene(SceneHelper.EndingSceneIndex);
-        }
+
+        SceneManager.LoadScene(SceneHelper.EndingSceneIndex);
+
     }
 
 
