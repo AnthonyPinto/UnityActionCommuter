@@ -12,12 +12,14 @@ public class GameEndTimelinePlayer : MonoBehaviour
 
     void Awake()
     {
-        director = GetComponent<PlayableDirector>();
-        director.played += PlayDirector;
-    }
+        if (Instance != null && Instance != this)
+        {
+            Object.Destroy(gameObject);
+        }
 
-    private void PlayDirector(PlayableDirector _obj) {
-        controlPanel.SetActive(true);
+        Instance = this;
+
+        director = GetComponent<PlayableDirector>();
     }
 
     public void StartTimeline()

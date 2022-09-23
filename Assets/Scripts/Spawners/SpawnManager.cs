@@ -47,7 +47,7 @@ namespace Spawner
         IEnumerator SpawningRoutine()
         {
             yield return new WaitForSeconds(waitBeforeSpawnStart);
-            while (true)
+            while (!GameManager.instance.GetIsGameOver())
             {
                 SpawnObjects(currentTick);
                 currentTick++;

@@ -16,13 +16,14 @@ public class GameManager : MonoBehaviour
     float baseGameSpeed = 11;
     float caffeinePercentage = 1;
 
-    int totalPapers = 20; // temporary UI supports up to 20 keeping it low for testing;
+    int totalPapers = 1; // temporary UI supports up to 20 keeping it low for testing;
     List<bool> encounteredPapersCollected = new List<bool>();
     int paperStreak = 0;
 
 
     bool isGameOver = false;
     bool didWin = false;
+    bool isOutroStarted = false;
     public bool playerHasSunglasses = false;
 
     private void Awake()
@@ -49,15 +50,17 @@ public class GameManager : MonoBehaviour
 
     private void Update()
     {
-        if (isGameOver && Input.GetKeyDown(KeyCode.C))
+        if (isGameOver && !isOutroStarted)
         {
+            isOutroStarted = true;
             GameState.Instance.OnGameOver();
             TriggerOutroTimeline();
         }
 
-        if (!isGameOver && encounteredPapersCollected.Count >= totalPapers)
+        if (!isGameOver && !isOutroStarted && encounteredPapersCollected.Count >= totalPapers)
         {
             didWin = true;
+            isOutroStarted = true;
             GameState.Instance.OnGameOver();
             TriggerOutroTimeline();
         }
@@ -65,7 +68,7 @@ public class GameManager : MonoBehaviour
 
     void TriggerOutroTimeline()
     {
-        // TODO: trigger the timeline here
+        GameEndTimelinePlayer.Instance.StartTimeline();
     }
 
     public void LoadEndingScene()

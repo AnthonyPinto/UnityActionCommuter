@@ -133,6 +133,8 @@ GameObject:
   m_Component:
   - component: {fileID: 46301672}
   - component: {fileID: 46301671}
+  - component: {fileID: 46301673}
+  - component: {fileID: 46301674}
   m_Layer: 0
   m_Name: GameEndTimeline
   m_TagString: Untagged
@@ -178,6 +180,49 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &46301673
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 46301670}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e52de21a22b6dd44c9cc19f810c65059, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Events:
+    m_Signals:
+    - {fileID: 11400000, guid: 8976a74d55bc23645b1da6c613fadc5d, type: 2}
+    m_Events:
+    - m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 362152289}
+          m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
+          m_MethodName: LoadEndingScene
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+--- !u!114 &46301674
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 46301670}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6de996946a48240b48ba5bd5186cbddf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  controlPanel: {fileID: 0}
 --- !u!1 &102573067
 GameObject:
   m_ObjectHideFlags: 0
@@ -414,6 +459,17 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &362152289 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3406241353266256615, guid: 9df3ffcde96ee294ba56ef139d18858c, type: 3}
+  m_PrefabInstance: {fileID: 3406241353976842618}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 362152285}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3273ffdfbd0bcf14ea75b702f43b369a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &482297233 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 8314340867665787322, guid: 7e01f30968a54764c9091596f316b618, type: 3}
