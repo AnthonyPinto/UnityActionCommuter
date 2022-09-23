@@ -10,6 +10,7 @@ public class EndingInputPanel : MonoBehaviour
 
     private void Start()
     {
+        // if there is a new high score
         if (GameState.Instance.CurrentHighScoreIndex.HasValue)
         {
             newHighScorePrompt.gameObject.SetActive(true);
