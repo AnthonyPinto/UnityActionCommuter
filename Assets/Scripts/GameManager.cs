@@ -22,6 +22,7 @@ public class GameManager : MonoBehaviour
 
 
     bool isGameOver = false;
+    bool didWin = false;
     public bool playerHasSunglasses = false;
 
     private void Awake()
@@ -50,15 +51,38 @@ public class GameManager : MonoBehaviour
     {
         if (isGameOver && Input.GetKeyDown(KeyCode.C))
         {
-            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+            GameState.Instance.OnGameOver();
+            TriggerOutroTimeline();
         }
 
         if (!isGameOver && encounteredPapersCollected.Count >= totalPapers)
+        {
+            didWin = true;
+            GameState.Instance.OnGameOver();
+            TriggerOutroTimeline();
+        }
+    }
+
+    void TriggerOutroTimeline()
+    {
+        // TODO: trigger the timeline here
+    }
+
+    public void LoadEndingScene()
+    {
+        // TODO: add different ending scenes
+        if (didWin)
+        {
+            GameState.Instance.OnGameOver();
+            SceneManager.LoadScene(SceneHelper.EndingSceneIndex);
+        }
+        else
         {
             GameState.Instance.OnGameOver();
             SceneManager.LoadScene(SceneHelper.EndingSceneIndex);
         }
     }
+
 
     public float GetCaffeinePercentage()
     {
