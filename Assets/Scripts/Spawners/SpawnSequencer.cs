@@ -50,7 +50,7 @@ namespace Spawner
             for (int i = 0; i < numberToAdd; i++)
             {
                 // add one paper on the final tick of each set of 'ticks per paper'
-                int tick = (i * ticksPerPaper) + numberToAdd - 1;
+                int tick = (i * ticksPerPaper) + ticksPerPaper - 1;
                 TrackManager.TrackSectionKey trackSectionKey = allowedTrackSections[Random.Range(0, allowedTrackSections.Count)];
                 sequence.AddSpawnEvent(tick, trackSectionKey, SpawnableType.Paper);
                 ApplySpawnMasksForPaper(tick, trackSectionKey, spawnOptionsByType);
