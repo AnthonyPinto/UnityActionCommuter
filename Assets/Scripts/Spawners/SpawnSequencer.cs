@@ -247,6 +247,8 @@ namespace Spawner
     {
         List<SpawnsForSingleTick> spawnsByTick;
 
+        public int Count { get => spawnsByTick.Count; }
+
         public SpawnsForSingleTick this[int index]
         {
             get => spawnsByTick[index];
