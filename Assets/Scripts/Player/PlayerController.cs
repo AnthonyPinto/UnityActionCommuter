@@ -76,6 +76,12 @@ namespace Player
 
         private void Update()
         {
+            // Drop player inputs while paused
+            if (GameManager.instance.IsPaused)
+            {
+                return;
+            }
+
             // Player dies if going too slow
             if (GameManager.instance.GetCaffeinePercentage() <= 0 && playerState.currentAction != ActionType.Death)
             {

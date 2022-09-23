@@ -11,9 +11,12 @@ public class UIManager : MonoBehaviour
 
     public TextMeshProUGUI gameOverText;
 
+    public TextMeshProUGUI pausedText;
+
     private void Start()
     {
         gameOverText.gameObject.SetActive(false);
+        pausedText.gameObject.SetActive(false);
     }
 
     private void Update()
@@ -36,5 +39,10 @@ public class UIManager : MonoBehaviour
     public void SetGameOver(bool isGameOver)
     {
         gameOverText.gameObject.SetActive(isGameOver);
+    }
+
+    public void SetPaused(bool isPaused)
+    {
+        pausedText.gameObject.SetActive(isPaused);
     }
 }
