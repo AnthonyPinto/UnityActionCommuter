@@ -49,7 +49,7 @@ namespace Spawner
             yield return new WaitForSeconds(waitBeforeSpawnStart);
             while (
                 currentTick < spawnSequence.Count &&
-                !GameManager.instance.GetIsGameOver()
+                !GameManager.instance.DidLose
             )
             {
                 SpawnObjects(currentTick);

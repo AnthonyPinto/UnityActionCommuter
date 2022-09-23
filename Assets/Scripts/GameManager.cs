@@ -21,10 +21,12 @@ public class GameManager : MonoBehaviour
     int paperStreak = 0;
 
 
-    bool isGameOver = false;
+    bool didLose = false;
     bool didWin = false;
     bool isOutroStarted = false;
-    public bool playerHasSunglasses = false;
+    public bool playerHasSunglasses = true;
+
+    public bool DidLose { get => didLose; set => didLose = value; }
 
     private void Awake()
     {
@@ -50,14 +52,12 @@ public class GameManager : MonoBehaviour
 
     private void Update()
     {
-        if (isGameOver && !isOutroStarted)
+        if (DidLose && Input.GetKeyDown(KeyCode.C))
         {
-            isOutroStarted = true;
-            GameState.Instance.OnGameOver();
-            TriggerOutroTimeline();
+            SceneManager.LoadScene(SceneHelper.GameSceneIndex);
         }
 
-        if (!isGameOver && !isOutroStarted && encounteredPapersCollected.Count >= totalPapers)
+        if (!DidLose && !isOutroStarted && encounteredPapersCollected.Count >= totalPapers)
         {
             didWin = true;
             isOutroStarted = true;
@@ -119,11 +119,6 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    public bool GetIsGameOver()
-    {
-        return isGameOver;
-    }
-
     public int GetPaperStreak()
     {
         return paperStreak;
@@ -168,7 +163,7 @@ public class GameManager : MonoBehaviour
 
     IEnumerator IncreaseDistanceOverTimeRoutine()
     {
-        while (!isGameOver)
+        while (!DidLose)
         {
             GameState.Instance.Distance += 3;
             yield return new WaitForSeconds(0.1f);
@@ -177,7 +172,7 @@ public class GameManager : MonoBehaviour
 
     IEnumerator DecreaseCaffeineOverTimeRoutine()
     {
-        while (!isGameOver)
+        while (!DidLose)
         {
             caffeinePercentage -= 0.01f;
             caffeinePercentage = Mathf.Max(caffeinePercentage, 0);
@@ -187,7 +182,7 @@ public class GameManager : MonoBehaviour
 
     public void GameOver()
     {
-        isGameOver = true;
+        DidLose = true;
         backgroundMusic.Stop();
         backgroundMusic.clip = gameOverAudioClip;
         backgroundMusic.loop = false;

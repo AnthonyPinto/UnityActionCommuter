@@ -20,7 +20,7 @@ public class UIManager : MonoBehaviour
     {
         scoreText.text = GameState.Instance.TotalScore.ToString();
         distanceText.text = GameState.Instance.Distance.ToString() + " ft";
-        gameOverText.gameObject.SetActive(GameManager.instance.GetIsGameOver());
+        gameOverText.gameObject.SetActive(GameManager.instance.DidLose);
     }
 
     public void UpdateScore(int score)
