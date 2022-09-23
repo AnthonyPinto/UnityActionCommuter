@@ -7,6 +7,7 @@ public class EndingInputPanel : MonoBehaviour
 {
     public GameObject continuePrompt;
     public NewHighScorePrompt newHighScorePrompt;
+    bool hasTimelineFinished = false;
 
     private void Start()
     {
@@ -19,16 +20,25 @@ public class EndingInputPanel : MonoBehaviour
         else
         {
             newHighScorePrompt.gameObject.SetActive(false);
-            continuePrompt.SetActive(true);
         }
     }
 
     private void Update()
     {
+        // if no new high score and animations in timeline are completed, show prompt to continue
+        if (!GameState.Instance.CurrentHighScoreIndex.HasValue && hasTimelineFinished)
+        {
+            continuePrompt.SetActive(true);
+        }
 
         if (continuePrompt.activeInHierarchy && Input.GetKeyDown(KeyCode.Return))
         {
             SceneManager.LoadScene(SceneHelper.TitleSceneIndex);
         }
+    }
+
+    public void OnTimelineFinished()
+    {
+        hasTimelineFinished = true;
     }
 }
