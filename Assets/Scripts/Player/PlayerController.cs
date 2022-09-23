@@ -71,6 +71,7 @@ namespace Player
             playerState = new PlayerState(startingRailIndex);
             playerState = moveHandler.HandleStart(playerState);
             playerState = attackHandler.HandleStart(playerState);
+            AddSunglasses();
         }
 
         private void Update()
