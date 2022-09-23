@@ -13,6 +13,8 @@ public class GameManager : MonoBehaviour
     public PointsPopupsManager pointsPopupsManager;
 
 
+    int sunglassesBonusValue = 1000;
+
     float baseGameSpeed = 11;
     float caffeinePercentage = 1;
 
@@ -20,13 +22,14 @@ public class GameManager : MonoBehaviour
     List<bool> encounteredPapersCollected = new List<bool>();
     int paperStreak = 0;
 
-
+    bool isPaused = false;
     bool didLose = false;
     bool didWin = false;
     bool isOutroStarted = false;
     public bool playerHasSunglasses = true;
 
     public bool DidLose { get => didLose; set => didLose = value; }
+    public bool IsPaused { get => isPaused; private set => isPaused = value; }
 
     private void Awake()
     {
@@ -52,6 +55,21 @@ public class GameManager : MonoBehaviour
 
     private void Update()
     {
+        if (!didLose && !didWin && !IsPaused && Input.GetKeyDown(KeyCode.Escape))
+        {
+            IsPaused = true;
+            Time.timeScale = 0;
+            AudioListener.volume = 0;
+            uiManager.SetPaused(true);
+        }
+        else if (IsPaused && Input.GetKeyDown(KeyCode.Escape))
+        {
+            IsPaused = false;
+            Time.timeScale = 1;
+            AudioListener.volume = 1;
+            uiManager.SetPaused(false);
+        }
+
         if (DidLose && Input.GetKeyDown(KeyCode.C))
         {
             SceneManager.LoadScene(SceneHelper.GameSceneIndex);
@@ -61,7 +79,11 @@ public class GameManager : MonoBehaviour
         {
             didWin = true;
             isOutroStarted = true;
-            GameState.Instance.OnGameOver();
+            if (playerHasSunglasses)
+            {
+                GameState.Instance.SunglassesScore += sunglassesBonusValue;
+            }
+            GameState.Instance.OnWin();
             TriggerOutroTimeline();
         }
     }
@@ -71,19 +93,11 @@ public class GameManager : MonoBehaviour
         GameEndTimelinePlayer.Instance.StartTimeline();
     }
 
-    public void LoadEndingScene()
+    public void LoadScoreScreen()
     {
-        // TODO: add different ending scenes
-        if (didWin)
-        {
-            GameState.Instance.OnGameOver();
-            SceneManager.LoadScene(SceneHelper.EndingSceneIndex);
-        }
-        else
-        {
-            GameState.Instance.OnGameOver();
-            SceneManager.LoadScene(SceneHelper.EndingSceneIndex);
-        }
+
+        SceneManager.LoadScene(SceneHelper.EndingSceneIndex);
+
     }
 
 

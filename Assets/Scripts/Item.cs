@@ -9,6 +9,7 @@ public class Item : MonoBehaviour
     public int pointValue = 100;
     public AudioClip audioClip;
     AudioSource audioSource;
+    public SpriteRenderer optionalOverrideSpriteRenderer;
     SpriteRenderer sr;
     float audioClipLength = 0.5f;
 
@@ -18,7 +19,7 @@ public class Item : MonoBehaviour
     private void Awake()
     {
         audioSource = GetComponent<AudioSource>();
-        sr = GetComponent<SpriteRenderer>();
+        sr = optionalOverrideSpriteRenderer != null ? optionalOverrideSpriteRenderer : GetComponent<SpriteRenderer>();
     }
 
     private void OnEnable()
