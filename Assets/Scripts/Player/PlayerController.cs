@@ -25,7 +25,7 @@ namespace Player
         float earlyInputAllowance = 0.25f;
         int startingRailIndex = 0;
 
-        float invincibilityDuration = 1;
+        //float invincibilityDuration = 1;
 
         PlayerState playerState;
 
@@ -175,30 +175,30 @@ namespace Player
 
         public void OnHit()
         {
-            if (playerState.isInvincible)
-            {
+            //if (playerState.isInvincible)
+            //{
 
-            }
-            else if (playerState.hasSunglasses)
-            {
-                playerState = attackHandler.HandleOnHit(playerState);
-                playerState.isInvincible = true;
-                playerState.invincibilityStartTime = Time.time;
-                playerState.currentInvincibilityDuration = invincibilityDuration;
+            //}
+            //else if (playerState.hasSunglasses)
+            //{
+            //    playerState = attackHandler.HandleOnHit(playerState);
+            //    playerState.isInvincible = true;
+            //    playerState.invincibilityStartTime = Time.time;
+            //    playerState.currentInvincibilityDuration = invincibilityDuration;
 
-                RemoveSunglasses();
-                GameManager.instance.OnStreakBroken();
-            }
-            else
-            {
-                playerState.currentAction = ActionType.Death;
-                playerState.currentActionDuration = float.PositiveInfinity;
-                playerState.actionStartTime = Time.time;
-                boxCollider.enabled = false;
-                StartCoroutine(OnDeathRoutine());
-                GameManager.instance.GameOver();
-                GameManager.instance.OnStreakBroken();
-            }
+            //    RemoveSunglasses();
+            //    GameManager.instance.OnStreakBroken();
+            //}
+            //else
+            //{
+            playerState.currentAction = ActionType.Death;
+            playerState.currentActionDuration = float.PositiveInfinity;
+            playerState.actionStartTime = Time.time;
+            boxCollider.enabled = false;
+            StartCoroutine(OnDeathRoutine());
+            GameManager.instance.GameOver();
+            GameManager.instance.OnStreakBroken();
+            //}
         }
 
         public void OnSunglasses()
