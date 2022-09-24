@@ -15,7 +15,8 @@ public class HighScoreEntry : MonoBehaviour
     {
         (string, int) entryValues = GameState.Instance.HighScores[entryIndex];
         initialsText.text = entryValues.Item1;
-        scoreText.text = entryValues.Item2.ToString();
+        scoreText.text = entryValues.Item2.ToString().PadLeft(5, '0');
+        
 
         if (entryIndex == GameState.Instance.CurrentHighScoreIndex)
         {
