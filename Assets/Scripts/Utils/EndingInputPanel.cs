@@ -9,26 +9,18 @@ public class EndingInputPanel : MonoBehaviour
     public NewHighScorePrompt newHighScorePrompt;
     bool hasTimelineFinished = false;
 
-    private void Start()
-    {
-        // if there is a new high score
-        if (GameState.Instance.CurrentHighScoreIndex.HasValue)
-        {
-            newHighScorePrompt.gameObject.SetActive(true);
-            continuePrompt.SetActive(false);
-        }
-        else
-        {
-            newHighScorePrompt.gameObject.SetActive(false);
-        }
-    }
-
     private void Update()
     {
-        // if no new high score and animations in timeline are completed, show prompt to continue
-        if (!GameState.Instance.CurrentHighScoreIndex.HasValue && hasTimelineFinished)
+        if (hasTimelineFinished)
         {
-            continuePrompt.SetActive(true);
+            // if there is a new high score, show high score screen and hide prompt
+            if (GameState.Instance.CurrentHighScoreIndex.HasValue) {
+                newHighScorePrompt.gameObject.SetActive(true);
+                continuePrompt.SetActive(false);
+            // if no new high score and animations in timeline are completed, show prompt to continue
+            } else {
+                continuePrompt.SetActive(true);
+            }
         }
 
         if (continuePrompt.activeInHierarchy && Input.GetKeyDown(KeyCode.Return))
