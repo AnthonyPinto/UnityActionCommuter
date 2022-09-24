@@ -2049,6 +2049,10 @@ PrefabInstance:
       propertyPath: m_margin.z
       value: -49.474792
       objectReference: {fileID: 0}
+    - target: {fileID: 8941306181661603941, guid: 77a1951754674497a91cd3c89bf20a06, type: 3}
+      propertyPath: m_audioClip
+      value: 
+      objectReference: {fileID: 8300000, guid: 6d50321b4a55b455f9c3c67fe6a7352a, type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 77a1951754674497a91cd3c89bf20a06, type: 3}
 --- !u!224 &1896628288 stripped
