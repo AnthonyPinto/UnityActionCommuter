@@ -77,7 +77,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isPaper: 0
   pointValue: 25
-  audioClip: {fileID: 8300000, guid: 49a6dc395f4c44192990c6afe4a86551, type: 3}
+  audioClip: {fileID: 8300000, guid: 5a9d90589342b4be1af683f4ceea53c3, type: 3}
   optionalOverrideSpriteRenderer: {fileID: 3848678219556531000}
 --- !u!61 &1415263052553856669
 BoxCollider2D:
@@ -117,7 +117,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 0
-  m_Volume: 0.3
+  m_Volume: 1
   m_Pitch: 1
   Loop: 0
   Mute: 0
