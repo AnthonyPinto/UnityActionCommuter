@@ -14,7 +14,7 @@ namespace Spawner
     public static class SpawnSequencer
     {
         static int ticksPerPaper = 29;
-        static List<SpawnableType> SpawnableTypeList = new List<SpawnableType>() { SpawnableType.Rat, SpawnableType.Coffee, SpawnableType.Sunglasses, SpawnableType.TrainFromFront, SpawnableType.TrainFromBehind, SpawnableType.Paper };
+        public static List<SpawnableType> SpawnableTypeList = new List<SpawnableType>() { SpawnableType.Rat, SpawnableType.Coffee, SpawnableType.Sunglasses, SpawnableType.TrainFromFront, SpawnableType.TrainFromBehind, SpawnableType.Paper };
 
 
 
@@ -53,6 +53,7 @@ namespace Spawner
                 int tick = (i * ticksPerPaper) + ticksPerPaper - 1;
                 TrackManager.TrackSectionKey trackSectionKey = allowedTrackSections[Random.Range(0, allowedTrackSections.Count)];
                 sequence.AddSpawnEvent(tick, trackSectionKey, SpawnableType.Paper);
+                Debug.Log("added Paper, tick: " + tick + ", section: " + trackSectionKey);
                 ApplySpawnMasksForPaper(tick, trackSectionKey, spawnOptionsByType);
             }
         }
@@ -158,6 +159,8 @@ namespace Spawner
 
         static void ApplySpawnMasksForPaper(int tick, TrackManager.TrackSectionKey trackSectionKey, SpawnOptionsByType spawnOptionsByType)
         {
+            ApplySpawnMaskToSpawnOptionsForAllTypes(SpawnMask.GetSpawnMaskForOccupiedSlot(tick, trackSectionKey), spawnOptionsByType);
+
             spawnOptionsByType[SpawnableType.Coffee].ApplySpawnMask(new SpawnMask(tick + 8, tick + 11));
 
             if (
@@ -180,6 +183,8 @@ namespace Spawner
 
         static void ApplySpawnMasksForCoffee(int tick, TrackManager.TrackSectionKey trackSectionKey, SpawnOptionsByType spawnOptionsByType)
         {
+            ApplySpawnMaskToSpawnOptionsForAllTypes(SpawnMask.GetSpawnMaskForOccupiedSlot(tick, trackSectionKey), spawnOptionsByType);
+
             spawnOptionsByType[SpawnableType.Coffee].ApplySpawnMask(new SpawnMask(tick - 2, tick + 3));
 
             if (
@@ -202,6 +207,8 @@ namespace Spawner
 
         static void ApplySpawnMasksForTrainFromFront(int tick, TrackManager.TrackSectionKey trackSectionKey, SpawnOptionsByType spawnOptionsByType)
         {
+            ApplySpawnMaskToSpawnOptionsForAllTypes(SpawnMask.GetSpawnMaskForOccupiedSlot(tick, trackSectionKey), spawnOptionsByType);
+
             spawnOptionsByType[SpawnableType.TrainFromFront].ApplySpawnMask(new SpawnMask(tick - 7, tick + 8));
             spawnOptionsByType[SpawnableType.TrainFromBehind].ApplySpawnMask(new SpawnMask(tick - 6, tick + 7));
 
@@ -220,6 +227,8 @@ namespace Spawner
 
         static void ApplySpawnMasksForTrainFromBehind(int tick, TrackManager.TrackSectionKey trackSectionKey, SpawnOptionsByType spawnOptionsByType)
         {
+            ApplySpawnMaskToSpawnOptionsForAllTypes(SpawnMask.GetSpawnMaskForOccupiedSlot(tick, trackSectionKey), spawnOptionsByType);
+
             spawnOptionsByType[SpawnableType.TrainFromFront].ApplySpawnMask(new SpawnMask(tick - 6, tick + 7));
             spawnOptionsByType[SpawnableType.TrainFromBehind].ApplySpawnMask(new SpawnMask(tick - 11, tick + 12));
 
@@ -237,8 +246,18 @@ namespace Spawner
 
         static void ApplySpawnMasksForRat(int tick, TrackManager.TrackSectionKey trackSectionKey, SpawnOptionsByType spawnOptionsByType)
         {
+            ApplySpawnMaskToSpawnOptionsForAllTypes(SpawnMask.GetSpawnMaskForOccupiedSlot(tick, trackSectionKey), spawnOptionsByType);
+
             // NOTE: only prevent other rats too close on the same track section
             spawnOptionsByType[SpawnableType.Rat].ApplySpawnMask(new SpawnMask(tick - 1, tick + 2, new List<TrackManager.TrackSectionKey>() { trackSectionKey }));
+        }
+
+        static void ApplySpawnMaskToSpawnOptionsForAllTypes(SpawnMask mask, SpawnOptionsByType spawnOptionsByType)
+        {
+            foreach (SpawnableType type in SpawnableTypeList)
+            {
+                spawnOptionsByType[type].ApplySpawnMask(mask);
+            }
         }
 
     }
@@ -278,6 +297,31 @@ namespace Spawner
         public void AddSpawnEvent(int tick, TrackManager.TrackSectionKey trackSectionKey, SpawnableType spawnableType)
         {
             spawnsByTick[tick][trackSectionKey] = spawnableType;
+        }
+
+        public void LogSpawnEventCounts()
+        {
+            Debug.Log("SpawnSequence Spawn Event Counts");
+            foreach (SpawnableType type in SpawnSequencer.SpawnableTypeList)
+            {
+                Debug.Log("type: " + type + " - " + GetSpawnEventCount(type));
+            }
+        }
+
+        public int GetSpawnEventCount(SpawnableType type)
+        {
+            int count = 0;
+            foreach (SpawnsForSingleTick spawns in spawnsByTick)
+            {
+                foreach (TrackManager.TrackSectionKey trackSectionKey in TrackManager.TrackSectionKeyList)
+                {
+                    if (spawns[trackSectionKey] == type)
+                    {
+                        count++;
+                    }
+                }
+            }
+            return count;
         }
     }
 
@@ -357,6 +401,11 @@ namespace Spawner
         public List<TrackManager.TrackSectionKey> trackSections;
         public int startTick;
         public int endTick;
+
+        public static SpawnMask GetSpawnMaskForOccupiedSlot(int tick, TrackManager.TrackSectionKey trackSectionKey)
+        {
+            return new SpawnMask(tick, tick + 1, new List<TrackManager.TrackSectionKey>() { trackSectionKey });
+        }
 
         public SpawnMask(int startTick, int endTick, List<TrackManager.TrackSectionKey> trackSections = null)
         {
