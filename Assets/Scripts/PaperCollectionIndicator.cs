@@ -25,11 +25,11 @@ public class PaperCollectionIndicator : MonoBehaviour
             {
                 if (GameManager.instance.GetEncounteredPapersCollected()[i])
                 {
-                    pageSymbols.Add("X");
+                    pageSymbols.Add("<sprite=1>");
                 }
                 else
                 {
-                    pageSymbols.Add("O");
+                    pageSymbols.Add("X");
                 }
             }
             else
