@@ -259,6 +259,7 @@ MonoBehaviour:
   isPaper: 1
   pointValue: 100
   audioClip: {fileID: 8300000, guid: d3dd6f5ca6a1a48f5a49fc99d0c4a9ff, type: 3}
+  missedAudioClip: {fileID: 8300000, guid: 3d82c50bf42d64ccaa7e48cb06e42723, type: 3}
   optionalOverrideSpriteRenderer: {fileID: 0}
 --- !u!114 &-185512037392401132
 MonoBehaviour:

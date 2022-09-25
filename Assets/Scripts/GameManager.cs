@@ -8,6 +8,7 @@ public class GameManager : MonoBehaviour
     public static GameManager instance;
 
     public AudioClip gameOverAudioClip;
+    public AudioClip streakOverAudioClip;
     public AudioSource backgroundMusic;
     public UIManager uiManager;
     public PointsPopupsManager pointsPopupsManager;

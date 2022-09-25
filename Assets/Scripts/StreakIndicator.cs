@@ -21,7 +21,7 @@ public class StreakIndicator : MonoBehaviour
     void Update()
     {
         int newMultiplier = GameManager.instance.GetPaperStreak();
-        text.text = newMultiplier > 1 ? "x" + newMultiplier.ToString() : "";
+        text.text = newMultiplier > 1 ? "Streak x" + newMultiplier.ToString() : "";
 
         // NOTE we can use this for animation if we stick with this indicator style
 

@@ -8,6 +8,7 @@ public class Item : MonoBehaviour
     public bool isPaper = false;
     public int pointValue = 100;
     public AudioClip audioClip;
+    public AudioClip missedAudioClip;
     AudioSource audioSource;
     public SpriteRenderer optionalOverrideSpriteRenderer;
     SpriteRenderer sr;
@@ -36,6 +37,7 @@ public class Item : MonoBehaviour
         }
         else if (collision.gameObject.CompareTag("MissedItemZone") && !wasCollected && isPaper)
         {
+            audioSource.PlayOneShot(missedAudioClip);
             GameManager.instance.OnPaperMissed();
         }
     }
