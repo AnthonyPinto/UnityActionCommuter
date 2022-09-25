@@ -45,6 +45,11 @@ public class Item : MonoBehaviour
     {
         wasCollected = true;
         sr.enabled = false;
+
+        if (isPaper)
+        {
+            audioSource.pitch = 1.1f + GameManager.instance.paperStreak * 0.05f;
+        }
         audioSource.PlayOneShot(audioClip);
         yield return new WaitForSeconds(audioClipLength);
         sr.enabled = true;

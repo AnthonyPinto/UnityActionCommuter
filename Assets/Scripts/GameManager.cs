@@ -18,9 +18,9 @@ public class GameManager : MonoBehaviour
     float baseGameSpeed = 11;
     float caffeinePercentage = 1;
 
-    int totalPapers = 1; // temporary UI supports up to 20 keeping it low for testing;
+    int totalPapers = 20; // temporary UI supports up to 20 keeping it low for testing;
     List<bool> encounteredPapersCollected = new List<bool>();
-    int paperStreak = 0;
+    public int paperStreak = 0;
 
     bool isPaused = false;
     bool didLose = false;
