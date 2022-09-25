@@ -128,7 +128,7 @@ AudioSource:
   Mute: 0
   Spatialize: 0
   SpatializePostEffects: 0
-  Priority: 128
+  Priority: 205
   DopplerLevel: 1
   MinDistance: 1
   MaxDistance: 500
@@ -258,7 +258,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isPaper: 1
   pointValue: 100
-  audioClip: {fileID: 8300000, guid: 49a6dc395f4c44192990c6afe4a86551, type: 3}
+  audioClip: {fileID: 8300000, guid: d3dd6f5ca6a1a48f5a49fc99d0c4a9ff, type: 3}
   optionalOverrideSpriteRenderer: {fileID: 0}
 --- !u!114 &-185512037392401132
 MonoBehaviour:

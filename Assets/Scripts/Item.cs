@@ -48,7 +48,8 @@ public class Item : MonoBehaviour
 
         if (isPaper)
         {
-            audioSource.pitch = 1.1f + GameManager.instance.paperStreak * 0.05f;
+            // this should be max 2.1f
+            audioSource.pitch = 0.7f + GameManager.instance.paperStreak * 0.05f;
         }
         audioSource.PlayOneShot(audioClip);
         yield return new WaitForSeconds(audioClipLength);
