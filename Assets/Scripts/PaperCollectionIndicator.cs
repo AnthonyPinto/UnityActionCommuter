@@ -7,7 +7,7 @@ public class PaperCollectionIndicator : MonoBehaviour
 {
     public PageIndicator pagePrefab;
 
-    List<PageIndicator> listOfPages;
+    List<PageIndicator> listOfPages = new List<PageIndicator>();
 
     private void Start()
     {
@@ -17,6 +17,7 @@ public class PaperCollectionIndicator : MonoBehaviour
             page.transform.SetParent(transform);
             listOfPages.Add(page);
         }
+
     }
 
     private void Update()
@@ -28,19 +29,13 @@ public class PaperCollectionIndicator : MonoBehaviour
         {
             if (i < countOfPagesEncountered)
             {
-                SpriteRenderer pageRenderer = listOfPages[i].GetComponent<SpriteRenderer>();
-                if (!pageRenderer)
-                {
-                    continue;
-                }
-
                 if (GameManager.instance.GetEncounteredPapersCollected()[i])
                 {
-                    pageRenderer.sprite = listOfPages[i].gatheredSprite;
+                    listOfPages[i].SetOverlay(true);
                 }
                 else
                 {
-                    pageRenderer.sprite = listOfPages[i].missedSprite;
+                    listOfPages[i].SetOverlay(false);
                 }
             }
 
