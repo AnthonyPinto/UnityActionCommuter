@@ -168,3 +168,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gatheredSprite: {fileID: -889682041, guid: 31a1354bea056494b8edb6276d39f77b, type: 3}
   missedSprite: {fileID: 700134974, guid: 31a1354bea056494b8edb6276d39f77b, type: 3}
+  overlayImage: {fileID: 4593341531750756076}
