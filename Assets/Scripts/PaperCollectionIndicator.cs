@@ -5,11 +5,19 @@ using TMPro;
 
 public class PaperCollectionIndicator : MonoBehaviour
 {
-    TextMeshProUGUI text;
+    public PageIndicator pagePrefab;
 
-    private void Awake()
+    List<PageIndicator> listOfPages = new List<PageIndicator>();
+
+    private void Start()
     {
-        text = GetComponent<TextMeshProUGUI>();
+        for (int i = 0; i < GameManager.instance.GetTotalPapers(); i++)
+        {
+            PageIndicator page = Instantiate(pagePrefab, transform.position, Quaternion.identity);
+            page.transform.SetParent(transform);
+            listOfPages.Add(page);
+        }
+
     }
 
     private void Update()
@@ -17,28 +25,20 @@ public class PaperCollectionIndicator : MonoBehaviour
         int countOfTotalPages = GameManager.instance.GetTotalPapers();
         int countOfPagesEncountered = GameManager.instance.GetEncounteredPapersCollected().Count;
 
-        List<string> pageSymbols = new List<string>();
-
         for (int i = 0; i < countOfTotalPages; i++)
         {
             if (i < countOfPagesEncountered)
             {
                 if (GameManager.instance.GetEncounteredPapersCollected()[i])
                 {
-                    pageSymbols.Add("<sprite=1>");
+                    listOfPages[i].SetOverlay(true);
                 }
                 else
                 {
-                    pageSymbols.Add("X");
+                    listOfPages[i].SetOverlay(false);
                 }
-            }
-            else
-            {
-                pageSymbols.Add("-");
             }
 
         }
-
-        text.text = string.Join(" ", pageSymbols);
     }
 }
