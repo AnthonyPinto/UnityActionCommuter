@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class IntroCutsceneManager : MonoBehaviour
+public class ControlsSceneManager : MonoBehaviour
 {
     // Update is called once per frame
     void Update()
@@ -16,13 +16,6 @@ public class IntroCutsceneManager : MonoBehaviour
 
     public void LoadGame()
     {
-        SceneManager.LoadScene(SceneHelper.ControlsSceneIndex);
+        SceneManager.LoadScene(SceneHelper.GameSceneIndex);
     }
-
-    public void OnEndIntroCutscene()
-    {
-        SceneManager.LoadScene(SceneHelper.ControlsSceneIndex);
-    }
-
-
 }

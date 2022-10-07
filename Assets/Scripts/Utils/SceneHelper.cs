@@ -8,4 +8,5 @@ public static class SceneHelper
     public const int IntroCutSceneIndex = 1;
     public const int GameSceneIndex = 2;
     public const int EndingSceneIndex = 3;
+    public const int ControlsSceneIndex = 4;
 }
