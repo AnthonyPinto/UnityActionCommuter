@@ -10,18 +10,18 @@ public class IntroCutsceneManager : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Return))
         {
-            LoadGame();
+            LoadControlsScene();
         }
     }
 
-    public void LoadGame()
+    public void LoadControlsScene()
     {
         SceneManager.LoadScene(SceneHelper.ControlsSceneIndex);
     }
 
     public void OnEndIntroCutscene()
     {
-        SceneManager.LoadScene(SceneHelper.ControlsSceneIndex);
+        LoadControlsScene();
     }
 
 

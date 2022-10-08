@@ -10,11 +10,11 @@ public class ControlsSceneManager : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Return))
         {
-            LoadGame();
+            LoadGameScene();
         }
     }
 
-    public void LoadGame()
+    public void LoadGameScene()
     {
         SceneManager.LoadScene(SceneHelper.GameSceneIndex);
     }
