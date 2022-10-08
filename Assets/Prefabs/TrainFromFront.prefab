@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 4437118049198327743}
   - component: {fileID: 4437118049198327736}
   - component: {fileID: 6156440402807488157}
+  - component: {fileID: -2738449242153810987}
   m_Layer: 0
   m_Name: TrainFromFront
   m_TagString: Untagged
@@ -160,6 +161,17 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!210 &-2738449242153810987
+SortingGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4437118049198327738}
+  m_Enabled: 1
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
 --- !u!1001 &2908547334373806997
 PrefabInstance:
   m_ObjectHideFlags: 0
