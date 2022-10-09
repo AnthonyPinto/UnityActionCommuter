@@ -25,6 +25,10 @@ namespace Player
         float earlyInputAllowance = 0.25f;
         int startingRailIndex = 0;
 
+
+        float lastFrameVerticalInput = 0;
+        float sensitivityThreshold = 0.01f;
+
         //float invincibilityDuration = 1;
 
         PlayerState playerState;
@@ -89,27 +93,34 @@ namespace Player
                 OnHit();
             }
 
+            float verticalInput = Input.GetAxisRaw("Vertical");
+            verticalInput = Mathf.Abs(verticalInput) < sensitivityThreshold ? 0 : verticalInput;
+
+            Debug.Log(verticalInput);
+
             // Get user input and queue it up to either start this frame - or possibly start on a later
             // frame if it becomes possible during the earlyInputAllowance window
             if (
-                Input.GetKeyDown(KeyCode.UpArrow) ||
-                Input.GetKeyDown(KeyCode.W))
+                lastFrameVerticalInput == 0 &&
+                verticalInput > 0)
             {
                 queuedAction = ActionType.Up;
                 actionQueuedTime = Time.time;
             }
             else if (
-                Input.GetKeyDown(KeyCode.DownArrow) ||
-                Input.GetKeyDown(KeyCode.S))
+                lastFrameVerticalInput == 0 &&
+                verticalInput < 0)
             {
                 queuedAction = ActionType.Down;
                 actionQueuedTime = Time.time;
             }
-            else if (Input.GetKeyDown(KeyCode.Space))
+            else if (Input.GetKeyDown(KeyCode.Space) || Input.GetButtonDown("Fire1"))
             {
                 queuedAction = ActionType.Attack;
                 actionQueuedTime = Time.time;
             }
+
+            lastFrameVerticalInput = verticalInput;
 
             // If we aren't in the middle of an action, and an action is queued and the input for that action was
             // within the input allowance, start the new action
