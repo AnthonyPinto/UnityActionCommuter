@@ -1320,7 +1320,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!95 &1297716923
 Animator:
@@ -1867,7 +1867,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 6
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1729361772 stripped
 MonoBehaviour:
@@ -1929,7 +1929,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 10
+  m_RootOrder: 11
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1847880258
 GameObject:
@@ -1962,7 +1962,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: -0.06563072, y: 0}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -1973,7 +1973,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 0.86873853, y: 1}
   m_EdgeRadius: 0
 --- !u!4 &1847880260
 Transform:
@@ -2501,7 +2501,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1863217250903586302, guid: 5e956f3c920cbdb48a165c26a8ab532d, type: 3}
       propertyPath: m_RootOrder
-      value: 5
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 1863217250903586302, guid: 5e956f3c920cbdb48a165c26a8ab532d, type: 3}
       propertyPath: m_LocalPosition.x
@@ -2854,7 +2854,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4974114680902852426, guid: 80df1296d7812404087899f0a1bcfaa3, type: 3}
       propertyPath: m_RootOrder
-      value: 7
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 4974114680902852426, guid: 80df1296d7812404087899f0a1bcfaa3, type: 3}
       propertyPath: m_LocalPosition.x
@@ -3085,7 +3085,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 8314340867665787321, guid: 7e01f30968a54764c9091596f316b618, type: 3}
       propertyPath: m_RootOrder
-      value: 11
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 8314340867665787321, guid: 7e01f30968a54764c9091596f316b618, type: 3}
       propertyPath: m_LocalPosition.x
