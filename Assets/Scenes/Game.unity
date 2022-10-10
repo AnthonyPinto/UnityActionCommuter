@@ -2569,6 +2569,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 1050211259954550703, guid: 69694dc2ae035144fa994c4d0274be73, type: 3}
+      propertyPath: m_UpscaleRT
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1050211259954550703, guid: 69694dc2ae035144fa994c4d0274be73, type: 3}
       propertyPath: m_CropFrameX
       value: 1
       objectReference: {fileID: 0}
@@ -2578,6 +2582,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1050211259954550703, guid: 69694dc2ae035144fa994c4d0274be73, type: 3}
       propertyPath: m_StretchFill
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1050211259954550703, guid: 69694dc2ae035144fa994c4d0274be73, type: 3}
+      propertyPath: m_PixelSnapping
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3307705924578111087, guid: 69694dc2ae035144fa994c4d0274be73, type: 3}
