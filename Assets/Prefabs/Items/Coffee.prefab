@@ -78,6 +78,7 @@ MonoBehaviour:
   isPaper: 0
   pointValue: 25
   audioClip: {fileID: 8300000, guid: 49a6dc395f4c44192990c6afe4a86551, type: 3}
+  missedAudioClip: {fileID: 0}
   optionalOverrideSpriteRenderer: {fileID: 3848678219556531000}
 --- !u!61 &1415263052553856669
 BoxCollider2D:
@@ -117,13 +118,13 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 0
-  m_Volume: 0.7
+  m_Volume: 0.5
   m_Pitch: 1
   Loop: 0
   Mute: 0
   Spatialize: 0
   SpatializePostEffects: 0
-  Priority: 128
+  Priority: 163
   DopplerLevel: 1
   MinDistance: 1
   MaxDistance: 500
