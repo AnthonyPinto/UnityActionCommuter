@@ -7,9 +7,11 @@ public class HighScoreData
 {
 
     public List<HighScoreEntry> highScores;
+    public int coinsUsed;
 
-    public HighScoreData(List<(string, int)> rawHighScores)
+    public HighScoreData(List<(string, int)> rawHighScores, int coinsUsed)
     {
+        this.coinsUsed = coinsUsed;
 
         highScores = new List<HighScoreEntry>();
 

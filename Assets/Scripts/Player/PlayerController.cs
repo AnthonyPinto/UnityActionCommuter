@@ -96,8 +96,6 @@ namespace Player
             float verticalInput = Input.GetAxisRaw("Vertical");
             verticalInput = Mathf.Abs(verticalInput) < sensitivityThreshold ? 0 : verticalInput;
 
-            Debug.Log(verticalInput);
-
             // Get user input and queue it up to either start this frame - or possibly start on a later
             // frame if it becomes possible during the earlyInputAllowance window
             if (

@@ -14,7 +14,7 @@ public static class FileDataHandler
 
 
 
-    public static List<(string, int)> Load()
+    public static List<(string, int)> Load(out int coinsUsed)
     {
         HighScoreData loadedData = null;
         if (File.Exists(FullPath))
@@ -37,16 +37,17 @@ public static class FileDataHandler
                 Debug.LogError("Error Occured while trying to load data from file: " + FullPath + "\n" + e);
             }
         }
+        coinsUsed = loadedData.coinsUsed;
         return loadedData == null ? null : loadedData.GetRawHighScores();
     }
 
-    public static void Save(List<(string, int)> highScores)
+    public static void Save(List<(string, int)> highScores, int coinsUsed)
     {
 
         try
         {
 
-            HighScoreData serializableData = new HighScoreData(highScores);
+            HighScoreData serializableData = new HighScoreData(highScores, coinsUsed);
 
             // Create directory if it doesn't exist
             Directory.CreateDirectory(Path.GetDirectoryName(FullPath));
@@ -71,7 +72,7 @@ public static class FileDataHandler
         try
         {
 
-            HighScoreData serializableData = new HighScoreData(new List<(string, int)>());
+            HighScoreData serializableData = new HighScoreData(new List<(string, int)>(), 0);
 
             // Create directory if it doesn't exist
             Directory.CreateDirectory(Path.GetDirectoryName(FullPath));

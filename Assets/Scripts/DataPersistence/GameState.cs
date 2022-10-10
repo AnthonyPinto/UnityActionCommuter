@@ -12,6 +12,7 @@ public class GameState : MonoBehaviour
     int sunglassesScore = 0;
     int distance = 0;
 
+    int coinsUsed;
     int? currentHighScoreIndex;
 
     List<(string, int)> highScores;
@@ -27,7 +28,9 @@ public class GameState : MonoBehaviour
     public int TotalScore { get => papersScore + streakScore + coffeeScore + sunglassesScore; }
     public int Distance { get => distance; set => distance = value; }
     public List<(string, int)> HighScores { get => highScores.GetRange(0, HighScoreListLength); set => highScores = value.GetRange(0, HighScoreListLength); }
+
     public int? CurrentHighScoreIndex { get => currentHighScoreIndex; set => currentHighScoreIndex = value; }
+    public int CoinsUsed { get => coinsUsed; set => coinsUsed = value; }
 
     private void Awake()
     {
@@ -40,7 +43,9 @@ public class GameState : MonoBehaviour
         Instance = this;
         DontDestroyOnLoad(gameObject);
 
-        highScores = FileDataHandler.Load();
+        int loadedCoinsUsed;
+        highScores = FileDataHandler.Load(out loadedCoinsUsed);
+        CoinsUsed = loadedCoinsUsed;
 
         if (highScores == null)
         {
@@ -55,6 +60,13 @@ public class GameState : MonoBehaviour
         }
     }
 
+    public void UseCoin()
+    {
+        CoinsUsed++;
+        FileDataHandler.Save(HighScores, CoinsUsed);
+        Debug.Log("TOTAL COINS USED: " + CoinsUsed);
+    }
+
     public void OnWin()
     {
         CurrentHighScoreIndex = GetCurrentHighScoreIndex();
@@ -67,7 +79,7 @@ public class GameState : MonoBehaviour
             List<(string, int)> updatedHighScores = new List<(string, int)>(HighScores);
             updatedHighScores.Insert(currentHighScoreIndex.Value, (initials.Substring(0, initialsCharacterLimit), TotalScore));
             HighScores = updatedHighScores;
-            FileDataHandler.Save(updatedHighScores);
+            FileDataHandler.Save(updatedHighScores, coinsUsed);
         }
     }
 

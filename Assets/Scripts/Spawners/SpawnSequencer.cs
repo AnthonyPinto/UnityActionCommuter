@@ -9,14 +9,10 @@ namespace Spawner
     using SpawnOptionsByType = Dictionary<SpawnableType, SpawnOptionMap>;
     public enum SpawnableType { Rat, Coffee, Sunglasses, TrainFromFront, TrainFromBehind, Paper }
 
-
-
     public static class SpawnSequencer
     {
         static int ticksPerPaper = 29;
         public static List<SpawnableType> SpawnableTypeList = new List<SpawnableType>() { SpawnableType.Rat, SpawnableType.Coffee, SpawnableType.Sunglasses, SpawnableType.TrainFromFront, SpawnableType.TrainFromBehind, SpawnableType.Paper };
-
-
 
         public static SpawnSequence CreateSpawnSequence(int numberOfPapers)
         {
@@ -53,7 +49,6 @@ namespace Spawner
                 int tick = (i * ticksPerPaper) + ticksPerPaper - 1;
                 TrackManager.TrackSectionKey trackSectionKey = allowedTrackSections[Random.Range(0, allowedTrackSections.Count)];
                 sequence.AddSpawnEvent(tick, trackSectionKey, SpawnableType.Paper);
-                Debug.Log("added Paper, tick: " + tick + ", section: " + trackSectionKey);
                 ApplySpawnMasksForPaper(tick, trackSectionKey, spawnOptionsByType);
             }
         }
@@ -64,13 +59,11 @@ namespace Spawner
             {
                 if (spawnOptionsByType[SpawnableType.Coffee].AvailableOptionCount <= 0)
                 {
-                    Debug.LogError("Unable to place Coffee, no available option for Coffee #" + (i + 1) + "/" + numberToAdd);
                     continue;
                 }
                 (int tick, TrackManager.TrackSectionKey trackSectionKey) = spawnOptionsByType[SpawnableType.Coffee].GetRandomValidTickAndTrackSection();
                 sequence.AddSpawnEvent(tick, trackSectionKey, SpawnableType.Coffee);
                 ApplySpawnMasksForCoffee(tick, trackSectionKey, spawnOptionsByType);
-                Debug.Log("added Coffee, tick: " + tick + ", section: " + trackSectionKey);
             }
         }
 
@@ -83,25 +76,21 @@ namespace Spawner
                 {
                     if (spawnOptionsByType[SpawnableType.TrainFromFront].AvailableOptionCount <= 0)
                     {
-                        Debug.LogError("Unable to place TrainFromFront, no available option for train # " + (i + 1) + "/" + numberToAdd);
                         continue;
                     }
                     (int tick, TrackManager.TrackSectionKey trackSectionKey) = spawnOptionsByType[SpawnableType.TrainFromFront].GetRandomValidTickAndTrackSection();
                     sequence.AddSpawnEvent(tick, trackSectionKey, SpawnableType.TrainFromFront);
                     ApplySpawnMasksForTrainFromFront(tick, trackSectionKey, spawnOptionsByType);
-                    Debug.Log("added TrainFromFront, tick: " + tick + ", section: " + trackSectionKey);
                 }
                 else
                 {
                     if (spawnOptionsByType[SpawnableType.TrainFromBehind].AvailableOptionCount <= 0)
                     {
-                        Debug.LogError("Unable to place TrainFromBehind, no available option for train # " + (i + 1) + "/" + numberToAdd);
                         continue;
                     }
                     (int tick, TrackManager.TrackSectionKey trackSectionKey) = spawnOptionsByType[SpawnableType.TrainFromBehind].GetRandomValidTickAndTrackSection();
                     sequence.AddSpawnEvent(tick, trackSectionKey, SpawnableType.TrainFromBehind);
                     ApplySpawnMasksForTrainFromBehind(tick, trackSectionKey, spawnOptionsByType);
-                    Debug.Log("added TrainFromBack, tick: " + tick + ", section: " + trackSectionKey);
                 }
 
 
@@ -115,13 +104,11 @@ namespace Spawner
             {
                 if (spawnOptionsByType[SpawnableType.Rat].AvailableOptionCount <= 0)
                 {
-                    Debug.LogError("Unable to place Rat, no available option for Rat #" + (i + 1) + "/" + numberToAdd);
                     continue;
                 }
                 (int tick, TrackManager.TrackSectionKey trackSectionKey) = spawnOptionsByType[SpawnableType.Rat].GetRandomValidTickAndTrackSection();
                 sequence.AddSpawnEvent(tick, trackSectionKey, SpawnableType.Rat);
                 ApplySpawnMasksForRat(tick, trackSectionKey, spawnOptionsByType);
-                Debug.Log("added Rat, tick: " + tick + ", section: " + trackSectionKey);
             }
         }
 

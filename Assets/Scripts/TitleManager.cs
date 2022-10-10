@@ -10,6 +10,7 @@ public class TitleManager : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.C))
         {
+            GameState.Instance.UseCoin();
             LoadIntroCutScene();
         }
     }
