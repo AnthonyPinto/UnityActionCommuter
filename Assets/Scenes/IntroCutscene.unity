@@ -1211,8 +1211,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0.0052490234, y: -0.097961426}
-  m_SizeDelta: {x: -19.599976, y: -0.38000488}
+  m_AnchoredPosition: {x: 0.0068969727, y: -16.9234}
+  m_SizeDelta: {x: -19.6, y: -32.7473}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &905853011
 MonoBehaviour:
@@ -1273,11 +1273,11 @@ MonoBehaviour:
   m_fontSizeMax: 72
   m_fontStyle: 0
   m_HorizontalAlignment: 2
-  m_VerticalAlignment: 512
+  m_VerticalAlignment: 256
   m_textAlignment: 65535
   m_characterSpacing: 0
   m_wordSpacing: 0
-  m_lineSpacing: 20
+  m_lineSpacing: 50
   m_lineSpacingMax: 0
   m_paragraphSpacing: 0
   m_charWidthMaxAdj: 0
@@ -1554,8 +1554,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.07700001}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0.010498047, y: -10.289993}
-  m_SizeDelta: {x: -19.599976, y: 19.420013}
+  m_AnchoredPosition: {x: 0.010498047, y: -26.7705}
+  m_SizeDelta: {x: -19.6, y: -13.5411}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1150413640
 MonoBehaviour:
@@ -1578,7 +1578,6 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_text: 'Oh no!
-
 
     The BIG PRESENTATION!'
   m_isRightToLeft: 0
@@ -1615,11 +1614,11 @@ MonoBehaviour:
   m_fontSizeMax: 72
   m_fontStyle: 0
   m_HorizontalAlignment: 2
-  m_VerticalAlignment: 512
+  m_VerticalAlignment: 256
   m_textAlignment: 65535
   m_characterSpacing: 0
   m_wordSpacing: 0
-  m_lineSpacing: 20
+  m_lineSpacing: 50
   m_lineSpacingMax: 0
   m_paragraphSpacing: 0
   m_charWidthMaxAdj: 0
@@ -1885,8 +1884,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -0.12988281, y: -0.10079956}
-  m_SizeDelta: {x: 0.24976, y: 0.20241}
+  m_AnchoredPosition: {x: -0.12982178, y: -16.9234}
+  m_SizeDelta: {x: 0.2498, y: -32.2557}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1263841136
 MonoBehaviour:
@@ -1909,7 +1908,6 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_text: 'On my way for the
-
 
     BIG PRESENTATION, BOSS!'
   m_isRightToLeft: 0
@@ -1946,11 +1944,11 @@ MonoBehaviour:
   m_fontSizeMax: 72
   m_fontStyle: 0
   m_HorizontalAlignment: 2
-  m_VerticalAlignment: 512
+  m_VerticalAlignment: 256
   m_textAlignment: 65535
   m_characterSpacing: 0
   m_wordSpacing: 0
-  m_lineSpacing: 20
+  m_lineSpacing: 50
   m_lineSpacingMax: 0
   m_paragraphSpacing: 0
   m_charWidthMaxAdj: 0
@@ -2692,8 +2690,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0.006958008, y: -0.02999878}
-  m_SizeDelta: {x: -19.599976, y: -0.26000977}
+  m_AnchoredPosition: {x: 0.0068969727, y: -16.8637}
+  m_SizeDelta: {x: -19.6, y: -32.646}
   m_Pivot: {x: 0.50000006, y: 0.49999997}
 --- !u!114 &1887440957
 MonoBehaviour:
@@ -2716,7 +2714,6 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_text: 'Don''t worry, BOSS.
-
 
     I''ve got it under control.'
   m_isRightToLeft: 0
@@ -2753,11 +2750,11 @@ MonoBehaviour:
   m_fontSizeMax: 72
   m_fontStyle: 0
   m_HorizontalAlignment: 2
-  m_VerticalAlignment: 512
+  m_VerticalAlignment: 256
   m_textAlignment: 65535
   m_characterSpacing: 0
   m_wordSpacing: 0
-  m_lineSpacing: 20
+  m_lineSpacing: 50
   m_lineSpacingMax: 0
   m_paragraphSpacing: 0
   m_charWidthMaxAdj: 0
