@@ -24,7 +24,7 @@ namespace Player
             float currentRailYPosition = currentRail.yPosition;
 
             // Snap to starting rail
-            UpdateYPosition(currentRailYPosition + characterRailOffset);
+            UpdateYPosition(currentRailYPosition);
 
             SetPlayerLayerFromTrackSectionIndex(state.currentRailIndex);
 
@@ -91,7 +91,7 @@ namespace Player
             // If the jump is over, finish move and update rail index
             if (remainingDuration <= 0)
             {
-                UpdateYPosition(nextRail.yPosition + characterRailOffset);
+                UpdateYPosition(nextRail.yPosition);
                 resultState.currentRailIndex = resultState.targetRailIndex;
                 resultState.currentAction = null;
                 SetPlayerLayerFromTrackSectionIndex(resultState.currentRailIndex);
@@ -100,8 +100,8 @@ namespace Player
             else
             {
                 // reposition based on progress of jump
-                float startY = prevRail.yPosition + characterRailOffset;
-                float endY = nextRail.yPosition + characterRailOffset;
+                float startY = prevRail.yPosition;
+                float endY = nextRail.yPosition;
 
                 float percentComplete = (state.currentActionDuration - remainingDuration) / state.currentActionDuration;
 
@@ -137,7 +137,7 @@ namespace Player
 
         void UpdateYPosition(float newY)
         {
-            transform.position = new Vector3(transform.position.x, newY, transform.position.y);
+            transform.position = new Vector3(transform.position.x, newY + characterRailOffset, transform.position.z);
         }
 
         void SetPlayerLayerFromTrackSectionIndex(int trackSectionIndex)
