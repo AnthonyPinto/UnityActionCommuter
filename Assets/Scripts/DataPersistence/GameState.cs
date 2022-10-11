@@ -5,6 +5,8 @@ using UnityEngine;
 public class GameState : MonoBehaviour
 {
     public static GameState Instance;
+    public AudioSource sfxAudioSource;
+    public AudioClip coinInsertAudioClip;
 
     int papersScore = 0;
     int streakScore = 0;
@@ -42,6 +44,7 @@ public class GameState : MonoBehaviour
 
         Instance = this;
         DontDestroyOnLoad(gameObject);
+        DontDestroyOnLoad(sfxAudioSource);
 
         int loadedCoinsUsed;
         highScores = FileDataHandler.Load(out loadedCoinsUsed);
@@ -62,6 +65,7 @@ public class GameState : MonoBehaviour
 
     public void UseCoin()
     {
+        sfxAudioSource.PlayOneShot(coinInsertAudioClip);
         CoinsUsed++;
         FileDataHandler.Save(HighScores, CoinsUsed);
         Debug.Log("TOTAL COINS USED: " + CoinsUsed);
