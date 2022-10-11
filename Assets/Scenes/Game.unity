@@ -887,8 +887,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 1.7999878}
-  m_SizeDelta: {x: 1.9999996, y: 52.2457}
+  m_AnchoredPosition: {x: -0.82611084, y: 1.7999878}
+  m_SizeDelta: {x: 40.7842, y: 153.0323}
   m_Pivot: {x: 0.5, y: 0.99999994}
 --- !u!114 &1067997220
 MonoBehaviour:
@@ -2213,8 +2213,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0}
   m_AnchorMax: {x: 0.5, y: 0}
-  m_AnchoredPosition: {x: 0.000012398, y: -25.893}
-  m_SizeDelta: {x: 331.2551, y: 51.786}
+  m_AnchoredPosition: {x: -1.1516, y: -30.4994}
+  m_SizeDelta: {x: 365.8015, y: 60.9986}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1961471197
 MonoBehaviour:
@@ -2263,8 +2263,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 32
-  m_fontSizeBase: 32
+  m_fontSize: 36
+  m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -2299,7 +2299,7 @@ MonoBehaviour:
   m_VertexBufferAutoSizeReduction: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: 0, y: 49.48883, z: -2.9793243, w: 48.695557}
+  m_margin: {x: 0, y: 63.307556, z: -2.9793243, w: 60.21106}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_hasFontAssetChanged: 0
@@ -2381,8 +2381,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: 0.0000084473, y: -26.123}
-  m_SizeDelta: {x: 800, y: 52.246}
+  m_AnchoredPosition: {x: 1.5007, y: -76.517}
+  m_SizeDelta: {x: 1993.5256, y: 153.03}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1981396508
 MonoBehaviour:
@@ -2422,11 +2422,11 @@ MonoBehaviour:
     m_Right: 0
     m_Top: 0
     m_Bottom: 0
-  m_ChildAlignment: 7
+  m_ChildAlignment: 4
   m_Spacing: 8
-  m_ChildForceExpandWidth: 0
+  m_ChildForceExpandWidth: 1
   m_ChildForceExpandHeight: 0
-  m_ChildControlWidth: 1
+  m_ChildControlWidth: 0
   m_ChildControlHeight: 0
   m_ChildScaleWidth: 0
   m_ChildScaleHeight: 0
@@ -3128,7 +3128,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8039551571312949489, guid: 55d98e2c16200394ba63d25a27c7341c, type: 3}
       propertyPath: m_fontSize
-      value: 20
+      value: 36
       objectReference: {fileID: 0}
     - target: {fileID: 8039551571312949489, guid: 55d98e2c16200394ba63d25a27c7341c, type: 3}
       propertyPath: m_fontAsset
@@ -3140,7 +3140,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8039551571312949489, guid: 55d98e2c16200394ba63d25a27c7341c, type: 3}
       propertyPath: m_fontSizeBase
-      value: 20
+      value: 36
       objectReference: {fileID: 0}
     - target: {fileID: 8039551571312949489, guid: 55d98e2c16200394ba63d25a27c7341c, type: 3}
       propertyPath: m_sharedMaterial
