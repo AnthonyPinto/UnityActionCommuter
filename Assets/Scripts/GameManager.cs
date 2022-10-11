@@ -71,7 +71,7 @@ public class GameManager : MonoBehaviour
             uiManager.SetPaused(false);
         }
 
-        if (DidLose && Input.GetKeyDown(KeyCode.C))
+        if (DidLose && Input.GetKeyDown(KeyCode.Return))
         {
             GameState.Instance.UseCoin();
             SceneManager.LoadScene(SceneHelper.GameSceneIndex);

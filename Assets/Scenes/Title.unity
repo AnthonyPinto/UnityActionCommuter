@@ -480,7 +480,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3250587403287160280, guid: 0151acfe0ac504a39b62bff59b0ca239, type: 3}
       propertyPath: m_text
-      value: Press C to Insert Coin
+      value: Press ENTER to Insert Coin
       objectReference: {fileID: 0}
     - target: {fileID: 3250587403287160280, guid: 0151acfe0ac504a39b62bff59b0ca239, type: 3}
       propertyPath: m_fontSize
@@ -512,11 +512,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3250587403287160283, guid: 0151acfe0ac504a39b62bff59b0ca239, type: 3}
       propertyPath: m_SizeDelta.x
-      value: 907.1919
+      value: 1012.6218
       objectReference: {fileID: 0}
     - target: {fileID: 3250587403287160283, guid: 0151acfe0ac504a39b62bff59b0ca239, type: 3}
       propertyPath: m_SizeDelta.y
-      value: 67.6363
+      value: 66.1302
       objectReference: {fileID: 0}
     - target: {fileID: 3250587403287160283, guid: 0151acfe0ac504a39b62bff59b0ca239, type: 3}
       propertyPath: m_AnchoredPosition.x
@@ -524,7 +524,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3250587403287160283, guid: 0151acfe0ac504a39b62bff59b0ca239, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -270.39
+      value: -273
       objectReference: {fileID: 0}
     - target: {fileID: 4702633250786272719, guid: 0151acfe0ac504a39b62bff59b0ca239, type: 3}
       propertyPath: m_AnchorMax.y

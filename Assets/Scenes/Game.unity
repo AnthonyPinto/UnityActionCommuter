@@ -2908,6 +2908,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4974114681573039782, guid: 80df1296d7812404087899f0a1bcfaa3, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 4
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 80df1296d7812404087899f0a1bcfaa3, type: 3}
 --- !u!1001 &5532498795758368170
@@ -3068,7 +3072,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8039551571312949488, guid: 55d98e2c16200394ba63d25a27c7341c, type: 3}
       propertyPath: m_SizeDelta.x
-      value: 900
+      value: 955.7273
       objectReference: {fileID: 0}
     - target: {fileID: 8039551571312949488, guid: 55d98e2c16200394ba63d25a27c7341c, type: 3}
       propertyPath: m_SizeDelta.y
@@ -3104,7 +3108,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8039551571312949488, guid: 55d98e2c16200394ba63d25a27c7341c, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 0
+      value: 0.000013351
       objectReference: {fileID: 0}
     - target: {fileID: 8039551571312949488, guid: 55d98e2c16200394ba63d25a27c7341c, type: 3}
       propertyPath: m_AnchoredPosition.y
@@ -3124,7 +3128,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8039551571312949489, guid: 55d98e2c16200394ba63d25a27c7341c, type: 3}
       propertyPath: m_text
-      value: Press C to Insert Coin
+      value: Press ENTER to Insert Coin
       objectReference: {fileID: 0}
     - target: {fileID: 8039551571312949489, guid: 55d98e2c16200394ba63d25a27c7341c, type: 3}
       propertyPath: m_fontSize
