@@ -37,7 +37,7 @@ public static class FileDataHandler
                 Debug.LogError("Error Occured while trying to load data from file: " + FullPath + "\n" + e);
             }
         }
-        coinsUsed = loadedData.coinsUsed;
+        coinsUsed = loadedData == null ? 0 : loadedData.coinsUsed;
         return loadedData == null ? null : loadedData.GetRawHighScores();
     }
 
