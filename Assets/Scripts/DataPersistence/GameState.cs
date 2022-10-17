@@ -44,7 +44,6 @@ public class GameState : MonoBehaviour
 
         Instance = this;
         DontDestroyOnLoad(gameObject);
-        DontDestroyOnLoad(sfxAudioSource);
 
         int loadedCoinsUsed;
         highScores = FileDataHandler.Load(out loadedCoinsUsed);
